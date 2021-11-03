@@ -1,4 +1,4 @@
-public class List extends ListItem {
+public class ToDoList {
 
 }
 
