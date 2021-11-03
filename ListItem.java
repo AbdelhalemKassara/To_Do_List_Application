@@ -1,43 +1,44 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ListItem {
-	private LocalDate startDate;
+	private LocalDateTime startDate;
 	private String item;
-	private LocalDate endDate;
+	private LocalDateTime endDate;
 	
 	public ListItem(){
 	}
-	public ListItem(String item, LocalDate endDate){
+	public ListItem(String item, LocalDateTime endDate){
 		this.item = item;
 		this.endDate = endDate;
 	}
-	public ListItem(LocalDate startDate, String item, LocalDate endDate){
+	public ListItem(LocalDateTime startDate, String item, LocalDateTime endDate){
 		this.startDate = startDate;
 		this.item = item;
 		this.endDate = endDate;
 	}
 
-	public void setEndDate(LocalDate endDate){
+	public void setEndDate(LocalDateTime endDate){
 		this.endDate = endDate;
 	}	
-	public void setStartDate(LocalDate startDate){
+	public void setStartDate(LocalDateTime startDate){
 		this.startDate = startDate;
 	}
 	public void setItem(String item){
 		this.item = item;
 	}
 	
-	public LocalDate getStartDate(){
+	public LocalDateTime getStartDate(){
 		return startDate;
 	}
-	public LocalDate getEndDate(){
+	public LocalDateTime getEndDate(){
 		return endDate;
 	}
 	public String getItem(){
 		return item;
 	}
 	public String toString(){
-		return String.format("%1$tB %1$te, %1$tY\n",endDate);
+		return	endDate.toString(); 
+			//String.format("%1$tB %1$te, %1$tY\n",endDate);
 	}
 }
 //%1$tl:%1$tM %1$tp"
