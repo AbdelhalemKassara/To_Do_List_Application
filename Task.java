@@ -64,14 +64,16 @@ public class Task {
 	
 	//"tostring" methods
 	private String dateString(LocalDateTime a){
-		return String.format("%d-%d-%d", a.getYear(), a.getMonth(), a.getDayOfMonth());
+		//using %03d is the minimum left padding
+		return String.format("%d-%s%d-%s%d", a.getYear(),a.getMonthValue()/10 == 0 ? "0" : "", a.getMonthValue(),
+			       				a.getDayOfMonth()/10 == 0 ? "0" : "", a.getDayOfMonth());
 	}
 	private String timeString(LocalDateTime a){
 		return String.format("%d:%d", a.getHour(), a.getMinute());
 	}
 
 	public String startDateString(){
-		return dateString(startDate) + " "  + timeString(startDate);
+		return startDate == null? "" : dateString(startDate) + " "  + timeString(startDate);
 	}
 	public String endDateString(){
 		return dateString(endDate) + " " + timeString(endDate);
