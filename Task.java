@@ -65,21 +65,32 @@ public class Task {
 	//"tostring" methods
 	private String dateString(LocalDateTime a){
 		//using %03d is the minimum left padding
-		return String.format("%d-%s%d-%s%d", a.getYear(),a.getMonthValue()/10 == 0 ? "0" : "", a.getMonthValue(),
-			       				a.getDayOfMonth()/10 == 0 ? "0" : "", a.getDayOfMonth());
+		return String.format("%ta %tb %s%d, %d", a.getDayOfWeek(), a.getMonth(), 
+				a.getDayOfMonth()/10 == 0 ? "0" : "", a.getDayOfMonth(), a.getYear());
 	}
 	private String timeString(LocalDateTime a){
-		return String.format("%d:%d", a.getHour(), a.getMinute());
+		int hour = a.getHour();
+		String ampm = "am";
+
+		if(hour > 12){
+			hour -= 12;
+		} else if (hour == 0){
+			hour = 12;
+		}
+
+		return String.format("%s%d:%s%d %s", hour/10 == 0? "0" : "", 
+				hour, a.getMinute()/10 == 0? "0" : "", 
+				a.getMinute(), a.getHour() >= 12 ? "pm": "am");
 	}
 
 	public String startDateString(){
-		return startDate == null? "" : dateString(startDate) + " "  + timeString(startDate);
+		return startDate == null? "" : dateString(startDate) + ", "  + timeString(startDate);
 	}
 	public String endDateString(){
-		return dateString(endDate) + " " + timeString(endDate);
+		return dateString(endDate) + ", " + timeString(endDate);
 	}
 
 	public String toString(){
-		return startDateString() + " " + task + " " + endDateString();		
+		return startDateString() + " | " + task + " | " + endDateString();		
 	}
 }
