@@ -54,10 +54,19 @@ public class Task {
 		a = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
 	}
 	private void changeDate(LocalDateTime a, int year, int month, int dayOfMonth){
-		a = LocalDateTime.of(year, month, dayOfMonth, a.getHour(), a.getMinute());
+		if(a == null) {
+			a = LocalDateTime.of(year, month, dayOfMonth, 0, 0);
+		} else {	
+			a = LocalDateTime.of(year, month, dayOfMonth, a.getHour(), a.getMinute());
+		}
 	}	
 	private void changeDate(LocalDateTime a, int hour, int minute) {
-		a = LocalDateTime.of(a.getYear(), a.getMonth(), a.getDayOfMonth(), hour, minute);
+		if(a == null){
+			LocalDateTime temp = LocalDate.now();
+			a = LocalDateTime.of(temp.getYear(), temp.getMonth(), temp.getDayOfMonth(), hour, minute);
+		} else {
+			a = LocalDateTime.of(a.getYear(), a.getMonth(), a.getDayOfMonth(), hour, minute);
+		}
 	}
 
 	//methods for changing the start and end date	
