@@ -62,7 +62,7 @@ public class Task {
 	}	
 	private void changeDate(LocalDateTime a, int hour, int minute) {
 		if(a == null){
-			LocalDateTime temp = LocalDate.now();
+			LocalDateTime temp = LocalDateTime.now();
 			a = LocalDateTime.of(temp.getYear(), temp.getMonth(), temp.getDayOfMonth(), hour, minute);
 		} else {
 			a = LocalDateTime.of(a.getYear(), a.getMonth(), a.getDayOfMonth(), hour, minute);
