@@ -4,7 +4,8 @@ public class Task {
 	private LocalDateTime startDate;
 	private String task;
 	private LocalDateTime endDate;
-	
+	private Task nextItem;
+
 	//constructors	
 	public Task(String task, LocalDateTime endDate){
 		this.task = task;
@@ -14,10 +15,24 @@ public class Task {
 		this(task, endDate);	
 		this.startDate = startDate;
 	}
+	public Task(String task, int year, int month, int dayOfMonth, int hour, int minute){
+		this.task = task;
+		this.endDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute); 
+	}
 	
+	public Task(int stYear, int stMonth, int stDayOfMonth, int stHour, int stMinute, String task, 
+			int year, int month, int dayOfMonth, int hour, int minute){
+		this.startDate = LocalDateTime.of(stYear, stMonth, stDayOfMonth, stHour, stMinute);	
+		this.task = task;
+		this.endDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute); 
+	}
+
 	//getters and setters	
 	public void setTask(String task){
 		this.task = task;
+	}
+	public String getTask(){
+		return task;
 	}
 	
 	public LocalDateTime getStartDate(){
@@ -26,40 +41,43 @@ public class Task {
 	public LocalDateTime getEndDate(){
 		return endDate;
 	}
-	public String getTask(){
-		return task;
+	
+	public void setNextItem(Task nextItem){
+		this.nextItem = nextItem;
+	}
+	public Task getNextItem(){
+		return nextItem;
 	}
 
-
 	//wrapper methods for LocalDateTime class (written this way incase I need to reformat inputs first)	
-	private void changeDate(LocalDateTime a, int year, int month, int dayOfMonth, int hour, int minuite){
-		a = LocalDateTime.of(year, month, dayOfMonth, hour, minuite);
+	private void changeDate(LocalDateTime a, int year, int month, int dayOfMonth, int hour, int minute){
+		a = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
 	}
 	private void changeDate(LocalDateTime a, int year, int month, int dayOfMonth){
 		a = LocalDateTime.of(year, month, dayOfMonth, a.getHour(), a.getMinute());
 	}	
-	private void changeDate(LocalDateTime a, int hour, int minuite) {
-		a = LocalDateTime.of(a.getYear(), a.getMonth(), a.getDayOfMonth(), hour, minuite);
+	private void changeDate(LocalDateTime a, int hour, int minute) {
+		a = LocalDateTime.of(a.getYear(), a.getMonth(), a.getDayOfMonth(), hour, minute);
 	}
 
 	//methods for changing the start and end date	
-	public void changeStartDate(int year, int month, int dayOfMonth, int hour, int minuite){
-		changeDate(startDate, year, month, dayOfMonth, hour, minuite);
+	public void changeStartDate(int year, int month, int dayOfMonth, int hour, int minute){
+		changeDate(startDate, year, month, dayOfMonth, hour, minute);
 	}
 	public void changeStartDate(int year, int month, int dayOfMonth){
 		changeDate(startDate, year, month, dayOfMonth);
 	}
-	public void changeStartDate(int hour, int minuite){
-		changeDate(startDate, hour, minuite);
+	public void changeStartDate(int hour, int minute){
+		changeDate(startDate, hour, minute);
 	}
-	public void changeEndDate(int year, int month, int dayOfMonth, int hour, int minuite){
-		changeDate(endDate, year, month, dayOfMonth, hour, minuite);
+	public void changeEndDate(int year, int month, int dayOfMonth, int hour, int minute){
+		changeDate(endDate, year, month, dayOfMonth, hour, minute);
 	}
 	public void changeEndDate(int year, int month, int dayOfMonth){
 		changeDate(endDate, year, month, dayOfMonth);
 	}
-	public void changeEndDate(int hour, int minuite){
-		changeDate(endDate, hour, minuite);
+	public void changeEndDate(int hour, int minute){
+		changeDate(endDate, hour, minute);
 	}
 	
 	//"tostring" methods
