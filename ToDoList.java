@@ -1,29 +1,29 @@
 import java.util.LinkedList;
+import java.util.HashMap;
 
 public class ToDoList {
 
-	//might be better to change sublistst to hashmap
 	private LinkedList<Task> tasks;
-	private LinkedList<ToDoList> subLists;	
+	private HashMap<String, ToDoList> subLists;	
 	private String nameOfList;
 	
 	//constructor methods
 	public ToDoList(String nameOfList){
 		this.nameOfList = nameOfList;
 		this.tasks = new LinkedList<>();
-		this.subLists = new LinkedList<>();
+		this.subLists = new HashMap<>();
 	}
 	public ToDoList(String nameOfList, LinkedList<Task> tasks){
 		this.nameOfList = nameOfList;
 		this.tasks = tasks;
-		this.subLists = new LinkedList<>();
+		this.subLists = new HashMap<>();
 	}
-	public ToDoList(LinkedList<ToDoList> subLists, String nameOfList){
+	public ToDoList(HashMap<String, ToDoList> subLists, String nameOfList){
 		this.nameOfList = nameOfList;
 		this.tasks = new LinkedList<>();
 		this.subLists = subLists;
 	}
-	public ToDoList(LinkedList<ToDoList> subLists, String nameOfList, LinkedList<Task> tasks){
+	public ToDoList(HashMap<String, ToDoList> subLists, String nameOfList, LinkedList<Task> tasks){
 		this.nameOfList = nameOfList;
 		this.tasks = tasks;
 		this.subLists = subLists;
@@ -37,11 +37,18 @@ public class ToDoList {
 		this.nameOfList = nameOfList;
 	}
 
-	public LinkedList<Task> getTasks(){
+	public LinkedList<Task> getTasks() {
 		return tasks;
 	}
-	public LinkedList<ToDoList> getSubLists() {
+	public void setTasks(LinkedList<Task> tasks) {
+		this.tasks = tasks;
+	}
+
+	public HashMap<String, ToDoList> getSubLists() {
 		return subLists;
+	}
+	public void setSubLists(HashMap<String, ToDoList> subLists) {
+		this.subLists = subLists;
 	}
 
 }
