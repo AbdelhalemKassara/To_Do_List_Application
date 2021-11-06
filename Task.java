@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Task {
 	private LocalDateTime startDate;
@@ -105,8 +106,7 @@ public class Task {
 			hour = 12;
 		}
 
-		return String.format("%s%d:%s%d %s", hour/10 == 0? "0" : "", 
-				hour, a.getMinute()/10 == 0? "0" : "", 
+		return String.format("%s%d:%s%d %s", hour/10 == 0? "0" : "", hour, a.getMinute()/10 == 0? "0" : "", 
 				a.getMinute(), a.getHour() >= 12 ? "pm": "am");
 	}
 
@@ -116,8 +116,28 @@ public class Task {
 	public String endDateString(){
 		return dateString(endDate) + ", " + timeString(endDate);
 	}
+	public ArrayList<String> splitString(String originalString) {
+		String temp = originalString;
+		ArrayList<String> splitString = new ArrayList<>();	
+		int length;	
 
-	public String toString(){
-		return startDateString() + " | " + task + " | " + endDateString();		
+		while(temp.length() != 0){
+			length = temp.length() < 56? temp.length() : 56;			
+			splitString.add(temp.substring(0, length));
+			temp = temp.substring(length, temp.length());
+		}
+		return splitString;
+	}
+	public String toString(){	
+		String temp = "";	
+		
+		temp += String.format("%s | %56.56s | %s\n", startDateString(), task, endDateString());
+		
+		ArrayList<String> holder = splitString(task);
+		
+		for(int i = 1; i < holder.size(); i++) {	
+			temp += String.format("%26.26s | %56.56s | %1$26.26s\n", "", holder.get(i));
+		}
+		return temp;	
 	}
 }
