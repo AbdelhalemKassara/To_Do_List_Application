@@ -2,7 +2,7 @@ import java.util.*;
 import java.time.LocalDateTime;
 public class MainClass {
 	public static void main(String[] args) {
-		Task test = new Task(LocalDateTime.of(2021, 2, 3, 13, 1),"testsafdlkajfdsjlkfdsalkj;dsaflkjdsafj;lkdsaflkasdfdfasdfasdfasdfasdfjw;lefj", LocalDateTime.now());
+		Task test = new Task(LocalDateTime.of(2021, 2, 3, 13, 1),"testsafsafdhdsafasfdjkhaslkdfjhaslkdjfhalskdjfhaksjdhflkasdjhfkalsjhfdlkdasjhflklksjfdhlaksdhfalkshdjflkdlkajfdsjlkfdsalkj;dsaflkjdsafj;lkdsaflkasdfdfasdfasdfasdfasdfjw;lefj", LocalDateTime.now());
 	//	System.out.println(test.getEndDate().getYear());	
 	//	System.out.println(test.getEndDate().getMonth());	
 	//	System.out.println(test.getEndDate().getDayOfMonth());	
@@ -20,6 +20,7 @@ public class MainClass {
 		//ArrayList<String> temp = test.splitString("sadfsaffasafsdfaafffdsafdsafadsfdafdsafdsfdsafdsaafsffdsafsdafsdasafdsafdsafdfsadsafdfsadfadsafdsfsd");
 		//System.out.println(temp);
 		//System.out.println(temp.size());
+		System.out.println(test.getTask() + '\n');	
 		System.out.println(test);	
 	}
 }

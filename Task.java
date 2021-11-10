@@ -116,28 +116,18 @@ public class Task {
 	public String endDateString(){
 		return dateString(endDate) + ", " + timeString(endDate);
 	}
-	public ArrayList<String> splitString(String originalString) {
-		String temp = originalString;
-		ArrayList<String> splitString = new ArrayList<>();	
-		int length;	
-
-		while(temp.length() != 0){
-			length = temp.length() < 56? temp.length() : 56;			
-			splitString.add(temp.substring(0, length));
-			temp = temp.substring(length, temp.length());
-		}
-		return splitString;
-	}
+	//56 is the default width of the command prompt window
 	public String toString(){	
-		String temp = "";	
-		
-		temp += String.format("%s | %56.56s | %s\n", startDateString(), task, endDateString());
-		
-		ArrayList<String> holder = splitString(task);
-		
-		for(int i = 1; i < holder.size(); i++) {	
-			temp += String.format("%26.26s | %56.56s | %1$26.26s\n", "", holder.get(i));
+		String outputString = String.format("%s | %-56.56s | %s\n", startDateString(), task, endDateString());
+		int length = task.length() < 56? task.length() : 56;
+		String tempTask = task.substring(length, task.length());	
+
+		while(tempTask.length() != 0) {	
+			length = tempTask.length() < 56? tempTask.length() : 56;
+			outputString += String.format("%-26.26s | %-56.56s | %1$-26.26s\n", "", tempTask.substring(0, length));
+			tempTask = tempTask.substring(length, tempTask.length());	
 		}
-		return temp;	
+
+		return outputString;	
 	}
 }
