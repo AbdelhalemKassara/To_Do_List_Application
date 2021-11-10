@@ -42,10 +42,6 @@ public class Task {
 		return endDate;
 	}
 	
-	public Task getNextItem(){
-		return nextItem;
-	}
-	
 	public int compareTo(LocalDateTime otherEndDate) {
 		return	endDate.compareTo(otherEndDate);
 	}	
@@ -68,6 +64,14 @@ public class Task {
 			startDate = LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), hour, minute);
 		}
 	}
+
+	public void changeStartDate(LocalDateTime startDate) {
+		this.startDate = startDate;
+	}
+	public void changeEndDate(LocalDateTime endDate) {
+		this.endDate = endDate;
+	}
+
 	public void changeEndDate(int year, int month, int dayOfMonth, int hour, int minute){
 		endDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);	
 	}
