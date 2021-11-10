@@ -50,46 +50,37 @@ public class Task {
 		return nextItem;
 	}
 	
-	//wrapper methods for LocalDateTime class (written this way incase I need to reformat inputs first)	
-	private void changeDate(LocalDateTime a, int year, int month, int dayOfMonth, int hour, int minute){
-		a = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
-	}
-	private void changeDate(LocalDateTime a, int year, int month, int dayOfMonth){
-		if(a == null) {
-			a = LocalDateTime.of(year, month, dayOfMonth, 0, 0);
-		} else {	
-			a = LocalDateTime.of(year, month, dayOfMonth, a.getHour(), a.getMinute());
-		}
-	}	
-	private void changeDate(LocalDateTime a, int hour, int minute) {
-		if(a == null){
-			LocalDateTime temp = LocalDateTime.now();
-			a = LocalDateTime.of(temp.getYear(), temp.getMonth(), temp.getDayOfMonth(), hour, minute);
-		} else {
-			a = LocalDateTime.of(a.getYear(), a.getMonth(), a.getDayOfMonth(), hour, minute);
-		}
-	}
 	public int compareTo(LocalDateTime otherEndDate) {
 		return	endDate.compareTo(otherEndDate);
 	}	
 	//methods for changing the start and end date	
 	public void changeStartDate(int year, int month, int dayOfMonth, int hour, int minute){
-		changeDate(startDate, year, month, dayOfMonth, hour, minute);
+		startDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
 	}
 	public void changeStartDate(int year, int month, int dayOfMonth){
-		changeDate(startDate, year, month, dayOfMonth);
+		if(startDate == null) {
+			startDate = LocalDateTime.of(year, month, dayOfMonth, 0 , 0);
+		} else {
+			startDate = LocalDateTime.of(year, month, dayOfMonth, startDate.getHour(), startDate.getMinute());
+		}
 	}
 	public void changeStartDate(int hour, int minute){
-		changeDate(startDate, hour, minute);
+		if(startDate == null){
+			LocalDateTime temp = LocalDateTime.now();
+			startDate = LocalDateTime.of(temp.getYear(), temp.getMonth(), temp.getDayOfMonth(), hour, minute);
+		} else {
+			startDate = LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), hour, minute);
+		}
 	}
 	public void changeEndDate(int year, int month, int dayOfMonth, int hour, int minute){
-		changeDate(endDate, year, month, dayOfMonth, hour, minute);
+		endDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);	
 	}
 	public void changeEndDate(int year, int month, int dayOfMonth){
-		changeDate(endDate, year, month, dayOfMonth);
+		endDate = LocalDateTime.of(year, month, dayOfMonth, endDate.getHour(), endDate.getMinute());
+	
 	}
 	public void changeEndDate(int hour, int minute){
-		changeDate(endDate, hour, minute);
+		endDate = LocalDateTime.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth(), hour, minute);
 	}
 	
 	//"tostring" methods
@@ -120,7 +111,7 @@ public class Task {
 	}
 	//56 is the default width of the command prompt window
 	public String toString(){	
-		String outputString = String.format("%s | %-56.56s | %s\n", startDateString(), task, endDateString());
+		String outputString = String.format("%-26.26s | %-56.56s | %-26.26s\n", startDateString(), task, endDateString());
 		int length = task.length() < 56? task.length() : 56;
 		String tempTask = task.substring(length, task.length());	
 
