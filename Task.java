@@ -5,7 +5,6 @@ public class Task {
 	private LocalDateTime startDate;
 	private String task;
 	private LocalDateTime endDate;
-	private Task nextItem;
 
 	//constructors	
 	public Task(String task, LocalDateTime endDate){
@@ -43,9 +42,6 @@ public class Task {
 		return endDate;
 	}
 	
-	public void setNextItem(Task nextItem){
-		this.nextItem = nextItem;
-	}
 	public Task getNextItem(){
 		return nextItem;
 	}
