@@ -49,7 +49,7 @@ public class Task {
 	public Task getNextItem(){
 		return nextItem;
 	}
-
+	
 	//wrapper methods for LocalDateTime class (written this way incase I need to reformat inputs first)	
 	private void changeDate(LocalDateTime a, int year, int month, int dayOfMonth, int hour, int minute){
 		a = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
@@ -69,7 +69,9 @@ public class Task {
 			a = LocalDateTime.of(a.getYear(), a.getMonth(), a.getDayOfMonth(), hour, minute);
 		}
 	}
-
+	public int compareTo(LocalDateTime otherEndDate) {
+		return	endDate.compareTo(otherEndDate);
+	}	
 	//methods for changing the start and end date	
 	public void changeStartDate(int year, int month, int dayOfMonth, int hour, int minute){
 		changeDate(startDate, year, month, dayOfMonth, hour, minute);
