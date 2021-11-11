@@ -1,47 +1,36 @@
 import java.util.LinkedList;
 import java.util.HashMap;
+import java.util.Collections;
 
 public class ToDoList {
 
-	private LinkedList<Task> tasks;
+	private LinkedList<Task> tasksList;
 	private HashMap<String, ToDoList> subLists;	
-	private String nameOfList;
 	
 	//constructor methods
-	public ToDoList(String nameOfList){
-		this.nameOfList = nameOfList;
-		this.tasks = new LinkedList<>();
+	public ToDoList(){
+		this.tasksList = new LinkedList<>();
 		this.subLists = new HashMap<>();
 	}
-	public ToDoList(String nameOfList, LinkedList<Task> tasks){
-		this.nameOfList = nameOfList;
-		this.tasks = tasks;
+	public ToDoList(LinkedList<Task> tasksList){
+		this.tasksList = tasksList;
 		this.subLists = new HashMap<>();
 	}
-	public ToDoList(HashMap<String, ToDoList> subLists, String nameOfList){
-		this.nameOfList = nameOfList;
-		this.tasks = new LinkedList<>();
+	public ToDoList(HashMap<String, ToDoList> subLists){
+		this.tasksList = new LinkedList<>();
 		this.subLists = subLists;
 	}
-	public ToDoList(HashMap<String, ToDoList> subLists, String nameOfList, LinkedList<Task> tasks){
-		this.nameOfList = nameOfList;
-		this.tasks = tasks;
+	public ToDoList(HashMap<String, ToDoList> subLists, LinkedList<Task> tasksList){
+		this.tasksList = tasksList;
 		this.subLists = subLists;
 	}
 
-	//setters and getters	
-	public String getNameOfList(){
-		return nameOfList;
+	//setters and getters (for importing)	
+	public LinkedList<Task> getTasksList() {
+		return tasksList;
 	}
-	public void setNameOfList(String nameOfList) {
-		this.nameOfList = nameOfList;
-	}
-
-	public LinkedList<Task> getTasks() {
-		return tasks;
-	}
-	public void setTasks(LinkedList<Task> tasks) {
-		this.tasks = tasks;
+	public void setTasksList(LinkedList<Task> tasksList) {
+		this.tasksList = tasksList;
 	}
 
 	public HashMap<String, ToDoList> getSubLists() {
@@ -50,6 +39,10 @@ public class ToDoList {
 	public void setSubLists(HashMap<String, ToDoList> subLists) {
 		this.subLists = subLists;
 	}
-
+	
+	public void addTask(Task task) {
+		tasksList.add(task);
+		Collections.sort(tasksList, Collections.reverseOrder());
+	}
 }
 
