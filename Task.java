@@ -1,7 +1,7 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Task {
+public class Task implements Comparable<Task>{
 	private LocalDateTime startDate;
 	private String task;
 	private LocalDateTime endDate;
@@ -42,9 +42,9 @@ public class Task {
 		return endDate;
 	}
 	
-	public int compareTo(Task otherTask) {
-		int result = endDate.compareTo(otherTask.getEndDate());
-
+	public int compareTo(Task t2) {
+		int result = endDate.compareTo(t2.getEndDate());
+		
 		if(result > 0) {
 			return 1;
 		} else if (result < 0) {
@@ -53,7 +53,6 @@ public class Task {
 			return 0;
 		}
 	}	
-	
 	//methods for changing the start and end date	
 	public void changeStartDate(int year, int month, int dayOfMonth, int hour, int minute){
 		startDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
