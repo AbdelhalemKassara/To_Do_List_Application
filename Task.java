@@ -42,9 +42,18 @@ public class Task {
 		return endDate;
 	}
 	
-	public int compareTo(LocalDateTime otherEndDate) {
-		return	endDate.compareTo(otherEndDate);
+	public int compareTo(Task otherTask) {
+		int result = endDate.compareTo(otherTask.getEndDate());
+
+		if(result > 0) {
+			return 1;
+		} else if (result < 0) {
+			return -1;
+		} else {
+			return 0;
+		}
 	}	
+	
 	//methods for changing the start and end date	
 	public void changeStartDate(int year, int month, int dayOfMonth, int hour, int minute){
 		startDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
