@@ -1,6 +1,6 @@
 import java.util.*;
 import java.time.LocalDateTime;
-public class MainClass {
+public class Test {
 	public static void main(String[] args) {
 		//test task's tostring moethod	
 		Task test = new Task(LocalDateTime.of(2021, 2, 3, 13, 1),"testsafsafdhdsafasfdjkhaslkdfjhaslkdjfhalskdjfhaksjdhflkasdjhfkalsjhfdlkdasjhflklksjfdhlaksdhfalkshdjflkdlkajfdsjlkfdsalkj;dsaflkjdsafj;lkdsaflkasdfdfasdfasdfasdfasdfjw;lefj", LocalDateTime.now());
