@@ -64,7 +64,8 @@ public class Task {
 			startDate = LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), hour, minute);
 		}
 	}
-
+	
+	//might be a good idea to remove these two methods(currently using them in the tests)
 	public void changeStartDate(LocalDateTime startDate) {
 		this.startDate = startDate;
 	}
