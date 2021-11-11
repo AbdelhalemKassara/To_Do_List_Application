@@ -1,6 +1,6 @@
 import java.util.*;
 import java.time.LocalDateTime;
-public class Test {
+public class TestTaskClass {
 	public static void main(String[] args) {
 		//test task's tostring moethod	
 		Task test = new Task(LocalDateTime.of(2021, 2, 3, 13, 1),"testsafsafdhdsafasfdjkhaslkdfjhaslkdjfhalskdjfhaksjdhflkasdjhfkalsjhfdlkdasjhflklksjfdhlaksdhfalkshdjflkdlkajfdsjlkfdsalkj;dsaflkjdsafj;lkdsaflkasdfdfasdfasdfasdfasdfjw;lefj", LocalDateTime.now());
@@ -42,8 +42,25 @@ public class Test {
 		constructor1.setTask("sdfasdfads");
 		System.out.println(constructor1);
 		System.out.println();
-
-
 		
+		System.out.println("test startDateString method");
+		System.out.println(constructor1.startDateString());
+		System.out.println();
+
+		System.out.println("test printing null startDate");
+		constructor1.changeStartDate(null);
+		System.out.println(constructor1.startDateString());
+		System.out.println();
+	
+		System.out.println("test constructor 3 for task");
+		Task constructor3 = new Task("testing constructor 3", 2021, 1, 1, 1, 1);
+		System.out.println(constructor3);
+		System.out.println();
+		
+		System.out.println("test constructor 4 for task");
+		Task constructor4 = new Task(2020, 2, 2, 2, 2,"testing constructor 4", 2021, 1, 1, 1, 1);
+		System.out.println(constructor4);
+		System.out.println(constructor4);
+
 	}
 }
