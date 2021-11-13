@@ -93,5 +93,18 @@ public class TestTaskClass {
 		list1.addTask(new Task("task3", 2021, 5, 2, 2, 2));
 		System.out.println(list1.getTasksList());
 		System.out.println();
+
+		System.out.println("test sublists");
+		ToDoList list2 = new ToDoList();
+		System.out.println(list2.getSubLists());
+		list2.addSubList("list 1", new ToDoList());
+		System.out.println(list2.getSubLists());
+		list2.addSubList("list 2", new ToDoList());
+		System.out.println(list2.getSubLists());
+		System.out.println(list2.addSubList("list 0", new ToDoList()));
+		System.out.println(list2.getSubLists());
+		System.out.println(list2.addSubList("list 0", new ToDoList()));
+		System.out.println(list2.getSubLists());
+		System.out.println();
 	}
 }

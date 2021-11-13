@@ -44,5 +44,11 @@ public class ToDoList {
 		tasksList.add(task);
 		Collections.sort(tasksList, Collections.reverseOrder());
 	}
+
+	//if there is no exisiting key reutrn true if there is return false
+	public boolean addSubList(String title, ToDoList list) {
+		return subLists.putIfAbsent(title, list) == null;
+		
+	}	
 }
 
