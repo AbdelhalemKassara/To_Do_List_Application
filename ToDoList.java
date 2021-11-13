@@ -51,7 +51,7 @@ public class ToDoList {
 		
 	}
 	//format ex. "sublist0/sublist1/sublist2"	
-	public ToDoList getList(String path){
+	public ToDoList getList(String path) {
 		String key = "";
 		//gets the key for the sublist and the new path	
 		for(int i = 0; i < path.length(); i++) {
@@ -64,12 +64,27 @@ public class ToDoList {
 				path = "";
 			}
 		}
-		//gets the next sublist 	
-		ToDoList temp =	subList.get(key);
+		
+		ToDoList temp =	subList.get(key); //gets sublist
+
 		if(temp != null && path != "") {
 			return temp.getList(path);
 		}
 		return temp;//returns null if there is no list associated to the key
+	}
+	public String toString() {
+		String s = "";
+		for(String list: subList.keySet()) {
+			s += String.format("%-26.26s | %-56.56s | %1$-26.26s\n", "SubList", list);
+		}	
+		//adds the tasks to the string	
+		//change from object to Task
+	       	Task[] taskArray = tasksList.toArray(new Task[tasksList.size()]);
+		for(int i = 0; i < taskArray.length; i++) {
+			s += taskArray[i].toString();
+		}
+
+		return s;
 	}	
 }
 
