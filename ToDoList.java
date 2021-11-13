@@ -5,24 +5,24 @@ import java.util.Collections;
 public class ToDoList {
 
 	private LinkedList<Task> tasksList;
-	private HashMap<String, ToDoList> subLists;	
+	private HashMap<String, ToDoList> subList;	
 	
 	//constructor methods
 	public ToDoList(){
 		this.tasksList = new LinkedList<>();
-		this.subLists = new HashMap<>();
+		this.subList = new HashMap<>();
 	}
 	public ToDoList(LinkedList<Task> tasksList){
 		this.tasksList = tasksList;
-		this.subLists = new HashMap<>();
+		this.subList = new HashMap<>();
 	}
-	public ToDoList(HashMap<String, ToDoList> subLists){
+	public ToDoList(HashMap<String, ToDoList> subList){
 		this.tasksList = new LinkedList<>();
-		this.subLists = subLists;
+		this.subList = subList;
 	}
-	public ToDoList(HashMap<String, ToDoList> subLists, LinkedList<Task> tasksList){
+	public ToDoList(HashMap<String, ToDoList> subList, LinkedList<Task> tasksList){
 		this.tasksList = tasksList;
-		this.subLists = subLists;
+		this.subList = subList;
 	}
 
 	//setters and getters (for importing)	
@@ -33,11 +33,11 @@ public class ToDoList {
 		this.tasksList = tasksList;
 	}
 
-	public HashMap<String, ToDoList> getSubLists() {
-		return subLists;
+	public HashMap<String, ToDoList> getSubList() {
+		return subList;
 	}
-	public void setSubLists(HashMap<String, ToDoList> subLists) {
-		this.subLists = subLists;
+	public void setSubList(HashMap<String, ToDoList> subList) {
+		this.subList = subList;
 	}
 	
 	public void addTask(Task task) {
@@ -47,7 +47,7 @@ public class ToDoList {
 
 	//if there is no exisiting key reutrn true if there is return false
 	public boolean addSubList(String title, ToDoList list) {
-		return subLists.putIfAbsent(title, list) == null;
+		return subList.putIfAbsent(title, list) == null;
 		
 	}	
 }

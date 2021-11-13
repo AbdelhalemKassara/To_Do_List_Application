@@ -96,15 +96,15 @@ public class TestTaskClass {
 
 		System.out.println("test sublists");
 		ToDoList list2 = new ToDoList();
-		System.out.println(list2.getSubLists());
+		System.out.println(list2.getSubList());
 		list2.addSubList("list 1", new ToDoList());
-		System.out.println(list2.getSubLists());
+		System.out.println(list2.getSubList());
 		list2.addSubList("list 2", new ToDoList());
-		System.out.println(list2.getSubLists());
+		System.out.println(list2.getSubList());
 		System.out.println(list2.addSubList("list 0", new ToDoList()));
-		System.out.println(list2.getSubLists());
+		System.out.println(list2.getSubList());
 		System.out.println(list2.addSubList("list 0", new ToDoList()));
-		System.out.println(list2.getSubLists());
+		System.out.println(list2.getSubList());
 		System.out.println();
 	}
 }
