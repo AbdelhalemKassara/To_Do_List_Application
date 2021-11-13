@@ -45,7 +45,7 @@ public class ToDoList {
 		Collections.sort(tasksList, Collections.reverseOrder());
 	}
 
-	//if there is no exisiting key reutrn true if there is return false
+	//if there is no exisiting key return true if there is return false
 	public boolean addSubList(String title, ToDoList list) {
 		return subList.putIfAbsent(title, list) == null;
 		
@@ -74,11 +74,12 @@ public class ToDoList {
 	}
 	public String toString() {
 		String s = "";
+		//adds the sublists to the string	
 		for(String list: subList.keySet()) {
 			s += String.format("%-26.26s | %-56.56s | %1$-26.26s\n", "SubList", list);
 		}	
+		
 		//adds the tasks to the string	
-		//change from object to Task
 	       	Task[] taskArray = tasksList.toArray(new Task[tasksList.size()]);
 		for(int i = 0; i < taskArray.length; i++) {
 			s += taskArray[i].toString();
