@@ -49,6 +49,27 @@ public class ToDoList {
 	public boolean addSubList(String title, ToDoList list) {
 		return subList.putIfAbsent(title, list) == null;
 		
+	}
+	//format ex. "sublist0/sublist1/sublist2"	
+	public ToDoList getList(String path){
+		String key = "";
+		//gets the key for the sublist and the new path	
+		for(int i = 0; i < path.length(); i++) {
+			if(path.charAt(i) == '/') {
+				key = path.substring(0, i);	
+				path = path.substring(i+1, path.length());	
+				break;
+			} else if (i == path.length()-1) {
+				key = path;
+				path = "";
+			}
+		}
+		//gets the next sublist 	
+		ToDoList temp =	subList.get(key);
+		if(temp != null && path != "") {
+			return temp.getList(path);
+		}
+		return temp;//returns null if there is no list associated to the key
 	}	
 }
 
