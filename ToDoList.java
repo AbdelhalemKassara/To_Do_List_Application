@@ -6,7 +6,6 @@ public class ToDoList {
 
 	private LinkedList<Task> taskList;
 	private HashMap<String, ToDoList> subList;	
-	
 	//constructor methods
 	public ToDoList(){
 		this.taskList = new LinkedList<>();
@@ -60,6 +59,9 @@ public class ToDoList {
 		}
 		
 		return false;
+	}
+	public boolean removeTask(Task task) {
+		return taskList.remove(task);	
 	}
 	//if there is no exisiting key return true if there is return false
 	public boolean addSubList(String title, ToDoList list) {
