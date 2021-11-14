@@ -72,20 +72,27 @@ public class ToDoList {
 		}
 		return temp;//returns null if there is no list associated to the key
 	}
-	public String toString() {
-		String s = "";
-		//adds the sublists to the string	
-		for(String list: subList.keySet()) {
-			s += String.format("%-26.26s | %-56.56s | %1$-26.26s\n", "SubList", list);
-		}	
-		
-		//adds the tasks to the string	
-	       	Task[] taskArray = tasksList.toArray(new Task[tasksList.size()]);
-		for(int i = 0; i < taskArray.length; i++) {
-			s += taskArray[i].toString();
-		}
+	public String subListString() {
+		StringBuilder str = new StringBuilder();	
 
-		return s;
+		for(String list: subList.keySet()) {
+			str.append(String.format("%-26.26s | %-56.56s | %1$-26.26s\n", "SubList", list));
+		}
+		
+		return str.toString();
+	}	
+	public String tasksListString() {
+		StringBuilder str = new StringBuilder();	
+	       	Task[] taskarray = tasksList.toArray(new Task[tasksList.size()]);
+	
+		for(int i = 0; i < taskarray.length; i++) {
+			str.append(taskarray[i].toString());
+		}
+		
+		return str.toString();
+	}	
+	public String toString() {
+		return subListString() + tasksListString();
 	}	
 }
 
