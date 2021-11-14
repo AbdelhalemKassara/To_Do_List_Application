@@ -6,6 +6,7 @@ public class ToDoList {
 
 	private LinkedList<Task> taskList;
 	private HashMap<String, ToDoList> subList;	
+	
 	//constructor methods
 	public ToDoList(){
 		this.taskList = new LinkedList<>();
@@ -28,6 +29,7 @@ public class ToDoList {
 	public LinkedList<Task> getTaskList() {
 		return taskList;
 	}
+
 	public void setTaskList(LinkedList<Task> taskList) {
 		this.taskList = taskList;
 	}
@@ -35,6 +37,7 @@ public class ToDoList {
 	public HashMap<String, ToDoList> getSubList() {
 		return subList;
 	}
+
 	public void setSubList(HashMap<String, ToDoList> subList) {
 		this.subList = subList;
 	}
@@ -52,22 +55,56 @@ public class ToDoList {
 		taskList.add(new Task(stYear, stMonth, stDayOfMonth, stHour, stMinute, task, year, month, dayOfMonth, hour, minute));
 		Collections.sort(taskList);
 	}
-	public boolean removeTask(int index) {
+
+	public void changeTask(int index, String task) {
+		if(index < taskList.size()) {
+			taskList.get(index).setTask(task);	
+		}
+	}
+	
+	public void changeStartDate(int index, int year, int month, int dayOfMonth, int hour, int minute) {
+		taskList.get(index).changeStartDate(year, month, dayOfMonth, hour, minute);
+	}
+	public void changeStartDate(int index, int year, int month, int dayOfMonth) {
+		taskList.get(index).changeStartDate(year, month, dayOfMonth);
+	}
+	public void changeStartDate(int index, int hour, int minute) {
+		taskList.get(index).changeStartDate(hour, minute);
+	}
+
+	public void changeEndDate(int index, int year, int month, int dayOfMonth, int hour, int minute) {
+		taskList.get(index).changeEndDate(year, month, dayOfMonth, hour, minute);
+	}
+	public void changeEndDate(int index, int year, int month, int dayOfMonth) {
+		taskList.get(index).changeEndDate(year, month, dayOfMonth);
+	}
+	public void changeEndDate(int index, int hour, int minute) {
+		taskList.get(index).changeEndDate(hour, minute);
+	}
+
+	public void removeTask(int index) {
 		if(index < taskList.size()) {
 			taskList.remove(index);
-			return true;	
 		}
 		
-		return false;
 	}
 	public boolean removeTask(Task task) {
 		return taskList.remove(task);	
 	}
-	//if there is no exisiting key return true if there is return false
+
+	//if there is no exisiting key return true if there is return false	
 	public boolean addSubList(String title, ToDoList list) {
 		return subList.putIfAbsent(title, list) == null;
 		
 	}
+	public boolean addSubList(String title) {
+		return subList.putIfAbsent(title, new ToDoList()) == null;
+	}
+
+	public void removeSubList(String key) {
+		subList.remove(key);		
+	}
+	
 	//format ex. "sublist0/sublist1/sublist2"	
 	public ToDoList getList(String path) {
 		String key = "";
@@ -90,6 +127,8 @@ public class ToDoList {
 		}
 		return temp;//returns null if there is no list associated to the key
 	}
+
+	//"tostring" methods
 	public String subListString() {
 		StringBuilder str = new StringBuilder();	
 
@@ -99,6 +138,7 @@ public class ToDoList {
 		
 		return str.toString();
 	}	
+
 	public String taskListString() {
 		StringBuilder str = new StringBuilder();	
 	       	Task[] taskarray = taskList.toArray(new Task[taskList.size()]);
@@ -109,6 +149,7 @@ public class ToDoList {
 		
 		return str.toString();
 	}	
+
 	public String toString() {
 		return subListString() + taskListString();
 	}	
