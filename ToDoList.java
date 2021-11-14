@@ -4,33 +4,33 @@ import java.util.Collections;
 
 public class ToDoList {
 
-	private LinkedList<Task> tasksList;
+	private LinkedList<Task> taskList;
 	private HashMap<String, ToDoList> subList;	
 	
 	//constructor methods
 	public ToDoList(){
-		this.tasksList = new LinkedList<>();
+		this.taskList = new LinkedList<>();
 		this.subList = new HashMap<>();
 	}
-	public ToDoList(LinkedList<Task> tasksList){
-		this.tasksList = tasksList;
+	public ToDoList(LinkedList<Task> taskList){
+		this.taskList = taskList;
 		this.subList = new HashMap<>();
 	}
 	public ToDoList(HashMap<String, ToDoList> subList){
-		this.tasksList = new LinkedList<>();
+		this.taskList = new LinkedList<>();
 		this.subList = subList;
 	}
-	public ToDoList(HashMap<String, ToDoList> subList, LinkedList<Task> tasksList){
-		this.tasksList = tasksList;
+	public ToDoList(HashMap<String, ToDoList> subList, LinkedList<Task> taskList){
+		this.taskList = taskList;
 		this.subList = subList;
 	}
 
-	//setters and getters (for importing)	
-	public LinkedList<Task> getTasksList() {
-		return tasksList;
+	//setters and getters	
+	public LinkedList<Task> getTaskList() {
+		return taskList;
 	}
-	public void setTasksList(LinkedList<Task> tasksList) {
-		this.tasksList = tasksList;
+	public void setTaskList(LinkedList<Task> taskList) {
+		this.taskList = taskList;
 	}
 
 	public HashMap<String, ToDoList> getSubList() {
@@ -41,10 +41,26 @@ public class ToDoList {
 	}
 	
 	public void addTask(Task task) {
-		tasksList.add(task);
-		Collections.sort(tasksList, Collections.reverseOrder());
+		taskList.add(task);
+		Collections.sort(taskList);
 	}
-
+	public void addTask(String task, int year, int month, int dayOfMonth, int hour, int minute) {
+		taskList.add(new Task(task, year, month, dayOfMonth, hour, minute));
+		Collections.sort(taskList);
+	}
+	public void addTask(int stYear, int stMonth, int stDayOfMonth, int stHour, int stMinute, String task,
+		int year, int month, int dayOfMonth, int hour, int minute){
+		taskList.add(new Task(stYear, stMonth, stDayOfMonth, stHour, stMinute, task, year, month, dayOfMonth, hour, minute));
+		Collections.sort(taskList);
+	}
+	public boolean removeTask(int index) {
+		if(index < taskList.size()) {
+			taskList.remove(index);
+			return true;	
+		}
+		
+		return false;
+	}
 	//if there is no exisiting key return true if there is return false
 	public boolean addSubList(String title, ToDoList list) {
 		return subList.putIfAbsent(title, list) == null;
@@ -81,9 +97,9 @@ public class ToDoList {
 		
 		return str.toString();
 	}	
-	public String tasksListString() {
+	public String taskListString() {
 		StringBuilder str = new StringBuilder();	
-	       	Task[] taskarray = tasksList.toArray(new Task[tasksList.size()]);
+	       	Task[] taskarray = taskList.toArray(new Task[taskList.size()]);
 	
 		for(int i = 0; i < taskarray.length; i++) {
 			str.append(taskarray[i].toString());
@@ -92,7 +108,7 @@ public class ToDoList {
 		return str.toString();
 	}	
 	public String toString() {
-		return subListString() + tasksListString();
+		return subListString() + taskListString();
 	}	
 }
 
