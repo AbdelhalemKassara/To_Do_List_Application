@@ -3,6 +3,7 @@ package ToDoList;
 import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.Collections;
+import java.util.Set;
 
 public class ToDoList {
 
@@ -63,7 +64,9 @@ public class ToDoList {
 			taskList.get(index).setTask(task);	
 		}
 	}
-	
+	public String[] getSubListKeys(){
+		return subList.keySet().toArray(new String[0]);
+	}
 	public void changeStartDate(int index, int year, int month, int dayOfMonth, int hour, int minute) {
 		taskList.get(index).changeStartDate(year, month, dayOfMonth, hour, minute);
 	}
