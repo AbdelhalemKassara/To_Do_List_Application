@@ -1,4 +1,7 @@
-package ToDoList;
+package ToDoList.User;
+
+import ToDoList.ToDoList;
+import ToDoList.Task;
 
 import java.util.HashMap;
 import java.util.LinkedList;
