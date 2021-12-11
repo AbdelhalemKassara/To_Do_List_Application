@@ -20,4 +20,8 @@ public class User extends ToDoList{
     public User(HashMap<String, ToDoList> subList, LinkedList<Task> taskList){
             super(subList, taskList);
     }
+    
+    public String toString() {
+	return "";
+    }
 }
