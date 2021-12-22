@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 public class TestTaskClass {
 	public static void main(String[] args) {
+
 		//test task's tostring moethod	
 		Task test = new Task(LocalDateTime.of(2021, 2, 3, 13, 1),"testsafsafdhdsafasfdjkhaslkdfjhaslkdjfhalskdjfhaksjdhflkasdjhfkalsjhfdlkdasjhflklksjfdhlaksdhfalkshdjflkdlkajfdsjlkfdsalkj;dsaflkjdsafj;lkdsaflkasdfdfasdfasdfasdfasdfjw;lefj", LocalDateTime.now());
 		System.out.println(test.getTask() + '\n');	
@@ -187,7 +188,6 @@ public class TestTaskClass {
 		u1.addTask(new Task("task 3", 2010, 2, 1, 1, 1));
 		System.out.println(u1);
 		System.out.println();
-
 
 	}
 }

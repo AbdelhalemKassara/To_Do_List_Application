@@ -1,13 +1,16 @@
 package ToDoList;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 public class Task implements Comparable<Task>{
 	private LocalDateTime startDate;
 	private String task;
 	private LocalDateTime endDate;
+	private int spacingOuter = 26;
+	private int spacingMid = 56;
+	//"%-26.26s | %-56.56s | %-26.26s\n"
+	private String toStringFormat = "%-" + spacingOuter + "." + spacingOuter + "s | %-" + spacingMid + "." + spacingMid + "s | %-" + spacingOuter + "."+ spacingOuter +"s\n";
 
-	//constructors	
+	//constructors
 	public Task(String task, LocalDateTime endDate){
 		this.task = task;
 		this.endDate = endDate;
@@ -120,14 +123,14 @@ public class Task implements Comparable<Task>{
 		return dateString(endDate) + ", " + timeString(endDate);
 	}
 	//56 is the default width of the command prompt window
-	public String toString(){	
-		String outputString = String.format("%-26.26s | %-56.56s | %-26.26s\n", startDateString(), task, endDateString());
-		int length = task.length() < 56? task.length() : 56;
+	public String toString(){
+		String outputString = String.format(toStringFormat, startDateString(), task, endDateString());
+		int length = Math.min(task.length(), spacingMid);
 		String tempTask = task.substring(length, task.length());	
 
 		while(tempTask.length() != 0) {	
-			length = tempTask.length() < 56? tempTask.length() : 56;
-			outputString += String.format("%-26.26s | %-56.56s | %1$-26.26s\n", "", tempTask.substring(0, length));
+			length = Math.min(tempTask.length(), spacingMid);
+			outputString += String.format(toStringFormat, "", tempTask.substring(0, length), "");
 			tempTask = tempTask.substring(length, tempTask.length());	
 		}
 
