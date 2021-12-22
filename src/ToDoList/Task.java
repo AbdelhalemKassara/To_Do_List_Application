@@ -5,15 +5,17 @@ public class Task implements Comparable<Task>{
 	private LocalDateTime startDate;
 	private String task;
 	private LocalDateTime endDate;
-	private int spacingOuter = 26;
+	//probably should add a method to update theses
+	private int spacingOuter = 28;
 	private int spacingMid = 56;
 	//"%-26.26s | %-56.56s | %-26.26s\n"
-	private String toStringFormat = "%-" + spacingOuter + "." + spacingOuter + "s | %-" + spacingMid + "." + spacingMid + "s | %-" + spacingOuter + "."+ spacingOuter +"s\n";
+	private String toStringFormat;
 
 	//constructors
 	public Task(String task, LocalDateTime endDate){
 		this.task = task;
 		this.endDate = endDate;
+		updateToStringFormat();
 	}
 	public Task(LocalDateTime startDate, String task, LocalDateTime endDate){
 		this(task, endDate);	
@@ -21,14 +23,16 @@ public class Task implements Comparable<Task>{
 	}
 	public Task(String task, int year, int month, int dayOfMonth, int hour, int minute){
 		this.task = task;
-		this.endDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute); 
+		this.endDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
+		updateToStringFormat();
 	}
 	
 	public Task(int stYear, int stMonth, int stDayOfMonth, int stHour, int stMinute, String task, 
 			int year, int month, int dayOfMonth, int hour, int minute){
 		this.startDate = LocalDateTime.of(stYear, stMonth, stDayOfMonth, stHour, stMinute);	
 		this.task = task;
-		this.endDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute); 
+		this.endDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
+		updateToStringFormat();
 	}
 
 	//getters and setters	
@@ -95,7 +99,14 @@ public class Task implements Comparable<Task>{
 	public void changeEndDate(int hour, int minute){
 		endDate = LocalDateTime.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth(), hour, minute);
 	}
-	
+	private void updateToStringFormat() {
+		toStringFormat = "%-" + spacingOuter + "." + spacingOuter + "s | %-" + spacingMid + "." + spacingMid + "s | %-" + spacingOuter + "."+ spacingOuter +"s\n";
+	}
+	public void changeToStringWidth(int spacingMid, int spacingOuter) {
+		this.spacingOuter = spacingOuter;
+		this.spacingMid = spacingMid;
+		updateToStringFormat();
+	}
 	//"tostring" methods
 	private String dateString(LocalDateTime a){
 		//using %03d is the minimum left padding
@@ -104,7 +115,6 @@ public class Task implements Comparable<Task>{
 	}
 	private String timeString(LocalDateTime a){
 		int hour = a.getHour();
-		String ampm = "am";
 
 		if(hour > 12){
 			hour -= 12;
@@ -124,16 +134,17 @@ public class Task implements Comparable<Task>{
 	}
 	//56 is the default width of the command prompt window
 	public String toString(){
-		String outputString = String.format(toStringFormat, startDateString(), task, endDateString());
+		StringBuilder outStr = new StringBuilder();
+		outStr.append(String.format(toStringFormat, startDateString(), task, endDateString()));
 		int length = Math.min(task.length(), spacingMid);
-		String tempTask = task.substring(length, task.length());	
+		String tempTask = task.substring(length);
 
 		while(tempTask.length() != 0) {	
 			length = Math.min(tempTask.length(), spacingMid);
-			outputString += String.format(toStringFormat, "", tempTask.substring(0, length), "");
-			tempTask = tempTask.substring(length, tempTask.length());	
+			outStr.append(String.format(toStringFormat, "", tempTask.substring(0, length), ""));
+			tempTask = tempTask.substring(length);
 		}
 
-		return outputString;	
+		return outStr.toString();
 	}
 }

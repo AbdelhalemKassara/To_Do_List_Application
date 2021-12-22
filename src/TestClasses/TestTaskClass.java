@@ -12,7 +12,11 @@ public class TestTaskClass {
 		Task test = new Task(LocalDateTime.of(2021, 2, 3, 13, 1),"testsafsafdhdsafasfdjkhaslkdfjhaslkdjfhalskdjfhaksjdhflkasdjhfkalsjhfdlkdasjhflklksjfdhlaksdhfalkshdjflkdlkajfdsjlkfdsalkj;dsaflkjdsafj;lkdsaflkasdfdfasdfasdfasdfasdfjw;lefj", LocalDateTime.now());
 		System.out.println(test.getTask() + '\n');	
 		System.out.println(test);	
-		
+		test.changeToStringWidth(30, 50);
+		System.out.println(test);
+
+
+
 		System.out.println("test 1st constructor");
 		Task constructor1 = new Task("constructor1", LocalDateTime.now());
 		System.out.println(constructor1);
