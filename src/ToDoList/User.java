@@ -1,4 +1,4 @@
-package ToDoList.User;
+package ToDoList;
 
 import ToDoList.ToDoList;
 import ToDoList.Task;

@@ -1,11 +1,8 @@
 package ToDoList;
 
-import java.util.LinkedList;
-import java.util.HashMap;
-import java.util.Collections;
-import java.util.Set;
+import java.util.*;
 
-public class ToDoList {
+public class ToDoList extends Format{
 
 	private LinkedList<Task> taskList;
 	private HashMap<String, ToDoList> subList;	
@@ -15,6 +12,7 @@ public class ToDoList {
 		this.taskList = new LinkedList<>();
 		this.subList = new HashMap<>();
 	}
+	//these constructor methods are for testing
 	public ToDoList(LinkedList<Task> taskList){
 		this.taskList = taskList;
 		this.subList = new HashMap<>();
@@ -135,14 +133,19 @@ public class ToDoList {
 
 	//"tostring" methods
 	public String subListString() {
-		StringBuilder str = new StringBuilder();	
-
+		StringBuilder str = new StringBuilder();
 		for(String list: subList.keySet()) {
-			str.append(String.format("%-26.26s | %-56.56s | %1$-26.26s\n", "SubList", list));
+			str.append(String.format(super.getFormat() + '\n', "SubList", list, ""));
 		}
-		
 		return str.toString();
-	}	
+	}
+	public ArrayList<String> subListArrListStr() {
+		ArrayList<String> str = new ArrayList<>();
+		for(String list: subList.keySet()) {
+			str.add(String.format(super.getFormat(), "SubList", list, ""));
+		}
+		return str;
+	}
 
 	public String taskListString() {
 		StringBuilder str = new StringBuilder();	
@@ -153,7 +156,22 @@ public class ToDoList {
 		}
 		
 		return str.toString();
-	}	
+	}
+	public ArrayList<String> taskListArrListStr() {
+		ArrayList<String> str = new ArrayList<>();
+		Task[] taskarray = taskList.toArray(new Task[taskList.size()]);
+
+		for(int i = 0; i < taskarray.length; i++) {
+				str.addAll(taskarray[i].toStringArrList());
+		}
+		return str;
+	}
+
+	public ArrayList<String> toStringArrListStr() {
+		ArrayList<String> temp = subListArrListStr();
+		temp.addAll(taskListArrListStr());
+		return temp;
+	}
 
 	public String toString() {
 		return subListString() + taskListString();

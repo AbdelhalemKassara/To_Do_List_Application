@@ -1,7 +1,7 @@
 package TestClasses;
 
 import ToDoList.*;
-import ToDoList.User.User;
+import ToDoList.User;
 
 import java.time.LocalDateTime;
 
@@ -192,6 +192,19 @@ public class TestTaskClass {
 		u1.addTask(new Task("task 3", 2010, 2, 1, 1, 1));
 		System.out.println(u1);
 		System.out.println();
+		System.out.println();
+		System.out.println();
+
+		System.out.println(list1);
+		System.out.println(list2);
+		System.out.println();
+		System.out.println();
+
+		Tables table1 = new Tables();
+		table1.addList(list1, "rojdafsjlkasdffa;ldjsl;;kl;;;;;;");
+		table1.addList(list2, "root");
+		System.out.println(table1);
+
 
 	}
 }
