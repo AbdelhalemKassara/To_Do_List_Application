@@ -23,7 +23,7 @@ public class Tables {
         ArrayList<ArrayList<String>> test = new ArrayList<>();
         StringBuilder str = new StringBuilder();
 
-        int min = -1;
+        int max = -1;
         for(int i = 0; i < toDoList.size(); i++) {
             test.add(toDoList.get(i).getList().toStringArrListStr());
 
@@ -39,19 +39,16 @@ public class Tables {
             for(int d = 0; d < len; d++) {
                 str.append(" ");
             }
-
-            if(min == -1) {
-                min = test.get(i).size();
-            } else {
-                min = Math.min(test.get(i).size(), min);
-            }
+            max = Math.max(test.get(i).size(), max);
         }
             str.append("\n");
 
-        for(int d = 0; d < min; d++) {
+        for(int d = 0; d < max; d++) {
             for(int i = 0; i < test.size(); i++) {
-                str.append(test.get(i).get(d));
-                str.append(" || ");
+                if(d < test.get(i).size()) {
+                    str.append(test.get(i).get(d));
+                    str.append(" || ");
+                }
             }
             str.append("\b\b\b\n");
 

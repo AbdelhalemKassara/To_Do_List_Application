@@ -163,6 +163,7 @@ public class TestTaskClass {
 		System.out.println(list1.taskListString());
 		list1.addTask(2002, 2, 2, 2, 2, "test addtask 2", 2021, 2, 2, 2, 2);
 		System.out.println(list1.taskListString());
+		list1.addTask(2002, 2, 2, 2, 2, "test adffsadfsddfsaadsffadsdfsaadfsdfsdfsajdfasjldf;sk;lkdjsf;jdsflksdf;sladkfasdfljkas;dfjklaljkadjks;ladfskljasdjkfadsfkjladfskjadfsklj;dfkasj;dkafjskd;jlafskljd;afskjlf;adskljdfsldfksjkjldfslkjsdflkj;sdadtask 2", 2021, 2, 2, 2, 2);
 
 		System.out.println("test removeTask methods");
 		System.out.println(list1.taskListString());
@@ -221,11 +222,13 @@ public class TestTaskClass {
 		System.out.println();
 
 		User user1 = new User();
+		list1.addTask(2002, 2, 2, 2, 2, "test adffsadfsddfsaadsffadsdfsaadfsdfsdfsajdfasjldf;sk;lkdjsf;jdsflksdf;sladkfasdfljkas;dfjklaljkadjks;ladfskljasdjkfadsfkjladfskjadfsklj;dfkasj;dkafjskd;jlafskljd;afskjlf;adskljdfsldfksjkjldfslkjsdflkj;sdadtask 2", 2011, 2, 2, 2, 2);
+		list1.addTask(2002, 2, 2, 2, 2, "test adffsadfsddfsaadsffadsdfsaadfsdfsdfsajdfasjldf;sk;lkdjsf;jdsflksdf;sladkfasdfljkas;dfjklaljkadjks;ladfskljasdjkfadsfkjladfskjadfsklj;dfkasj;dkafjskd;jlafskljd;afskjlf;adskljdfsldfksjkjldfslkjsdflkj;sdadtask 2", 2021, 2, 2, 2, 2);
+		list2.addTask(2002, 2, 2, 2, 2, "test adffsadfsddfsaadsffadsdfsaadfsdfsdfsajdfasjldf;sk;lkdjsf;jdsflksdf;sladkfasdfljkas;dfjklaljkadjks;ladfskljasdjkfadsfkjladfskjadfsklj;dfkasj;dkafjskd;jlafskljd;afskjlf;adskljdfsldfksjkjldfslkjsdflkj;sdadtask 2", 2021, 2, 2, 2, 2);
 
 		user1.addTable("stuff");
 		user1.addToTable("stuff", new ListItem(list1, "test value1"));
-		user1.addToTable("stuff", new ListItem(list1, "test value2"));
-		user1.addToTable("stuff", new ListItem(list1, "test value1"));
+		user1.addToTable("stuff", new ListItem(list2, "test vaue1"));
 
 		System.out.println(user1.getTable("stuff"));
 	}
