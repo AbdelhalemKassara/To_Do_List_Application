@@ -19,11 +19,15 @@ public class User extends ToDoList{
         }
     }
 
+
     public String getTable(String name) {
         if(tables.containsKey(name)) {
             return name + "\n\n" + tables.get(name).toString();
         }
         return "";
+    }
+    public String[] getTableNames() {
+        return tables.keySet().toArray(new String[0]);
     }
 
     public void deleteTable(String name) {

@@ -30,7 +30,9 @@ public class ToDoList extends Format{
 	public LinkedList<Task> getTaskList() {
 		return taskList;
 	}
-
+	public Task getTask(int index) {
+		return taskList.get(index);
+	}
 	public void setTaskList(LinkedList<Task> taskList) {
 		this.taskList = taskList;
 	}
@@ -122,7 +124,7 @@ public class ToDoList extends Format{
 				path = "";
 			}
 		}
-		
+
 		ToDoList temp =	subList.get(key); //gets sublist
 
 		if(temp != null && path != "") {
@@ -130,6 +132,13 @@ public class ToDoList extends Format{
 		}
 
 		return temp;//returns null if there is no list associated to the key
+	}
+	public ToDoList betterGetList(String path) {
+		if(path.equals("")) {
+			return this;
+		} else {
+			return getList(path);
+		}
 	}
 	public ListItem getListWithName(String path) {
 		String key = "";

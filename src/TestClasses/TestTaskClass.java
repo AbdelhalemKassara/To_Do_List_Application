@@ -130,6 +130,8 @@ public class TestTaskClass {
 
 		
 		list1.getSubList().get("sublist11").getSubList().get("sublist21").addSubList("sublist31", new ToDoList());
+		list1.getSubList().get("sublist11").getSubList().get("sublist21").addSubList("sublistsadf1", new ToDoList());
+
 		System.out.println(list1.getSubList().get("sublist11").getSubList().get("sublist21").getSubList());
 		list1.getSubList().get("sublist11").getSubList().get("sublist21").getSubList().get("sublist31").addTask("test 1", 2022, 12, 3, 1, 1);
 		
@@ -235,7 +237,42 @@ public class TestTaskClass {
 		user1.addTable("stuff");
 		user1.addToTable("stuff", new ListItem(list1, "test value1"));
 		user1.addToTable("stuff", new ListItem(list2, "test vaue1"));
-
+		list1.addSubList("asfdaf",new ToDoList());
 		System.out.println(user1.getTable("stuff"));
+		Parser p1 = new Parser();
+		//System.out.println(p1.printSubListsFromCur(list1, ""));
+
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+
+
+
+		ToDoList list4 = new ToDoList();
+		System.out.println(list1.getSubList());
+		list4.addSubList("sublist11", new ToDoList());
+		list4.addSubList("sublist10", new ToDoList());
+		list4.getSubList().get("sublist11").addSubList("sublist21", new ToDoList());
+		list4.getSubList().get("sublist11").getSubList().get("sublist21").addSubList("sublist31", new ToDoList());
+		list4.getSubList().get("sublist11").getSubList().get("sublist21").addSubList("sublistsadf1", new ToDoList());
+		list4.getSubList().get("sublist11").getSubList().get("sublist21").getSubList().get("sublist31").addTask("test 1", 2022, 12, 3, 1, 1);
+		list4.getSubList().get("sublist11").addSubList("pp21", new ToDoList());
+
+		/*
+		sublist11/sublist21/sublist31
+		sublist11/sublist21/sublistsadf1
+		sublist11/sublists10
+		 */
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+
+		Parser p2 = new Parser();
+		p2.tewt(list4);
+		System.out.println(p2.printSubListsFromRoot());
 	}
 }
