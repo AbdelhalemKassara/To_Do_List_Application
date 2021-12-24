@@ -226,6 +226,12 @@ public class TestTaskClass {
 		list1.addTask(2002, 2, 2, 2, 2, "test adffsadfsddfsaadsffadsdfsaadfsdfsdfsajdfasjldf;sk;lkdjsf;jdsflksdf;sladkfasdfljkas;dfjklaljkadjks;ladfskljasdjkfadsfkjladfskjadfsklj;dfkasj;dkafjskd;jlafskljd;afskjlf;adskljdfsldfksjkjldfslkjsdflkj;sdadtask 2", 2021, 2, 2, 2, 2);
 		list2.addTask(2002, 2, 2, 2, 2, "test adffsadfsddfsaadsffadsdfsaadfsdfsdfsajdfasjldf;sk;lkdjsf;jdsflksdf;sladkfasdfljkas;dfjklaljkadjks;ladfskljasdjkfadsfkjladfskjadfsklj;dfkasj;dkafjskd;jlafskljd;afskjlf;adskljdfsldfksjkjldfslkjsdflkj;sdadtask 2", 2021, 2, 2, 2, 2);
 
+		list2.addTask(2002, 2, 2, 2, 2, "test adffsadfsddfssaadsffadsdfsaadfsdfsdfsajdfasjldf;sk;lkdjsf;jdsflksdf;sladkfasdfljkas;dfjklaljkadjks;ladfskljasdjkfadsfkjladfskjadfsklj;dfkasj;dkafjskd;jlafskljd;afskjlf;adskljdfsldfksjkjldfslkjsdflkj;sdadtask 2", 2021, 2, 2, 2, 2);
+		list2.addTask(2002, 2, 2, 2, 2, "test adffsadfsddfsadadsffadsdfsaadfsdfsdfsajdfasjldf;sk;lkdjsf;jdsflksdf;sladkfasdfljkas;dfjklaljkadjks;ladfskljasdjkfadsfkjladfskjadfsklj;dfkasj;dkafjskd;jlafskljd;afskjlf;adskljdfsldfksjkjldfslkjsdflkj;sdadtask 2", 2021, 2, 2, 2, 2);
+		list2.addTask(2002, 2, 2, 2, 2, "test adffsadfsddfsaasdsffadsdfsaadfsdfsdfsajdfasjldf;sk;lkdjsf;jdsflksdf;sladkfasdfljkas;dfjklaljkadjks;ladfskljasdjkfadsfkjladfskjadfsklj;dfkasj;dkafjskd;jlafskljd;afskjlf;adskljdfsldfksjkjldfslkjsdflkj;sdadtask 2", 2021, 2, 2, 2, 2);
+		list2.addTask(2002, 2, 2, 2, 2, "test adffsadfsddfsaadssffadsdfsaadfsdfsdfsajdfasjldf;sk;lkdjsf;jdsflksdf;sladkfasdfljkas;dfjklaljkadjks;ladfskljasdjkfadsfkjladfskjadfsklj;dfkasj;dkafjskd;jlafskljd;afskjlf;adskljdfsldfksjkjldfslkjsdflkj;sdadtask 2", 2021, 2, 2, 2, 2);
+		list2.addTask(2002, 2, 2, 2, 2, "test adffsadfsddfsaadsdffadsdfsaadfsdfsdfsajdfasjldf;sk;lkdjsf;jdsflksdf;sladkfasdfljkas;dfjklaljkadjks;ladfskljasdjkfadsfkjladfskjadfsklj;dfkasj;dkafjskd;jlafskljd;afskjlf;adskljdfsldfksjkjldfslkjsdflkj;sdadtask 2", 2021, 2, 2, 2, 2);
+		list2.addTask(2002, 2, 2, 2, 2, "test adffsadfsddfsaadsfdffadsdfsaadfsdfsdfsajdfasjldf;sk;lkdjsf;jdsflksdf;sladkfasdfljkas;dfjklaljkadjks;ladfskljasdjkfadsfkjladfskjadfsklj;dfkasj;dkafjskd;jlafskljd;afskjlf;adskljdfsldfksjkjldfslkjsdflkj;sdadtask 2", 2021, 2, 2, 2, 2);
 		user1.addTable("stuff");
 		user1.addToTable("stuff", new ListItem(list1, "test value1"));
 		user1.addToTable("stuff", new ListItem(list2, "test vaue1"));

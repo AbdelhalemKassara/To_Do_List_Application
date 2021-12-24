@@ -22,14 +22,14 @@ public class Tables {
     public String toString() {
         ArrayList<ArrayList<String>> test = new ArrayList<>();
         StringBuilder str = new StringBuilder();
-
+        int space = 0;
         int max = -1;
         for(int i = 0; i < toDoList.size(); i++) {
             test.add(toDoList.get(i).getList().toStringArrListStr());
 
             String name = toDoList.get(i).getName();
             //+10 because of whitespace and | in the format and the || for spacing between the lists
-            int space = toDoList.get(i).getList().getSpacingMid() + 2 * toDoList.get(i).getList().getSpacingOuter() + 10;
+            space = toDoList.get(i).getList().getSpacingMid() + 2 * toDoList.get(i).getList().getSpacingOuter() + 10;
             int len = space - toDoList.get(i).getName().length();
             if(len < 0) {
                 name = toDoList.get(i).getName().substring(0, space-4);
@@ -48,6 +48,10 @@ public class Tables {
                 if(d < test.get(i).size()) {
                     str.append(test.get(i).get(d));
                     str.append(" || ");
+                } else {
+                    for(int s = 0; s < space; s++) {
+                        str.append(" ");
+                    }
                 }
             }
             str.append("\b\b\b\n");
