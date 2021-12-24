@@ -12,6 +12,12 @@ public class Tables {
 
         toDoList.add(new ListItem(list, name));
     }
+    public void addList(ListItem list) {
+        toDoList.add(list);
+    }
+    public void removeList(ListItem list) {
+        toDoList.remove(list);
+    }
 
     public String toString() {
         ArrayList<ArrayList<String>> test = new ArrayList<>();

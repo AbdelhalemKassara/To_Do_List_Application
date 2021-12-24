@@ -211,6 +211,22 @@ public class TestTaskClass {
 		table1.addList(list2, "root");
 		System.out.println(table1);
 
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
 
+		User user1 = new User();
+
+		user1.addTable("stuff");
+		user1.addToTable("stuff", new ListItem(list1, "test value1"));
+		user1.addToTable("stuff", new ListItem(list1, "test value2"));
+		user1.addToTable("stuff", new ListItem(list1, "test value1"));
+
+		System.out.println(user1.getTable("stuff"));
 	}
 }
