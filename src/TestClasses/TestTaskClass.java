@@ -115,7 +115,7 @@ public class TestTaskClass {
 		System.out.println(list2.getSubList());
 		System.out.println(list2.addSubList("list 0", new ToDoList()));
 		System.out.println(list2.getSubList());
-		System.out.println();
+		System.out.println("asfasd");
 
 		System.out.println("test getting a list");
 		list1 = new ToDoList();
@@ -127,12 +127,18 @@ public class TestTaskClass {
 		
 		System.out.println(list1.getList("sublist11/sublist21"));
 		System.out.println(list1.getList("sublist11"));
+
 		
 		list1.getSubList().get("sublist11").getSubList().get("sublist21").addSubList("sublist31", new ToDoList());
 		System.out.println(list1.getSubList().get("sublist11").getSubList().get("sublist21").getSubList());
-		
+		list1.getSubList().get("sublist11").getSubList().get("sublist21").getSubList().get("sublist31").addTask("test 1", 2022, 12, 3, 1, 1);
 		
 		System.out.println(list1.getList("sublist11/sublist21/sublist31"));
+		System.out.println("this one here");
+		System.out.println(list1.getListWithName("sublist11/sublist21/sublist31").getName());
+		System.out.println(list1.getListWithName("afdfd").getName());
+		System.out.println("this one here");
+
 		System.out.println(list1.getList("sublist11/sublist21/sublst31"));
 		System.out.println(list1.getList("1"));
 		System.out.println();

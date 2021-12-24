@@ -128,7 +128,23 @@ public class ToDoList extends Format{
 		if(temp != null && path != "") {
 			return temp.getList(path);
 		}
+
 		return temp;//returns null if there is no list associated to the key
+	}
+	public ListItem getListWithName(String path) {
+		String key = "";
+		//gets the key for the sublist and the new path
+		for(int i = path.length()-1; i >= 0; i--) {
+			if(path.charAt(i) == '/') {
+				key = path.substring(i+1);
+				break;
+			}
+		}
+		ToDoList holder = getList(path);
+		if(holder == null) {
+			return new ListItem(holder, "");
+		}
+		return new ListItem(holder, key);//returns null if there is no list associated to the key
 	}
 
 	//"tostring" methods
