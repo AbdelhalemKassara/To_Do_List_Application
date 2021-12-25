@@ -25,9 +25,11 @@ change the "task" of a task
 change the date of a task
 change the name of a list
 change the name of a table
+change list "cl"(enter the entire path from base so (something1/something2/something3))
 
 completed
 
+format method takes in an operation and returns the format of the input
 
  */
 
@@ -41,99 +43,112 @@ public class Parser {
 
     public Parser(User user) {
         this.user = user;
+        curList = user;
+        dir = "//";
     }
-    //I think the user input should be split in blocks
-    //the first block is what we want to do in one work
-    //the next are it's inputs with commas in between without any spaces
-    //
+
     public void parseUserInput(String input) {
-        String operation;
+        String operation = "";
         ArrayList<String> values = new ArrayList<>();
 
         for(int i = 0; i < input.length(); i++) {
             if (input.charAt(i) == ' ') {
                 operation = input.substring(0, i);
                 input = input.substring(i);
+                break;
             }
+        }
+        //if there is no operation return
+        if(operation.equals("")) {
+            return;
         }
 
         //removes the whitespace if there are inputs
         if(input.length() > 1) {
             input = input.substring(1);
         }
+        System.out.println(operation);
         //check if there are commands that have no arguments here add a continue or return after if it meets a condition
-        int stIndex = 0;
+        if(operationsWithoutValues(operation)) {
+            return;
+        }
 
+        int stIndex = 0;
         for(int i = 0; i < input.length(); i++) {
-            if(input.charAt(i) == ',') {
-                values.add(input.substring(stIndex, i);
+            if(input.charAt(i) == '|') {
+                values.add(input.substring(stIndex, i));
                 stIndex = i+1;
             }
         }
+        operationsWithValues(operation, values);
+    }
+    public boolean operationsWithoutValues(String operation) {
+        switch(operation) {
+            case "listNames":
+                listNames();
+                return true;
+            case "printList":
+                printList();
+                return true;
+            case "listTableNames":
+                listTableNames();
+                return true;
+            case "printSubLists":
+                printSubLists();
+                return true;
+            case "printSubListsFromRoot":
+                printSubListsFromRoot();
+                return true;
+            case "printCurDir":
+                printCurDir();
+                return true;
+        }
+        return false;
+    }
 
-        /*
-        if (input.length() > 3) {
-            //check if the user wants to add something
-            if(input.substring(0,3).equals("add")) {
-                input = input.substring(5);
-                String addWhat = input.substring(0,4);
-                //checking if the user wants to add a new list
-                if(addWhat.equals("list") || addWhat.equals("List")) {
-                    input = input.substring(6);
-                    addList(input);
-                } else if(addWhat.equals("task") || addWhat.equals("Task")) {
-                    //skip whitespace and start quote
-                    input = input.substring(7);
-                    addTask(input);
-                } else if (input.substring(0,5).equals("table") || input.substring(0,5).equals("Table")) {
-                    input = input.substring(6);
-                    addTable(input);
+    public void operationsWithValues(String operation, ArrayList<String> values) {
+        switch(operation) {
+            case "addTask":
+                try {
+                    System.out.println(values);
+                    if (values.size() == 11) {
+                        curList.addTask(Integer.parseInt(values.get(0)), Integer.parseInt(values.get(1)), Integer.parseInt(values.get(2)),
+                                Integer.parseInt(values.get(3)), Integer.parseInt(values.get(4)), values.get(5), Integer.parseInt(values.get(6)),
+                                Integer.parseInt(values.get(7)), Integer.parseInt(values.get(8)), Integer.parseInt(values.get(9)),
+                                Integer.parseInt(values.get(10)));
+                    } else if (values.size() == 6) {
+                        curList.addTask(values.get(0), Integer.parseInt(values.get(1)), Integer.parseInt(values.get(2)), Integer.parseInt(values.get(3)),
+                                Integer.parseInt(values.get(4)), Integer.parseInt(values.get(5)));
+                        System.out.println("asdfasd");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Invalid input values for addtask operation");
                 }
+                return;
+            case "addTable":
+                try {
+                    user.addTable(values.get(0));
+                } catch (Exception e) {
+                    System.out.println("please enter a name");
+                }
+                return;
+            case "addList":
+                try {
+                    curList.addSubList(values.get(0));
+                } catch (Exception e) {
+                    System.out.println("please enter a name");
+                }
+                return;
+            case "addListToTable":
+                try {
+                    user.addToTable(values.get(0), user.getListWithName(values.get(1)));
+                } catch (Exception e) {
+                    System.out.println("please enter a valid table name or path to list");
+                }
+                return;
+           // case "moveList":
 
-            }
         }
-
-         */
-    }
-    public void addList(String name) {
-        curList.addSubList(name);
-    }
-
-    public void addTask(String input) {
-        String task = "";
-        int[] values = new int[10];
-        //should check for start quote but i'm not doing it here
-
-        //this is getting the task
-        for(int i = 0; i < input.length(); i++) {
-            if(input.charAt(i) == '"') {
-                task = input.substring(0, i);
-                input = input.substring(i+2);//skips end quote and white space
-            }
-        }
-
-        int index = 0;
-        int startIndex = 0;
-        for(int i = 0; i < input.length(); i++) {
-            if (input.charAt(i) == ' ') {
-                values[index] = Integer.parseInt(input.substring(startIndex, i));
-                startIndex = i+1;
-                index++;
-            } else if (i+1 == input.length()) {
-                values[index] = Integer.parseInt(input.substring(startIndex, i + 1));
-            }
-        }
-        if(index == 9) {
-            curList.addTask(values[0], values[1], values[2], values[3], values[4], task, values[5], values[6], values[7], values[8], values[9]);
-        } else if(index == 4) {
-            curList.addTask(task, values[0], values[1], values[2], values[3], values[4]);
-        }
-    }
-    public void addTable(String name) {
-        user.addTable(name);
-    }
-    public void addListToTable(String nameOfTable, String path) {
-        user.addToTable(nameOfTable,user.getListWithName(path));
     }
     public void moveList(String pathMove,String nameOfList, String pathNewLoc) {
         ToDoList temp = user.getList(pathMove);
@@ -183,12 +198,13 @@ public class Parser {
         }
         return str.toString();
     }
-    public String printSubListsBase(ToDoList temp) {
-        return printSubListsFromCur(temp, "", "");
+    public String printSubLists() {
+        return printSubListsFromCur(curList, "", "");
     }
     public String printSubListsFromRoot() {
         return printSubListsFromCur(user,"","");
     }
+
 
     //delete this method, this was just for testing the method above
     public void tewt(ToDoList list) {
@@ -231,6 +247,16 @@ public class Parser {
     }
     public void renameTable(String oldName, String newName) {
         user.renameTable(oldName, newName);
+    }
+
+    public void changeList(String path) {
+        ListItem temp = user.betterGetListWithName(path);
+        curList = temp.getList();
+        dir = temp.getName();
+
+    }
+    public void printCurDir() {
+        System.out.println(dir);
     }
 
 }

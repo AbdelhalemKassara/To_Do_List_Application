@@ -282,7 +282,16 @@ public class TestTaskClass {
 		System.out.println();
 		System.out.println();
 		System.out.println();
-		System.out.println("addfffffffff".substring(0,3).equals("add"));
-		System.out.println("addfffffffff".substring(3));
+
+		Parser p3 = new Parser(new User());
+		p3.parseUserInput("addList list1|");
+		p3.parseUserInput("addList list2|");
+		//p3.printList();
+		p3.parseUserInput("printList ");
+		p3.parseUserInput("addTask asdfasfda|2020|2|3|12|12|");
+		p3.parseUserInput("addTask 2020|2|3|12|12|asads;jjaf;dsl asd;lkfkj asdf adsfdfasfda|2020|2|3|12|12|");
+		p3.parseUserInput("printList ");
+		p3.parseUserInput("listNames ");
+
 	}
 }

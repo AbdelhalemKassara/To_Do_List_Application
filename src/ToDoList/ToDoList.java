@@ -164,6 +164,14 @@ public class ToDoList extends Format{
 		return new ListItem(holder, key);//returns null if there is no list associated to the key
 	}
 
+	public ListItem betterGetListWithName(String path) {
+		if (path.equals("")) {
+			return new ListItem(this, "//");
+		} else {
+			return getListWithName(path);
+		}
+	}
+
 	//"tostring" methods
 	public String subListString() {
 		StringBuilder str = new StringBuilder();
