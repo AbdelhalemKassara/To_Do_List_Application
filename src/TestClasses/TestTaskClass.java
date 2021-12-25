@@ -239,7 +239,7 @@ public class TestTaskClass {
 		user1.addToTable("stuff", new ListItem(list2, "test vaue1"));
 		list1.addSubList("asfdaf",new ToDoList());
 		System.out.println(user1.getTable("stuff"));
-		Parser p1 = new Parser();
+		Parser p1 = new Parser(new User());
 		//System.out.println(p1.printSubListsFromCur(list1, ""));
 
 		System.out.println();
@@ -271,8 +271,18 @@ public class TestTaskClass {
 		System.out.println();
 		System.out.println();
 
-		Parser p2 = new Parser();
+		Parser p2 = new Parser(new User());
 		p2.tewt(list4);
 		System.out.println(p2.printSubListsFromRoot());
+
+
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println("addfffffffff".substring(0,3).equals("add"));
+		System.out.println("addfffffffff".substring(3));
 	}
 }

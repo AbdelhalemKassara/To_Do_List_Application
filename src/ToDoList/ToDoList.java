@@ -109,6 +109,14 @@ public class ToDoList extends Format{
 	public void removeSubList(String key) {
 		subList.remove(key);		
 	}
+	public void renameSubList(String oldKey, String newKey) {
+		if(subList.containsKey(oldKey) && !oldKey.equals(newKey)) {
+			subList.put(newKey, subList.get(oldKey));
+			subList.remove(oldKey);
+		} else {
+			System.out.println("this key doesn't exist or you have entered the same name");
+		}
+	}
 	
 	//format ex. "sublist0/sublist1/sublist2"	
 	public ToDoList getList(String path) {

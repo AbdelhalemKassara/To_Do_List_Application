@@ -36,4 +36,13 @@ public class User extends ToDoList{
     public void removeFromTable(String name, ListItem list) {
         tables.remove(name).removeList(list);
     }
+
+    public void renameTable(String oldName, String newName) {
+        if (tables.containsKey(oldName) && !oldName.equals(newName)) {
+            tables.put(newName, tables.get(oldName));
+            tables.remove(oldName);
+        } else {
+            System.out.println("the names are the same or the old name doesn't exist");
+        }
+    }
 }
