@@ -1,14 +1,13 @@
-package ToDoList;
+package Application.DataStructures.User;
 
-import ToDoList.ToDoList;
-import ToDoList.Task;
+import Application.DataStructures.ListItem;
+import Application.DataStructures.Tables.Tables;
+import Application.DataStructures.ToDoList.ToDoList;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 
-public class User extends ToDoList{
-    HashMap<String,Tables> tables = new HashMap<>();
+public class User extends ToDoList {
+    HashMap<String, Tables> tables = new HashMap<>();
 
     public void addTable(String name) {
         tables.put(name, new Tables());

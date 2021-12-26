@@ -1,8 +1,12 @@
-package ToDoList;
+package Application.DataStructures.ToDoList;
+
+import Application.CommandLine.Format;
+import Application.DataStructures.ListItem;
+import Application.DataStructures.Task.Task;
 
 import java.util.*;
 
-public class ToDoList extends Format{
+public class ToDoList extends Format {
 
 	private LinkedList<Task> taskList;
 	private HashMap<String, ToDoList> subList;	

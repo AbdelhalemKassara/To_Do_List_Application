@@ -1,7 +1,12 @@
 package TestClasses;
 
-import ToDoList.*;
-import ToDoList.User;
+import Application.CommandLine.UserInput.CommandsMap;
+import Application.DataStructures.*;
+import Application.CommandLine.UserInput.Parser;
+import Application.DataStructures.Tables.Tables;
+import Application.DataStructures.Task.Task;
+import Application.DataStructures.ToDoList.ToDoList;
+import Application.DataStructures.User.User;
 
 import java.time.LocalDateTime;
 
@@ -239,8 +244,6 @@ public class TestTaskClass {
 		user1.addToTable("stuff", new ListItem(list2, "test vaue1"));
 		list1.addSubList("asfdaf",new ToDoList());
 		System.out.println(user1.getTable("stuff"));
-		Parser p1 = new Parser(new User());
-		//System.out.println(p1.printSubListsFromCur(list1, ""));
 
 		System.out.println();
 		System.out.println();
@@ -271,19 +274,16 @@ public class TestTaskClass {
 		System.out.println();
 		System.out.println();
 
-		Parser p2 = new Parser(new User());
-		p2.tewt(list4);
-		System.out.println(p2.printSubListsFromRoot());
-
 
 		System.out.println();
 		System.out.println();
 		System.out.println();
 		System.out.println();
 		System.out.println();
-		System.out.println();
 
+		/*
 		Parser p3 = new Parser(new User());
+
 		p3.parseUserInput("addList list1|");
 		p3.parseUserInput("addList list2|");
 		//p3.printList();
@@ -292,6 +292,14 @@ public class TestTaskClass {
 		p3.parseUserInput("addTask 2020|2|3|12|12|asads;jjaf;dsl asd;lkfkj asdf adsfdfasfda|2020|2|3|12|12|");
 		p3.parseUserInput("printList ");
 		p3.parseUserInput("listNames ");
-
+		 */
+		CommandsMap c1 = new CommandsMap(new User());
+		c1.operationsSearch(Parser.parseUserInput("addTask 2020|2|3|12|12|asads;jjaf;dsl asd;lkfkj asdf adsfdfasfda|2020|2|3|12|12|"));
+		c1.operationsSearch(Parser.parseUserInput("addTask asdfasfda|2020|2|3|12|12|"));
+		c1.operationsSearch(Parser.parseUserInput("addList list1|"));
+		c1.operationsSearch(Parser.parseUserInput("addList list2|"));
+		c1.operationsSearch(Parser.parseUserInput("addList listsdfasdf1|"));
+		c1.operationsSearch(Parser.parseUserInput("listNames "));
+		c1.operationsSearch(Parser.parseUserInput("printList "));
 	}
 }

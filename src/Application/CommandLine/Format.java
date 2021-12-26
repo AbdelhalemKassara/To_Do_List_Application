@@ -1,4 +1,4 @@
-package ToDoList;
+package Application.CommandLine;
 
 public abstract class Format {
     private int spacingOuter = 28;

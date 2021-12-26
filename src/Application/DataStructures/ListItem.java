@@ -1,4 +1,6 @@
-package ToDoList;
+package Application.DataStructures;
+
+import Application.DataStructures.ToDoList.ToDoList;
 
 public class ListItem {
     private ToDoList list;

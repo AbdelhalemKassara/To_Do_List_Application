@@ -1,7 +1,9 @@
-package ToDoList;
+package Application.DataStructures.Tables;
+
+import Application.DataStructures.ListItem;
+import Application.DataStructures.ToDoList.ToDoList;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Tables {
     private ArrayList<ListItem> toDoList;
