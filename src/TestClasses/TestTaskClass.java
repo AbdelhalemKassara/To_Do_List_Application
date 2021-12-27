@@ -3,10 +3,10 @@ package TestClasses;
 import Application.CommandLine.UserInput.CommandsMap;
 import Application.DataStructures.*;
 import Application.CommandLine.UserInput.Parser;
-import Application.DataStructures.Tables.Tables;
-import Application.DataStructures.Task.Task;
-import Application.DataStructures.ToDoList.ToDoList;
-import Application.DataStructures.User.User;
+import Application.DataStructures.Tables;
+import Application.DataStructures.Task;
+import Application.DataStructures.ToDoList;
+import Application.DataStructures.User;
 
 import java.time.LocalDateTime;
 
@@ -301,5 +301,14 @@ public class TestTaskClass {
 		c1.operationsSearch(Parser.parseUserInput("addList listsdfasdf1|"));
 		c1.operationsSearch(Parser.parseUserInput("listNames "));
 		c1.operationsSearch(Parser.parseUserInput("printList "));
+		c1.operationsSearch(Parser.parseUserInput("cl list1|"));
+		c1.operationsSearch(Parser.parseUserInput("addTask 2020|2|3|12|12|asads;jjaf;dsl asd;lkfkj asdf adsfdfasfda|2020|2|3|12|12|"));
+		System.out.println();
+		System.out.println();
+		c1.operationsSearch(Parser.parseUserInput("printList "));
+		c1.operationsSearch(Parser.parseUserInput("cl |"));
+		c1.operationsSearch(Parser.parseUserInput("printList "));
+
+
 	}
 }

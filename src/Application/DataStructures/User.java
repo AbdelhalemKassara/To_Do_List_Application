@@ -1,8 +1,8 @@
-package Application.DataStructures.User;
+package Application.DataStructures;
 
 import Application.DataStructures.ListItem;
-import Application.DataStructures.Tables.Tables;
-import Application.DataStructures.ToDoList.ToDoList;
+import Application.DataStructures.Tables;
+import Application.DataStructures.ToDoList;
 
 import java.util.HashMap;
 

@@ -1,13 +1,14 @@
-package Application.DataStructures.Task;
+package Application.DataStructures;
 import Application.CommandLine.Format;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Task extends Format implements Comparable<Task>{
-	private LocalDateTime startDate;
-	private String task;
-	private LocalDateTime endDate;
+	protected LocalDateTime startDate;
+	protected String task;
+	protected LocalDateTime endDate;
 
 	//constructors
 	public Task(String task, LocalDateTime endDate){
@@ -60,6 +61,17 @@ public class Task extends Format implements Comparable<Task>{
 	public void changeStartDate(int year, int month, int dayOfMonth, int hour, int minute){
 		startDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
 	}
+
+	//these probably will be needed for the ui version of the app
+/*	public void changeStartDate(int year){
+		if(startDate == null) {
+			LocalDateTime temp = LocalDateTime.now();
+			startDate = LocalDateTime.of(year, temp.getMonth(), temp.getDayOfMonth(), temp.getHour(), temp.getMinute());
+		} else {
+			startDate = LocalDateTime.of(year, startDate.getMonth(), startDate.getDayOfMonth(), startDate.getHour(), startDate.getMinute());
+		}
+	}*/
+
 	public void changeStartDate(int year, int month, int dayOfMonth){
 		if(startDate == null) {
 			startDate = LocalDateTime.of(year, month, dayOfMonth, 0 , 0);
@@ -67,8 +79,8 @@ public class Task extends Format implements Comparable<Task>{
 			startDate = LocalDateTime.of(year, month, dayOfMonth, startDate.getHour(), startDate.getMinute());
 		}
 	}
-	public void changeStartDate(int hour, int minute){
-		if(startDate == null){
+	public void changeStartDate(int hour, int minute) {
+		if (startDate == null) {
 			LocalDateTime temp = LocalDateTime.now();
 			startDate = LocalDateTime.of(temp.getYear(), temp.getMonth(), temp.getDayOfMonth(), hour, minute);
 		} else {
@@ -98,7 +110,7 @@ public class Task extends Format implements Comparable<Task>{
 	//"tostring" methods
 	private String dateString(LocalDateTime a){
 		//using %03d is the minimum left padding
-		return String.format("%ta %tb %s%d, %d", a.getDayOfWeek(), a.getMonth(), 
+		return String.format("%ta %tb %s%d, %d", a.getDayOfWeek(), a.getMonth(),
 				a.getDayOfMonth()/10 == 0 ? "0" : "", a.getDayOfMonth(), a.getYear());
 	}
 	private String timeString(LocalDateTime a){
@@ -110,7 +122,7 @@ public class Task extends Format implements Comparable<Task>{
 			hour = 12;
 		}
 
-		return String.format("%s%d:%s%d %s", hour/10 == 0? "0" : "", hour, a.getMinute()/10 == 0? "0" : "", 
+		return String.format("%s%d:%s%d %s", hour/10 == 0? "0" : "", hour, a.getMinute()/10 == 0? "0" : "",
 				a.getMinute(), a.getHour() >= 12 ? "pm": "am");
 	}
 
@@ -123,13 +135,13 @@ public class Task extends Format implements Comparable<Task>{
 	//56 is the default width of the command prompt window
 	public String toString(){
 		StringBuilder outStr = new StringBuilder();
-		outStr.append(String.format(super.getFormat() + '\n', startDateString(), task, endDateString()));
-		int length = Math.min(task.length(), super.getSpacingMid());
+		outStr.append(String.format(getFormat() + '\n', startDateString(), task, endDateString()));
+		int length = Math.min(task.length(), getSpacingMid());
 		String tempTask = task.substring(length);
 
-		while(tempTask.length() != 0) {	
-			length = Math.min(tempTask.length(), super.getSpacingMid());
-			outStr.append(String.format(super.getFormat() + '\n', "", tempTask.substring(0, length), ""));
+		while(tempTask.length() != 0) {
+			length = Math.min(tempTask.length(), getSpacingMid());
+			outStr.append(String.format(getFormat() + '\n', "", tempTask.substring(0, length), ""));
 			tempTask = tempTask.substring(length);
 		}
 
@@ -137,16 +149,17 @@ public class Task extends Format implements Comparable<Task>{
 	}
 	public ArrayList<String> toStringArrList(){
 		ArrayList<String> outStr = new ArrayList<>();
-		outStr.add(String.format(super.getFormat(), startDateString(), task, endDateString()));
-		int length = Math.min(task.length(), super.getSpacingMid());
+		outStr.add(String.format(getFormat(), startDateString(), task, endDateString()));
+		int length = Math.min(task.length(), getSpacingMid());
 		String tempTask = task.substring(length);
 
 		while(tempTask.length() != 0) {
-			length = Math.min(tempTask.length(), super.getSpacingMid());
-			outStr.add(String.format(super.getFormat(), "", tempTask.substring(0, length), ""));
+			length = Math.min(tempTask.length(), getSpacingMid());
+			outStr.add(String.format(getFormat(), "", tempTask.substring(0, length), ""));
 			tempTask = tempTask.substring(length);
 		}
 
 		return outStr;
 	}
+
 }

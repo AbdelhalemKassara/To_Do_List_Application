@@ -1,8 +1,6 @@
-package Application.DataStructures.ToDoList;
+package Application.DataStructures;
 
 import Application.CommandLine.Format;
-import Application.DataStructures.ListItem;
-import Application.DataStructures.Task.Task;
 
 import java.util.*;
 
@@ -71,6 +69,7 @@ public class ToDoList extends Format {
 	public String[] getSubListKeys(){
 		return subList.keySet().toArray(new String[0]);
 	}
+
 	public void changeStartDate(int index, int year, int month, int dayOfMonth, int hour, int minute) {
 		taskList.get(index).changeStartDate(year, month, dayOfMonth, hour, minute);
 	}

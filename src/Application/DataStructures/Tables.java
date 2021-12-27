@@ -1,12 +1,12 @@
-package Application.DataStructures.Tables;
+package Application.DataStructures;
 
 import Application.DataStructures.ListItem;
-import Application.DataStructures.ToDoList.ToDoList;
+import Application.DataStructures.ToDoList;
 
 import java.util.ArrayList;
 
 public class Tables {
-    private ArrayList<ListItem> toDoList;
+    protected ArrayList<ListItem> toDoList;
     public Tables() {
         toDoList = new ArrayList<>();
     }
@@ -43,7 +43,7 @@ public class Tables {
             }
             max = Math.max(test.get(i).size(), max);
         }
-            str.append("\n");
+        str.append("\n");
 
         for(int d = 0; d < max; d++) {
             for(int i = 0; i < test.size(); i++) {
@@ -62,5 +62,4 @@ public class Tables {
 
         return str.toString();
     }
-
 }

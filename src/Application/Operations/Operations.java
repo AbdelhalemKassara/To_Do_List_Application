@@ -1,8 +1,8 @@
 package Application.Operations;
 
 import Application.DataStructures.ListItem;
-import Application.DataStructures.ToDoList.ToDoList;
-import Application.DataStructures.User.User;
+import Application.DataStructures.ToDoList;
+import Application.DataStructures.User;
 
 import java.util.ArrayList;
 /* store the current "directory"

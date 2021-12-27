@@ -2,7 +2,7 @@ package Application.CommandLine.UserInput;
 
 import java.util.ArrayList;
 import Application.Operations.Operations;
-import Application.DataStructures.User.User;
+import Application.DataStructures.User;
 
 public class CommandsMap extends Operations{
     public CommandsMap(User user) {
@@ -37,6 +37,9 @@ public class CommandsMap extends Operations{
             case "printCurDir":
                 printCurDir();
                 return;
+            case "exit":
+                System.exit(0);
+            return;
         }
     }
 
