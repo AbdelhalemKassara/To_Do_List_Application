@@ -1,9 +1,11 @@
 package Application.CommandLine.UserInput;
 
-import java.util.ArrayList;
-import Application.Operations.Operations;
 import Application.DataStructures.User;
+import Application.Operations.Operations;
 
+import java.util.ArrayList;
+
+//this class should use hashing in the future
 public class CommandsMap extends Operations{
     public CommandsMap(User user) {
         super(user);

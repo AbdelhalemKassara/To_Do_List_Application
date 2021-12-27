@@ -1,9 +1,5 @@
 package Application.DataStructures;
 
-import Application.DataStructures.ListItem;
-import Application.DataStructures.Tables;
-import Application.DataStructures.ToDoList;
-
 import java.util.HashMap;
 
 public class User extends ToDoList {

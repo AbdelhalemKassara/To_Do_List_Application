@@ -1,8 +1,5 @@
 package Application.DataStructures;
 
-import Application.DataStructures.ListItem;
-import Application.DataStructures.ToDoList;
-
 import java.util.ArrayList;
 
 public class Tables {

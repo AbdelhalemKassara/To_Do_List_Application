@@ -2,51 +2,44 @@ package Application.DataStructures;
 
 import Application.CommandLine.Format;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 public class ToDoList extends Format {
 
 	private LinkedList<Task> taskList;
 	private HashMap<String, ToDoList> subList;	
-	
+	private String listName;
+	private ToDoList parentList;
+
 	//constructor methods
 	public ToDoList(){
 		this.taskList = new LinkedList<>();
 		this.subList = new HashMap<>();
+		parentList = null;
 	}
-	//these constructor methods are for testing
-	public ToDoList(LinkedList<Task> taskList){
-		this.taskList = taskList;
-		this.subList = new HashMap<>();
-	}
-	public ToDoList(HashMap<String, ToDoList> subList){
+	//switch everything so that it uses these methods
+	public ToDoList(String listName){
 		this.taskList = new LinkedList<>();
-		this.subList = subList;
+		this.subList = new HashMap<>();
+		this.listName = listName;
+		this.parentList = null;
 	}
-	public ToDoList(HashMap<String, ToDoList> subList, LinkedList<Task> taskList){
-		this.taskList = taskList;
-		this.subList = subList;
+	public ToDoList(String listName, ToDoList parentList){
+		this.taskList = new LinkedList<>();
+		this.subList = new HashMap<>();
+		this.listName = listName;
+		this.parentList = parentList;
 	}
 
-	//setters and getters	
-	public LinkedList<Task> getTaskList() {
-		return taskList;
-	}
+
+	//setters and getters
 	public Task getTask(int index) {
 		return taskList.get(index);
 	}
-	public void setTaskList(LinkedList<Task> taskList) {
-		this.taskList = taskList;
-	}
 
-	public HashMap<String, ToDoList> getSubList() {
-		return subList;
-	}
-
-	public void setSubList(HashMap<String, ToDoList> subList) {
-		this.subList = subList;
-	}
-	
 	public void addTask(Task task) {
 		taskList.add(task);
 		Collections.sort(taskList);
@@ -59,6 +52,12 @@ public class ToDoList extends Format {
 		int year, int month, int dayOfMonth, int hour, int minute){
 		taskList.add(new Task(stYear, stMonth, stDayOfMonth, stHour, stMinute, task, year, month, dayOfMonth, hour, minute));
 		Collections.sort(taskList);
+	}
+	public String getListName() {
+		return listName;
+	}
+	public void setListName(String listName) {
+		this.listName = listName;
 	}
 
 	public void changeTask(int index, String task) {
@@ -96,11 +95,8 @@ public class ToDoList extends Format {
 		}
 		
 	}
-	public boolean removeTask(Task task) {
-		return taskList.remove(task);	
-	}
 
-	//if there is no exisiting key return true if there is return false	
+	//if there is no exisiting key return true if there is return false
 	public boolean addSubList(String title, ToDoList list) {
 		return subList.putIfAbsent(title, list) == null;
 		
@@ -112,9 +108,12 @@ public class ToDoList extends Format {
 	public void removeSubList(String key) {
 		subList.remove(key);		
 	}
+	//probably should check if the new key already exists
 	public void renameSubList(String oldKey, String newKey) {
 		if(subList.containsKey(oldKey) && !oldKey.equals(newKey)) {
-			subList.put(newKey, subList.get(oldKey));
+			ToDoList temp = subList.get(oldKey);
+			subList.put(newKey, temp);
+			temp.setListName(newKey);
 			subList.remove(oldKey);
 		} else {
 			System.out.println("this key doesn't exist or you have entered the same name");
@@ -137,20 +136,14 @@ public class ToDoList extends Format {
 		}
 
 		ToDoList temp =	subList.get(key); //gets sublist
-
-		if(temp != null && path != "") {
+		///////changed the path.equls
+		if(temp != null && !path.equals("")) {
 			return temp.getList(path);
 		}
 
 		return temp;//returns null if there is no list associated to the key
 	}
-	public ToDoList betterGetList(String path) {
-		if(path.equals("")) {
-			return this;
-		} else {
-			return getList(path);
-		}
-	}
+
 	public ListItem getListWithName(String path) {
 		String key = "";
 		//gets the key for the sublist and the new path
@@ -221,4 +214,3 @@ public class ToDoList extends Format {
 		return subListString() + taskListString();
 	}	
 }
-
