@@ -40,6 +40,25 @@ public class ToDoList extends Format {
 		return taskList.get(index);
 	}
 
+	public String getListName() {
+		return listName;
+	}
+	public void setListName(String listName) {
+		this.listName = listName;
+	}
+
+	public ToDoList getParentList() {
+		return parentList;
+	}
+	public void setParentList(ToDoList parentList) {
+		this.parentList = parentList;
+	}
+
+	public String[] getSubListKeys(){
+		return subList.keySet().toArray(new String[0]);
+	}
+
+	//methods for modifying tasks
 	public void addTask(Task task) {
 		taskList.add(task);
 		Collections.sort(taskList);
@@ -49,26 +68,23 @@ public class ToDoList extends Format {
 		Collections.sort(taskList);
 	}
 	public void addTask(int stYear, int stMonth, int stDayOfMonth, int stHour, int stMinute, String task,
-		int year, int month, int dayOfMonth, int hour, int minute){
+						int year, int month, int dayOfMonth, int hour, int minute){
 		taskList.add(new Task(stYear, stMonth, stDayOfMonth, stHour, stMinute, task, year, month, dayOfMonth, hour, minute));
 		Collections.sort(taskList);
 	}
-	public String getListName() {
-		return listName;
-	}
-	public void setListName(String listName) {
-		this.listName = listName;
-	}
+	public void removeTask(int index) {
+		if(index < taskList.size()) {
+			taskList.remove(index);
+		}
 
+	}
 	public void changeTask(int index, String task) {
 		if(index < taskList.size()) {
-			taskList.get(index).setTask(task);	
+			taskList.get(index).setTask(task);
 		}
 	}
-	public String[] getSubListKeys(){
-		return subList.keySet().toArray(new String[0]);
-	}
 
+	//methods for changing the date
 	public void changeStartDate(int index, int year, int month, int dayOfMonth, int hour, int minute) {
 		taskList.get(index).changeStartDate(year, month, dayOfMonth, hour, minute);
 	}
@@ -89,22 +105,15 @@ public class ToDoList extends Format {
 		taskList.get(index).changeEndDate(hour, minute);
 	}
 
-	public void removeTask(int index) {
-		if(index < taskList.size()) {
-			taskList.remove(index);
-		}
-		
-	}
 
-	//if there is no exisiting key return true if there is return false
-	public boolean addSubList(String title, ToDoList list) {
-		return subList.putIfAbsent(title, list) == null;
-		
-	}
-	public boolean addSubList(String title) {
-		return subList.putIfAbsent(title, new ToDoList()) == null;
-	}
 
+	//methods for modifying the sublists
+	public void addSubList(String title, ToDoList list) {
+		 subList.putIfAbsent(title, list);
+	}
+	public void addSubList(String title) {
+		subList.putIfAbsent(title, new ToDoList());
+	}
 	public void removeSubList(String key) {
 		subList.remove(key);		
 	}
@@ -121,7 +130,7 @@ public class ToDoList extends Format {
 	}
 	
 	//format ex. "sublist0/sublist1/sublist2"	
-	public ToDoList getList(String path) {
+	private ToDoList getListMethod(String path) {
 		String key = "";
 		//gets the key for the sublist and the new path	
 		for(int i = 0; i < path.length(); i++) {
@@ -135,36 +144,19 @@ public class ToDoList extends Format {
 			}
 		}
 
-		ToDoList temp =	subList.get(key); //gets sublist
-		///////changed the path.equls
-		if(temp != null && !path.equals("")) {
-			return temp.getList(path);
+		ToDoList targetList = subList.get(key); //gets sublist
+
+		if(targetList != null && !path.equals("")) {
+			return targetList.getList(path);
 		}
 
-		return temp;//returns null if there is no list associated to the key
+		return targetList;//returns null if there is no list associated to the key
 	}
-
-	public ListItem getListWithName(String path) {
-		String key = "";
-		//gets the key for the sublist and the new path
-		for(int i = path.length()-1; i >= 0; i--) {
-			if(path.charAt(i) == '/') {
-				key = path.substring(i+1);
-				break;
-			}
-		}
-		ToDoList holder = getList(path);
-		if(holder == null) {
-			return new ListItem(holder, "");
-		}
-		return new ListItem(holder, key);//returns null if there is no list associated to the key
-	}
-
-	public ListItem betterGetListWithName(String path) {
+	public ToDoList getList(String path) {
 		if (path.equals("")) {
-			return new ListItem(this, "//");
+			return this;
 		} else {
-			return getListWithName(path);
+			return getListMethod(path);
 		}
 	}
 

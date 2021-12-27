@@ -1,6 +1,5 @@
 package Application.Operations;
 
-import Application.DataStructures.ListItem;
 import Application.DataStructures.ToDoList;
 import Application.DataStructures.User;
 
@@ -81,7 +80,7 @@ public class Operations {
     }
     public void addListToTable(ArrayList<String> values) {
         try {
-            user.addToTable(values.get(0), user.getListWithName(values.get(1)));
+            user.addToTable(values.get(0), user.getList(values.get(1)));
         } catch (Exception e) {
             System.out.println("please enter a valid table name or path to list");
         }
@@ -126,9 +125,9 @@ public class Operations {
     }
     public void changeList(ArrayList<String> values) {
         try {
-            ListItem temp = user.betterGetListWithName(values.get(0));
-            curList = temp.getList();
-            dir = temp.getName();
+            ToDoList temp = user.getList(values.get(0));
+            curList = temp;
+            dir = curList.getListName();
         } catch(Exception e) {
             System.out.println(e + "\n\n invalid list");
         }

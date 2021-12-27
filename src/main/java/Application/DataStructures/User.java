@@ -8,7 +8,7 @@ public class User extends ToDoList {
     public void addTable(String name) {
         tables.put(name, new Tables());
     }
-    public void addToTable(String name, ListItem list) {
+    public void addToTable(String name, ToDoList list) {
         if(tables.containsKey(name)) {
             tables.get(name).addList(list);
         }
@@ -28,7 +28,7 @@ public class User extends ToDoList {
     public void deleteTable(String name) {
         tables.remove(name);
     }
-    public void removeFromTable(String name, ListItem list) {
+    public void removeFromTable(String name, ToDoList list) {
         tables.remove(name).removeList(list);
     }
 
