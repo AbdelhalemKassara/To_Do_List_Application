@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Tables {
     protected ArrayList<ToDoList> toDoList;
+
     public Tables() {
         toDoList = new ArrayList<>();
     }

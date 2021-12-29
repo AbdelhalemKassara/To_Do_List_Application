@@ -126,6 +126,25 @@ public class ToDoList extends Format {
 			return false;
 		}
 	}
+
+	private String getAllSubListsFrom(ToDoList rootList, String path, String cur) {
+		StringBuilder str = new StringBuilder();
+		String[] subLists = rootList.getSubListKeys();
+		path += '/' + cur;
+
+		for(int i = 0; i < subLists.length; i++) {
+			str.append(path);
+			str.append('/');
+			str.append(subLists[i]);
+			str.append('\n');
+			str.append(getAllSubListsFrom(rootList.getList(subLists[i]), path, subLists[i]));
+		}
+		return str.toString();
+	}
+
+	public String getAllSubLists() {
+		return getAllSubListsFrom(this, "", "");
+	}
 	
 	//format ex. "sublist0/sublist1/sublist2"	
 	private ToDoList getListMethod(String path) {

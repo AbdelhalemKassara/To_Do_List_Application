@@ -217,26 +217,11 @@ public class Operations {
         }
     }
 
-    //not the best way to do it but I want to see if it will be noticibly slow
-    public String printSubListsFromCur(ToDoList temp, String path, String cur) {
-        StringBuilder str = new StringBuilder();
-        String[] subLists = temp.getSubListKeys();
-        path += '/' + cur;
-
-        for(int i = 0; i < subLists.length; i++) {
-            str.append(path);
-            str.append('/');
-            str.append(subLists[i]);
-            str.append('\n');
-            str.append(printSubListsFromCur(temp.getList(subLists[i]), path, subLists[i]));
-        }
-        return str.toString();
-    }
     public void printSubLists() {
-        System.out.println(printSubListsFromCur(curList, "", ""));
+        System.out.println(curList.getAllSubLists());
     }
     public void printSubListsFromRoot() {
-        System.out.println(printSubListsFromCur(user,"",""));
+        System.out.println(user.getAllSubLists());
     }
     public void printCurDir() {
         System.out.println(dir);
