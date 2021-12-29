@@ -172,4 +172,13 @@ public class ToDoListTest {
                 """;
         Assertions.assertEquals(output,t1.getAllSubLists());
     }
+    @Test
+    public void addSubListTest() {
+        ToDoList t1 = new ToDoList("root");
+        ToDoList t12 = new ToDoList("subList11");
+
+        t1.addSubList(t12.getListName(), t12);
+        Assertions.assertEquals(t1, t12.getParentList());
+    }
+    //add a test for searching using ".." to go back one list
 }

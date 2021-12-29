@@ -104,10 +104,12 @@ public class ToDoList extends Format {
 
 	//methods for modifying the sublists
 	public void addSubList(String title, ToDoList list) {
+		list.setParentList(this);
 		 subList.putIfAbsent(title, list);
 	}
 	public void addSubList(String title) {
-		subList.putIfAbsent(title, new ToDoList(title));
+		subList.putIfAbsent(title, new ToDoList(title,this));
+
 	}
 	public void removeSubList(String key) {
 		subList.remove(key);		
@@ -153,7 +155,7 @@ public class ToDoList extends Format {
 		for(int i = 0; i < path.length(); i++) {
 			if(path.charAt(i) == '/') {
 				key = path.substring(0, i);	
-				path = path.substring(i+1, path.length());	
+				path = path.substring(i+1);
 				break;
 			} else if (i == path.length()-1) {
 				key = path;
@@ -161,7 +163,12 @@ public class ToDoList extends Format {
 			}
 		}
 
-		ToDoList targetList = subList.get(key); //gets sublist
+		ToDoList targetList;
+		if(key.equals("..")) {
+			targetList = this.parentList;
+		} else {
+			targetList = subList.get(key); //gets sublist
+		}
 
 		if(targetList != null && !path.equals("")) {
 			return targetList.getList(path);

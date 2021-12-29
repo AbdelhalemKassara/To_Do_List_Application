@@ -12,6 +12,8 @@ public class Parser {
                 values.add(input.substring(0, i));
                 input = input.substring(i);
                 break;
+            } else if(i == input.length()-1) {
+                values.add(input);
             }
         }
 
@@ -27,6 +29,8 @@ public class Parser {
             if(input.charAt(i) == '|') {
                 values.add(input.substring(stIndex, i));
                 stIndex = i+1;
+            } else if(i == input.length()-1) {
+                values.add(input.substring(stIndex));
             }
         }
         return values;

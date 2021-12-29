@@ -127,9 +127,12 @@ public class Operations {
     }
     public void changeList(ArrayList<String> values) {
         try {
-            ToDoList temp = user.getList(values.get(0));
-            curList = temp;
-            dir = curList.getListName();
+            //note: the issue is that it starts from the root rather than from the current directory so when the user uses ".." it goes to the root which has no parent
+            if(values.get(0).charAt(0) == '/') {
+                curList = user.getList(values.get(0).substring(1));
+            } else {
+                curList = curList.getList(values.get(0));
+            }
         } catch(Exception e) {
             System.out.println(e + "\n\n invalid list");
         }
@@ -229,6 +232,17 @@ public class Operations {
 
     //delete this method, this was just for testing the method above
     public void tewt(ToDoList list) {
-        user.addSubList("temp",list);
+        user.addSubList("temp", list);
+    }
+    public void help() {
+        System.out.println("""
+                            operations: (format)
+                            listNames: prints the names of the sub lists in the current list. (listNames)
+                            printList: prints the contents of the current list, sub-lists and tasks. (printList)
+                            listTableNames: prints all the table names for the current user. (listTableNames)
+                            printSubLists: prints the names of all the sub lists from the current list. (printSubLists)
+                            printSubListsFromRoot: prints the names of all the sub lists from the root list. (printSubListsFromRoot)
+                            printCurDir: 
+                            """);
     }
 }
