@@ -4,6 +4,9 @@ import Application.DataStructures.ToDoList;
 import Application.DataStructures.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 /* store the current "directory"
 
 create new list in some list
@@ -33,21 +36,46 @@ change the name of a table
 change list "cl"(enter the entire path from base so (something1/something2/something3))
 
 completed
-
-format method takes in an operation and returns the format of the input
-
  */
 public class Operations {
     private String dir;
     private User user;
     private ToDoList curList;
+    private HashMap<String, String> helpMessages = new HashMap<>();
+
 
     public Operations(User user) {
         this.user = user;
         curList = user;
         dir = "//";
+        helpMessages.put("addTask", "addTask: adds a new task to the current list. (task|year|month|dayOfMonth|hour|minute or stYear|stMonth|stDayOfMonth|stHour|stMin|task|year|month|dayOfMonth|hour|minute)");
+        helpMessages.put("addTable", "addTable: adds a new table. (nameOfNewTable)");
+        helpMessages.put("addList", "addList: add a new list. (nameOfNewList)");
+        helpMessages.put("addListToTable", "addListToTable: adds a desired list to a desired table. (nameOfTable|path)");
+        helpMessages.put("moveList", "moveList: moves a list to another list. (pathToMove|PathNewLoc)");
+        helpMessages.put("moveTask", "moveTask: moves a task from the current list to a desired list. (index|pathToNewList)");
+        helpMessages.put("deleteTable", "deleteTable: deletes a table. (tableName)");
+        helpMessages.put("deleteTask", "deleteTask: deletes a task from the current list. (taskNumber)");
+        helpMessages.put("deleteList", "deleteList: deletes a list from the current list. (listName)");
+        helpMessages.put("changeList", "changeList: changes the current list to the desired list. (path)");
+        helpMessages.put("changeStDateTask", "changeStDateTask: changes the start date of a task. (index|year|month|dayOfMonth| or index|hour|min| or index|year|month|dayOfMonth|hour|min)");
+        helpMessages.put("changeTask", "changeTask: changes the task of a task. (index|task|)");
+        helpMessages.put("changeEndDateTask","changeEndDateTask: changes the end date of a task. (index|year|month|dayOfMonth| or index|hour|min| or index|year|month|dayOfMonth|hour|min)");
+        helpMessages.put("renameList", "renameList: changes the name of a sublist from the current list. (oldName|newName|)");
+        helpMessages.put("renameTable", "renameTable: renames a table. (oldName|newName|)");
+        helpMessages.put("listNames", "listNames: prints the names of the sub lists in the current list. ()");
+        helpMessages.put("printList", "printList: prints the contents of the current list, sub-lists and tasks. ()");
+        helpMessages.put("listTableNames", "listTableNames: prints all the table names for the current user. ()");
+        helpMessages.put("printTable", "printTable: prints the desired table. (tableName)");
+        helpMessages.put("printSubLists", "printSubLists: prints the names of all the sub lists from the current list. ()");
+        helpMessages.put("printSubListsFromRoot", "printSubListsFromRoot: prints the names of all the sub lists from the root list. ()");
+        helpMessages.put("printCurDir", "printCurDir: prints the current directory. ()");
     }
-
+    public void help() {
+        for(Map.Entry<String, String> i : helpMessages.entrySet()) {
+            System.out.println(i.getValue());
+        }
+    }
 
     public void addTask(ArrayList<String> values) {
         try {
@@ -63,78 +91,77 @@ public class Operations {
                 throw new RuntimeException();
             }
         } catch (Exception e) {
-            System.out.println("Invalid input values for addtask operation");
+            System.out.println("Invalid input values for addtask operation, format: task|year|month|dayOfMonth|hour|minute or stYear|stMonth|stDayOfMonth|stHour|stMin|task|year|month|dayOfMonth|hour|minute");
         }
     }
     public void addTable(ArrayList<String> values) {
         try {
             user.addTable(values.get(0));
         } catch (Exception e) {
-            System.out.println("please enter a name");
+            System.out.println("please enter a name, format: nameOfNewTable");
         }
     }
     public void addList(ArrayList<String> values) {
         try {
             curList.addSubList(values.get(0));
         } catch (Exception e) {
-            System.out.println("please enter a name");
+            System.out.println("please enter a name, format: nameOfNewList");
         }
     }
     public void addListToTable(ArrayList<String> values) {
         try {
             user.addToTable(values.get(0), user.getList(values.get(1)));
         } catch (Exception e) {
-            System.out.println("please enter a valid table name or path to list");
+            System.out.println("please enter a valid table name or path to list, format: nameOfTable|path");
         }
     }
     public void moveList(ArrayList<String> values) {
         try {
             ToDoList temp = user.getList(values.get(0));
-            user.getList(values.get(2)).addSubList(values.get(1), temp.getList(values.get(1)));
-            temp.removeSubList(values.get(1));
+            user.getList(values.get(1)).addSubList(temp.getListName(), temp);
+            temp.removeSubList(values.get(0));
         } catch (Exception e) {
-            System.out.println("invalid inputs format: pathToMove|nameOfList|PathNewLoc");
+            System.out.println("invalid inputs format: pathToMove|PathNewLoc");
         }
     }
     public void moveTask(ArrayList<String> values) {
-        try {
-            user.getList(values.get(2)).addTask(user.getList(values.get(0)).getTask(Integer.parseInt(values.get(1))));
-            user.getList(values.get(0)).removeTask(Integer.parseInt(values.get(1)));
+        try {//this will need to use an operation similar to changeList operation
+            user.getList(values.get(1)).addTask(curList.getTask(Integer.parseInt(values.get(0))));
+            curList.removeTask(Integer.parseInt(values.get(0)));
         } catch(Exception e) {
-            System.out.println("invalid inputs for moveTask format: pathToList|index|pathToNewList");
+            System.out.println("invalid inputs for moveTask format: index|pathToNewList");
         }
     }
     public void deleteTable(ArrayList<String> values) {
         try {
             user.deleteTable(values.get(0));
         } catch (Exception e) {
-            System.out.println("can't delete table");
+            System.out.println("can't delete table, format: tableName");
         }
     }
     public void deleteTask(ArrayList<String> values) {
         try {
             curList.removeTask(Integer.parseInt(values.get(0)));
         } catch (Exception e) {
-            System.out.println("can't delete task");
+            System.out.println("can't delete task, format: taskNumber");
         }
     }
     public void deleteList(ArrayList<String> values) {
         try {
             curList.removeSubList(values.get(0));
         }  catch (Exception e) {
-            System.out.println("can't delete list");
+            System.out.println("can't delete list, format: listName");
         }
     }
     public void changeList(ArrayList<String> values) {
         try {
-            //note: the issue is that it starts from the root rather than from the current directory so when the user uses ".." it goes to the root which has no parent
             if(values.get(0).charAt(0) == '/') {
                 curList = user.getList(values.get(0).substring(1));
             } else {
                 curList = curList.getList(values.get(0));
             }
         } catch(Exception e) {
-            System.out.println(e + "\n\n invalid list");
+            System.out.println(e + "\n\n invalid list, format: path");
         }
     }
     public void changeStDateTask(ArrayList<String> values) {
@@ -216,7 +243,7 @@ public class Operations {
         try {
             System.out.println(user.getTable(values.get(0)));
         } catch(Exception e) {
-            System.out.println(e + "\n\n invalid name for table");
+            System.out.println(e + "\n\n invalid name for table, format: tableName");
         }
     }
 
@@ -230,19 +257,5 @@ public class Operations {
         System.out.println(dir);
     }
 
-    //delete this method, this was just for testing the method above
-    public void tewt(ToDoList list) {
-        user.addSubList("temp", list);
-    }
-    public void help() {
-        System.out.println("""
-                            operations: (format)
-                            listNames: prints the names of the sub lists in the current list. (listNames)
-                            printList: prints the contents of the current list, sub-lists and tasks. (printList)
-                            listTableNames: prints all the table names for the current user. (listTableNames)
-                            printSubLists: prints the names of all the sub lists from the current list. (printSubLists)
-                            printSubListsFromRoot: prints the names of all the sub lists from the root list. (printSubListsFromRoot)
-                            printCurDir: 
-                            """);
-    }
+
 }

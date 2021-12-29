@@ -39,9 +39,12 @@ public class CommandsMap extends Operations{
             case "printCurDir":
                 printCurDir();
                 return;
+            case "help":
+                help();
+                return;
             case "exit":
                 System.exit(0);
-            return;
+                return;
         }
     }
 

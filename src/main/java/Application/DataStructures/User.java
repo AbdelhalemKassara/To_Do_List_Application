@@ -43,4 +43,7 @@ public class User extends ToDoList {
             System.out.println("the names are the same or the old name doesn't exist");
         }
     }
+    public ToDoList getListFromRoot(String path) {
+        return getList(path);
+    }
 }
