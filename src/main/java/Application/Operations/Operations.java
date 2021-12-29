@@ -59,6 +59,8 @@ public class Operations {
             } else if (values.size() == 6) {
                 curList.addTask(values.get(0), Integer.parseInt(values.get(1)), Integer.parseInt(values.get(2)), Integer.parseInt(values.get(3)),
                         Integer.parseInt(values.get(4)), Integer.parseInt(values.get(5)));
+            } else {
+                throw new RuntimeException();
             }
         } catch (Exception e) {
             System.out.println("Invalid input values for addtask operation");
@@ -230,11 +232,11 @@ public class Operations {
         }
         return str.toString();
     }
-    public String printSubLists() {
-        return printSubListsFromCur(curList, "", "");
+    public void printSubLists() {
+        System.out.println(printSubListsFromCur(curList, "", ""));
     }
-    public String printSubListsFromRoot() {
-        return printSubListsFromCur(user,"","");
+    public void printSubListsFromRoot() {
+        System.out.println(printSubListsFromCur(user,"",""));
     }
     public void printCurDir() {
         System.out.println(dir);

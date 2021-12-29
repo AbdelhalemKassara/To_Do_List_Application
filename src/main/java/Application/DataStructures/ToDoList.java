@@ -14,13 +14,8 @@ public class ToDoList extends Format {
 	private String listName;
 	private ToDoList parentList;
 
+
 	//constructor methods
-	public ToDoList(){
-		this.taskList = new LinkedList<>();
-		this.subList = new HashMap<>();
-		parentList = null;
-	}
-	//switch everything so that it uses these methods
 	public ToDoList(String listName){
 		this.taskList = new LinkedList<>();
 		this.subList = new HashMap<>();
@@ -112,20 +107,23 @@ public class ToDoList extends Format {
 		 subList.putIfAbsent(title, list);
 	}
 	public void addSubList(String title) {
-		subList.putIfAbsent(title, new ToDoList());
+		subList.putIfAbsent(title, new ToDoList(title));
 	}
 	public void removeSubList(String key) {
 		subList.remove(key);		
 	}
-	//probably should check if the new key already exists
-	public void renameSubList(String oldKey, String newKey) {
-		if(subList.containsKey(oldKey) && !oldKey.equals(newKey)) {
+
+	public boolean renameSubList(String oldKey, String newKey) {
+		if(subList.containsKey(oldKey) && !oldKey.equals(newKey) && !subList.containsKey(newKey)) {
 			ToDoList temp = subList.get(oldKey);
 			subList.put(newKey, temp);
 			temp.setListName(newKey);
 			subList.remove(oldKey);
+			return true;
 		} else {
+			//move this over to the command line operations
 			System.out.println("this key doesn't exist or you have entered the same name");
+			return false;
 		}
 	}
 	

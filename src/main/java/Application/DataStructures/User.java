@@ -3,6 +3,9 @@ package Application.DataStructures;
 import java.util.HashMap;
 
 public class User extends ToDoList {
+    public User() {
+        super("root");
+    }
     HashMap<String, Tables> tables = new HashMap<>();
 
     public void addTable(String name) {
