@@ -70,6 +70,7 @@ public class Operations {
         helpMessages.put("printSubLists", "printSubLists: prints the names of all the sub lists from the current list. ()");
         helpMessages.put("printSubListsFromRoot", "printSubListsFromRoot: prints the names of all the sub lists from the root list. ()");
         helpMessages.put("printCurDir", "printCurDir: prints the current directory. ()");
+        helpMessages.put("removeListFromTable", "removeListFromTable: this will remove a list from the desired table. (tableName|listName)");
     }
     public void help() {
         for(Map.Entry<String, String> i : helpMessages.entrySet()) {
@@ -244,6 +245,13 @@ public class Operations {
             System.out.println(user.getTable(values.get(0)));
         } catch(Exception e) {
             System.out.println(e + "\n\n invalid name for table, format: tableName");
+        }
+    }
+    public void removeListFromTable(ArrayList<String> values) {
+        try {
+            user.removeFromTable(values.get(0), values.get(1));
+        } catch(Exception e) {
+            System.out.println( e + "\n\n invalid name for table and or list. format tableName|ListName");
         }
     }
 

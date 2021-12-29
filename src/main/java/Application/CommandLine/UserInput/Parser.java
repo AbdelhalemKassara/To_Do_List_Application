@@ -21,7 +21,6 @@ public class Parser {
         if(input.length() > 1) {
             input = input.substring(1);
         }
-        //check if there are commands that have no arguments here add a continue or return after if it meets a condition
 
 
         int stIndex = 0;

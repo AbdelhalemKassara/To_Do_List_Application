@@ -101,8 +101,7 @@ public class ToDoList extends Format {
 	}
 
 
-
-	//methods for modifying the sublists
+	//methods for modifying the sub-lists
 	public void addSubList(String title, ToDoList list) {
 		list.setParentList(this);
 		 subList.putIfAbsent(title, list);

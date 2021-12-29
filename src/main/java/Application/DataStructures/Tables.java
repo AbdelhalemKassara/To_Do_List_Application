@@ -13,8 +13,32 @@ public class Tables {
         toDoList.add(list);
     }
 
-    public void removeList(ToDoList list) {
-        toDoList.remove(list);
+
+    //implement this in operations
+    public boolean removeList(String list) {
+        int index = -1;
+        for(int i = 0; i < toDoList.size(); i++) {
+            if(toDoList.get(i).getListName().equals(list)) {
+                index = i;
+            }
+        }
+        if(index == -1) {
+            return false;
+        } else {
+            toDoList.remove(index);
+            return true;
+        }
+
+    }
+
+    public String getLists() {
+        StringBuilder str = new StringBuilder();
+
+        for (int i = 0; i < toDoList.size(); i++) {
+            str.append(toDoList.get(i).getListName());
+            str.append(", ");
+        }
+        return str.toString();
     }
 
     public String toString() {

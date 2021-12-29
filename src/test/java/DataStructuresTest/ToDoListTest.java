@@ -63,7 +63,6 @@ public class ToDoListTest {
 
         Assertions.assertFalse(t1.renameSubList("list0","anykey"));
     }
-    //test getList Method
 
     @Test
     public void getListTest() {
@@ -162,7 +161,7 @@ public class ToDoListTest {
 
         t1.addSubList(t22.getListName(), t22);
 
-        Assertions.assertEquals(t24, t1.getList("subList11/subList12/subList13/../../../subList11/subList of subList11/../../subList21/subList23/subList24"));
+        Assertions.assertEquals(t24, t1.getList("subList11/subList12/subList13/../../subList of subList11/../../subList21/subList23/subList24"));
     }
 
     @Test

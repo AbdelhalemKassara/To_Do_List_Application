@@ -31,8 +31,8 @@ public class User extends ToDoList {
     public void deleteTable(String name) {
         tables.remove(name);
     }
-    public void removeFromTable(String name, ToDoList list) {
-        tables.remove(name).removeList(list);
+    public void removeFromTable(String name, String listName) {
+        tables.remove(name).removeList(listName);
     }
 
     public void renameTable(String oldName, String newName) {

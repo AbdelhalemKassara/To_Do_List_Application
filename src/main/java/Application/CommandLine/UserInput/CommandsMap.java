@@ -99,6 +99,10 @@ public class CommandsMap extends Operations{
                 return;
             case "printTable":
                 printTable(values);
+                return;
+            case "removeListFromTable":
+                removeListFromTable(values);
+                return;
         }
     }
 }
