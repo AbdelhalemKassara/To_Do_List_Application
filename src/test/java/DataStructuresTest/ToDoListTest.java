@@ -139,6 +139,31 @@ public class ToDoListTest {
 
         Assertions.assertEquals(t24, t1.getList("subList21/subList23/subList24"));
     }
+    @Test
+    @DisplayName("test searching using '..'")
+    public void getListTest3() {
+        ToDoList t1 = new ToDoList("root");
+        ToDoList t12 = new ToDoList("subList11");
+        ToDoList t120 = new ToDoList("subList of subList11");
+        ToDoList t13 = new ToDoList("subList12");
+        ToDoList t14 = new ToDoList("subList13");
+
+        t13.addSubList(t14.getListName(), t14);
+        t12.addSubList(t13.getListName(), t13);
+        t12.addSubList(t120.getListName(), t120);
+        t1.addSubList(t12.getListName(), t12);
+
+        ToDoList t22 = new ToDoList("subList21");
+        ToDoList t23 = new ToDoList("subList23");
+        ToDoList t24 = new ToDoList("subList24");
+
+        t23.addSubList(t24.getListName(), t24);
+        t22.addSubList(t23.getListName(), t23);
+
+        t1.addSubList(t22.getListName(), t22);
+
+        Assertions.assertEquals(t24, t1.getList("subList11/subList12/subList13/../../../subList11/subList of subList11/../../subList21/subList23/subList24"));
+    }
 
     @Test
     public void getAllSubListsTest() {
@@ -180,5 +205,4 @@ public class ToDoListTest {
         t1.addSubList(t12.getListName(), t12);
         Assertions.assertEquals(t1, t12.getParentList());
     }
-    //add a test for searching using ".." to go back one list
 }
