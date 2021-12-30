@@ -52,7 +52,7 @@ public class Operations {
         helpMessages.put("addTable", "addTable: adds a new table. (nameOfNewTable)");
         helpMessages.put("addList", "addList: add a new list. (nameOfNewList)");
         helpMessages.put("addListToTable", "addListToTable: adds a desired list to a desired table. (nameOfTable|path)");
-        helpMessages.put("moveList", "moveList: moves a list to another list. (pathToMove|PathNewLoc)");
+        helpMessages.put("moveList", "moveList: moves a list from the current directory to another list. (pathToMove|PathNewLoc)");
         helpMessages.put("moveTask", "moveTask: moves a task from the current list to a desired list. (index|pathToNewList)");
         helpMessages.put("deleteTable", "deleteTable: deletes a table. (tableName)");
         helpMessages.put("deleteTask", "deleteTask: deletes a task from the current list. (taskNumber)");
@@ -73,7 +73,7 @@ public class Operations {
         helpMessages.put("removeListFromTable", "removeListFromTable: this will remove a list from the desired table. (tableName|listName)");
         helpMessages.put("exit", "exit: end the program ()");
     }
-    public void help() {
+    public void help() {//tested
         for(Map.Entry<String, String> i : helpMessages.entrySet()) {
             System.out.println(i.getValue());
         }
@@ -86,7 +86,7 @@ public class Operations {
         }
     }
 
-    public void addTask(ArrayList<String> values) {
+    public void addTask(ArrayList<String> values) {//tested
         try {
             if (values.size() == 11) {
                 curList.addTask(Integer.parseInt(values.get(0)), Integer.parseInt(values.get(1)), Integer.parseInt(values.get(2)),
@@ -110,7 +110,7 @@ public class Operations {
             System.out.println("please enter a name, format: nameOfNewTable");
         }
     }
-    public void addList(ArrayList<String> values) {
+    public void addList(ArrayList<String> values) {//tested
         try {
             curList.addSubList(values.get(0));
         } catch (Exception e) {
@@ -124,21 +124,27 @@ public class Operations {
             System.out.println("please enter a valid table name or path to list, format: nameOfTable|path");
         }
     }
-    public void moveList(ArrayList<String> values) {
+    public void moveList(ArrayList<String> values) {//tested
         try {
-            ToDoList temp = user.getList(values.get(0));
-            user.getList(values.get(1)).addSubList(temp.getListName(), temp);
-            temp.removeSubList(values.get(0));
+            ToDoList moving = curList.getList(values.get(0));
+            ToDoList destination = getToDoList(values.get(1));
+
+            if(moving != null && destination != null && !moving.getListName().equals("root")) {
+                destination.addSubList(moving.getListName(), moving);
+                curList.removeSubList(values.get(0));
+            } else {
+                throw new NullPointerException();
+            }
         } catch (Exception e) {
-            System.out.println("invalid inputs format: pathToMove|PathNewLoc");
+            System.out.println(e + "\n\ninvalid inputs format: pathToMove|PathNewLoc");
         }
     }
-    public void moveTask(ArrayList<String> values) {
-        try {//this will need to use an operation similar to changeList operation
-            user.getList(values.get(1)).addTask(curList.getTask(Integer.parseInt(values.get(0))));
+    public void moveTask(ArrayList<String> values) {//tested
+        try {
+            getToDoList(values.get(1)).addTask(curList.getTask(Integer.parseInt(values.get(0))));
             curList.removeTask(Integer.parseInt(values.get(0)));
         } catch(Exception e) {
-            System.out.println("invalid inputs for moveTask format: index|pathToNewList");
+            System.out.println(e + "\n\ninvalid inputs for moveTask format: index|pathToNewList");
         }
     }
     public void deleteTable(ArrayList<String> values) {
@@ -162,29 +168,47 @@ public class Operations {
             System.out.println("can't delete list, format: listName");
         }
     }
+    private ToDoList getToDoList(String path) {
+        ToDoList output;
+        if(path.charAt(0) == '/') {
+            output = user.getList(path.substring(1));
+        } else {
+            output = curList.getList(path);
+        }
+        return output;
+    }
     public void changeList(ArrayList<String> values) {
         try {
             if(values.get(0).charAt(0) == '/') {
-                curList = user.getList(values.get(0).substring(1));
-                dir =  values.get(0);
-                System.out.println("test");
-            } else {
-                curList = curList.getList(values.get(0));
-                //this is responsible for changing the dir (need to limit it so that it doesn't go to null (past root or to non existant child))
-                String[] path = values.get(0).split("/");
-                for(int i = 0; i < path.length; i++) {
-                    if(path[i].equals("..")) {
-                        for(int d = dir.length()-1; d >= 0; d--) {
-                            if(dir.charAt(d) == '/') {
-                                dir = dir.substring(0,d);
-                                break;
-                            }
-                        }
-                    }else {
-                        dir += '/' + path[i];
-                    }
+                ToDoList temp = user.getList(values.get(0).substring(1));
+                if(temp != null) {
+                    curList = temp;
+                    dir = values.get(0);
+                } else {
+                    throw new NullPointerException();
                 }
+            } else {
+                ToDoList temp = curList.getList(values.get(0));
+                if(temp != null) {
+                    curList = curList.getList(values.get(0));
 
+                    //this is responsible for changing the current directory
+                    String[] path = values.get(0).split("/");
+                    for(int i = 0; i < path.length; i++) {  //this loops through each list in the path
+                        if(path[i].equals("..")) {
+                            for(int d = dir.length()-1; d >= 0; d--) {  //this removes the rightmost list
+                                if(dir.charAt(d) == '/') {
+                                    dir = dir.substring(0, d);
+                                    break;
+                                }
+                            }
+                        }else {
+                            dir += '/' + path[i];
+                        }
+                    }
+                } else {
+                    throw new NullPointerException();
+                }
             }
 
         } catch(Exception e) {

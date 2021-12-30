@@ -104,18 +104,19 @@ public class ToDoList extends Format {
 	//methods for modifying the sub-lists
 	public void addSubList(String title, ToDoList list) {
 		list.setParentList(this);
-		 subList.putIfAbsent(title, list);
+		subList.putIfAbsent(title, list);
 	}
 	public void addSubList(String title) {
-		subList.putIfAbsent(title, new ToDoList(title,this));
-
+		if(!title.equals("..")) {
+			subList.putIfAbsent(title, new ToDoList(title, this));
+		}
 	}
 	public void removeSubList(String key) {
 		subList.remove(key);		
 	}
 
 	public boolean renameSubList(String oldKey, String newKey) {
-		if(subList.containsKey(oldKey) && !oldKey.equals(newKey) && !subList.containsKey(newKey)) {
+		if(subList.containsKey(oldKey) && !oldKey.equals(newKey) && !subList.containsKey(newKey) && !newKey.equals("..")) {
 			ToDoList temp = subList.get(oldKey);
 			subList.put(newKey, temp);
 			temp.setListName(newKey);
