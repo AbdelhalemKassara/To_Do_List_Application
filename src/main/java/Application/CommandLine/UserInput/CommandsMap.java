@@ -13,99 +13,104 @@ public class CommandsMap extends Operations{
 
     public void operationsSearch(ArrayList<String> values) {
         try {
-            operationsWithoutValues(values.get(0));
-            operationsWithValues(values);
+            if(!operationsWithoutValues(values.get(0)) && !operationsWithValues(values)) {
+                System.out.println("this command doesn't exist");
+            }
         } catch(Exception e) {
-            System.out.println("no command");
+            System.out.println(e);
         }
     }
-    public void operationsWithoutValues(String operation) {
+    public boolean operationsWithoutValues(String operation) {
         switch(operation) {
             case "listNames":
                 listNames();
-                return;
+                return true;
             case "printList":
                 printList();
-                return;
+                return true;
             case "listTableNames":
                 listTableNames();
-                return;
+                return true;
             case "printSubLists":
                 printSubLists();
-                return;
+                return true;
             case "printSubListsFromRoot":
                 printSubListsFromRoot();
-                return;
+                return true;
             case "printCurDir":
                 printCurDir();
-                return;
+                return true;
             case "help":
                 help();
-                return;
+                return true;
             case "exit":
                 System.exit(0);
-                return;
+                return true;
+            default:
+                return false;
         }
     }
 
-    public void operationsWithValues(ArrayList<String> values) {
+    public boolean operationsWithValues(ArrayList<String> values) {
         String operation = values.get(0);
         values.remove(0);
         switch(operation) {
             case "addTask":
                 addTask(values);
-                return;
+                return true;
             case "addTable":
                 addTable(values);
-                return;
+                return true;
             case "addList":
                 addList(values);
-                return;
+                return true;
             case "addListToTable":
                 addListToTable(values);
-                return;
+                return true;
             case "moveList":
                 moveList(values);
-                return;
+                return true;
             case "moveTask":
                 moveTask(values);
-                return;
+                return true;
             case "deleteTable":
                 deleteTable(values);
-                return;
+                return true;
             case "deleteTask":
                 deleteTask(values);
-                return;
+                return true;
             case "deleteList":
                 deleteList(values);
-                return;
+                return true;
             case "cl":
                 changeList(values);
-                return;
+                return true;
             case "changeStDateTask":
                 changeStDateTask(values);
-                return;
+                return true;
             case "changeEndDateTask":
                 changeEndDateTask(values);
-                return;
+                return true;
             case "changeTask":
                 changeTask(values);
-                return;
+                return true;
             case "renameList":
                 renameList(values);
-                return;
+                return true;
             case "renameTable":
                 renameTable(values);
-                return;
+                return true;
             case "printTable":
                 printTable(values);
-                return;
+                return true;
             case "removeListFromTable":
                 removeListFromTable(values);
-                return;
+                return true;
             case "about":
                 about(values);
-                return;
+                return true;
+            default:
+                return false;
         }
     }
 }

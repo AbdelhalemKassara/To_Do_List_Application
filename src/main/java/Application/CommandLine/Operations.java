@@ -7,38 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/* store the current "directory"
-
-create new list in some list
-create new task in some list
-create a new table
-
-add a list to a table
-
-move a list into another list
-move a task into another list
-
-print all list names at the current location
-print list at the current location
-print all table names
-print some table
-print all lists (from root)
-print all the lists from the current location (including sublists)
-
-delete a task
-delete a table
-delete a list
-
-change the "task" of a task
-change the date of a task
-change the name of a list
-change the name of a table
-change list "cl"(enter the entire path from base so (something1/something2/something3))
-
-completed
- */
 public class Operations {
-    private String dir;//this hasn't really been setup
+    private String dir;
     private User user;
     private ToDoList curList;
     private HashMap<String, String> helpMessages = new HashMap<>();
@@ -73,20 +43,25 @@ public class Operations {
         helpMessages.put("removeListFromTable", "removeListFromTable: this will remove a list from the desired table. (tableName|listName)");
         helpMessages.put("exit", "exit: end the program ()");
     }
-    public void help() {//tested
+    public void help() {
         for(Map.Entry<String, String> i : helpMessages.entrySet()) {
             System.out.println(i.getValue());
         }
     }
     public void about(ArrayList<String> values) {
         try {
-            System.out.println(helpMessages.get(values.get(0)));
+            String output = helpMessages.get(values.get(0));
+            if(output != null) {
+                System.out.println(output);
+            } else {
+                throw new NullPointerException();
+            }
         } catch(Exception e) {
             System.out.println("please enter a valid command");
         }
     }
 
-    public void addTask(ArrayList<String> values) {//tested
+    public void addTask(ArrayList<String> values) {
         try {
             if (values.size() == 11) {
                 curList.addTask(Integer.parseInt(values.get(0)), Integer.parseInt(values.get(1)), Integer.parseInt(values.get(2)),
@@ -100,7 +75,7 @@ public class Operations {
                 throw new RuntimeException();
             }
         } catch (Exception e) {
-            System.out.println("Invalid input values for addtask operation, format: task|year|month|dayOfMonth|hour|minute or stYear|stMonth|stDayOfMonth|stHour|stMin|task|year|month|dayOfMonth|hour|minute");
+            System.out.println(e + "\n\nInvalid input values for addtask operation, format: task|year|month|dayOfMonth|hour|minute or stYear|stMonth|stDayOfMonth|stHour|stMin|task|year|month|dayOfMonth|hour|minute");
         }
     }
     public void addTable(ArrayList<String> values) {
@@ -110,7 +85,7 @@ public class Operations {
             System.out.println("please enter a name, format: nameOfNewTable");
         }
     }
-    public void addList(ArrayList<String> values) {//tested
+    public void addList(ArrayList<String> values) {
         try {
             curList.addSubList(values.get(0));
         } catch (Exception e) {
@@ -119,12 +94,18 @@ public class Operations {
     }
     public void addListToTable(ArrayList<String> values) {
         try {
-            user.addToTable(values.get(0), user.getList(values.get(1)));
+            ToDoList list = getToDoList(values.get(1));
+            if(list != null) {
+                user.addToTable(values.get(0), list);
+            } else {
+                throw new NullPointerException();
+            }
+
         } catch (Exception e) {
-            System.out.println("please enter a valid table name or path to list, format: nameOfTable|path");
+            System.out.println(e + "\n\nplease enter a valid table name or path to list, format: nameOfTable|path");
         }
     }
-    public void moveList(ArrayList<String> values) {//tested
+    public void moveList(ArrayList<String> values) {
         try {
             ToDoList moving = curList.getList(values.get(0));
             ToDoList destination = getToDoList(values.get(1));
@@ -139,7 +120,7 @@ public class Operations {
             System.out.println(e + "\n\ninvalid inputs format: pathToMove|PathNewLoc");
         }
     }
-    public void moveTask(ArrayList<String> values) {//tested
+    public void moveTask(ArrayList<String> values) {
         try {
             getToDoList(values.get(1)).addTask(curList.getTask(Integer.parseInt(values.get(0))));
             curList.removeTask(Integer.parseInt(values.get(0)));

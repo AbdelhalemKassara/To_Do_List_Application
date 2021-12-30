@@ -9,12 +9,12 @@ public class User extends ToDoList {
     HashMap<String, Tables> tables = new HashMap<>();
 
     public void addTable(String name) {
-        tables.put(name, new Tables());
+        if(!tables.containsKey(name)) {
+            tables.put(name, new Tables());
+        }
     }
     public void addToTable(String name, ToDoList list) {
-        if(tables.containsKey(name)) {
             tables.get(name).addList(list);
-        }
     }
 
     public String getTable(String name) {
