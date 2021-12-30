@@ -1,4 +1,4 @@
-package Application.Operations;
+package Application.CommandLine;
 
 import Application.DataStructures.ToDoList;
 import Application.DataStructures.User;
@@ -38,7 +38,7 @@ change list "cl"(enter the entire path from base so (something1/something2/somet
 completed
  */
 public class Operations {
-    private String dir;
+    private String dir;//this hasn't really been setup
     private User user;
     private ToDoList curList;
     private HashMap<String, String> helpMessages = new HashMap<>();
@@ -47,7 +47,7 @@ public class Operations {
     public Operations(User user) {
         this.user = user;
         curList = user;
-        dir = "//";
+        dir = "/";
         helpMessages.put("addTask", "addTask: adds a new task to the current list. (task|year|month|dayOfMonth|hour|minute or stYear|stMonth|stDayOfMonth|stHour|stMin|task|year|month|dayOfMonth|hour|minute)");
         helpMessages.put("addTable", "addTable: adds a new table. (nameOfNewTable)");
         helpMessages.put("addList", "addList: add a new list. (nameOfNewList)");
@@ -71,10 +71,18 @@ public class Operations {
         helpMessages.put("printSubListsFromRoot", "printSubListsFromRoot: prints the names of all the sub lists from the root list. ()");
         helpMessages.put("printCurDir", "printCurDir: prints the current directory. ()");
         helpMessages.put("removeListFromTable", "removeListFromTable: this will remove a list from the desired table. (tableName|listName)");
+        helpMessages.put("exit", "exit: end the program ()");
     }
     public void help() {
         for(Map.Entry<String, String> i : helpMessages.entrySet()) {
             System.out.println(i.getValue());
+        }
+    }
+    public void about(ArrayList<String> values) {
+        try {
+            System.out.println(helpMessages.get(values.get(0)));
+        } catch(Exception e) {
+            System.out.println("please enter a valid command");
         }
     }
 
@@ -158,9 +166,27 @@ public class Operations {
         try {
             if(values.get(0).charAt(0) == '/') {
                 curList = user.getList(values.get(0).substring(1));
+                dir =  values.get(0);
+                System.out.println("test");
             } else {
                 curList = curList.getList(values.get(0));
+                //this is responsible for changing the dir (need to limit it so that it doesn't go to null (past root or to non existant child))
+                String[] path = values.get(0).split("/");
+                for(int i = 0; i < path.length; i++) {
+                    if(path[i].equals("..")) {
+                        for(int d = dir.length()-1; d >= 0; d--) {
+                            if(dir.charAt(d) == '/') {
+                                dir = dir.substring(0,d);
+                                break;
+                            }
+                        }
+                    }else {
+                        dir += '/' + path[i];
+                    }
+                }
+
             }
+
         } catch(Exception e) {
             System.out.println(e + "\n\n invalid list, format: path");
         }
@@ -264,6 +290,4 @@ public class Operations {
     public void printCurDir() {
         System.out.println(dir);
     }
-
-
 }

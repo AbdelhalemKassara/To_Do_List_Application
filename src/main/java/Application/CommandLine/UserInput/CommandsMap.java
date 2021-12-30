@@ -1,7 +1,7 @@
 package Application.CommandLine.UserInput;
 
 import Application.DataStructures.User;
-import Application.Operations.Operations;
+import Application.CommandLine.Operations;
 
 import java.util.ArrayList;
 
@@ -102,6 +102,9 @@ public class CommandsMap extends Operations{
                 return;
             case "removeListFromTable":
                 removeListFromTable(values);
+                return;
+            case "about":
+                about(values);
                 return;
         }
     }

@@ -1,4 +1,4 @@
-package MainCommandLIne;
+package Main;
 
 import Application.CommandLine.UserInput.CommandsMap;
 import Application.CommandLine.UserInput.Parser;
@@ -11,6 +11,7 @@ public class Main {
         CommandsMap c1 = new CommandsMap(new User());
         Scanner in = new Scanner(System.in);
 
+        System.out.println("Enter help to list all commands\n");
         while(true) {
             c1.operationsSearch(Parser.parseUserInput(in.nextLine()));
         }
