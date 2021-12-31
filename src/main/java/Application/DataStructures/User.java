@@ -3,10 +3,11 @@ package Application.DataStructures;
 import java.util.HashMap;
 
 public class User extends ToDoList {
+    HashMap<String, Tables> tables = new HashMap<>();
+
     public User() {
         super("root");
     }
-    HashMap<String, Tables> tables = new HashMap<>();
 
     public void addTable(String name) {
         if(!tables.containsKey(name)) {
@@ -26,14 +27,12 @@ public class User extends ToDoList {
     public String[] getTableNames() {
         return tables.keySet().toArray(new String[0]);
     }
-
     public void deleteTable(String name) {
         tables.remove(name);
     }
     public void removeFromTable(String name, String listName) {
         tables.remove(name).removeList(listName);
     }
-
     public void renameTable(String oldName, String newName) {
         if (tables.containsKey(oldName) &&  !tables.containsKey(newName)) {
             tables.put(newName, tables.get(oldName));
