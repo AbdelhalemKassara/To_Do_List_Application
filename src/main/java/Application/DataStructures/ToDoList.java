@@ -48,6 +48,9 @@ public class ToDoList extends Format {
 	public void setParentList(ToDoList parentList) {
 		this.parentList = parentList;
 	}
+	public LinkedList<Task> getTaskList() {
+		return taskList;
+	}
 
 	public String[] getSubListKeys(){
 		return subList.keySet().toArray(new String[0]);

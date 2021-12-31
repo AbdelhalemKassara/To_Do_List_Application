@@ -7,6 +7,7 @@ import Application.DataStructures.ToDoList;
 import Application.DataStructures.User;
 
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 
 /*
 format of: ToDoList
@@ -34,7 +35,7 @@ endDate : value
 }
 
 (ToDoList){(format){spacingOuter|spacingMid}{path|taskList|listName}}
-(ToDoList){{spacingOuter|spacingMid}{path|taskList|listName}}
+(List){{spacingOuter|spacingMid}{path|taskList|listName}}
 
 (Task){(format){spacingOuter|spacingMid}{startDate|task|endDate}}
 (Task){{spacingOuter|spacingMid}{startDate|task|endDate}}
@@ -43,20 +44,62 @@ format: LocalDateTime
 (LocalDateTime){year|month|dayOfMonth|hour|minute}
 (Date){year|month|dayOfMonth|hour|minute}
  */
-public class Save {
-    public String saveToDoList(ToDoList list) {
-        StringBuilder str = new StringBuilder();
-        str.append("(ToDoList){");
 
+//add escape character '\' to the load and save methods for certain character patterns
+public class Save {
+    //format in (List){{spacingOuter|spacingMid}{path|[task1|task2]|listName}}
+    public static String saveToDoList(ToDoList list, String path) {
+        StringBuilder str = new StringBuilder();
+        str.append("(List){");
+        str.append(saveFormat(list));
+        str.append('{');
+        str.append(path);
+        str.append("|[");
+        for(Task task : list.getTaskList()) {
+            str.append(saveTask(task));
+            str.append('|');
+        }
+        str.append("\b]|");
+        str.append(list.getListName());
+        str.append("}}");
         return str.toString();
+    }
+    public static ToDoList loadToDoList(String listString, User user) {
+
+
+        return null;
+    }
+
+    public static String saveFormat(Format format) {
+        StringBuilder str = new StringBuilder();
+        str.append('{');
+        str.append(format.getSpacingOuter());
+        str.append('|');
+        str.append(format.getSpacingMid());
+        str.append('}');
+        return str.toString();
+    }
+    //format in {spacingOuter|spacingMid}
+    public static Format loadFormat(Format format, String formatString) {
+        int[] values = new int[2];
+
+        int index = 0;
+        int st = 1;
+        for(int i = 1; i < formatString.length(); i++) {
+            if(formatString.charAt(i) == '|' || formatString.charAt(i) == '}') {
+                values[index] = Integer.parseInt(formatString.substring(st, i));
+                st = i+1;
+                index++;
+            }
+        }
+        format.changeToStringWidth(values[1],values[0]);
+        return format;
     }
     public static String saveTask(Task task) {
         StringBuilder str = new StringBuilder();
-        str.append("(Task){{");
-        str.append(task.getSpacingOuter());
-        str.append('|');
-        str.append(task.getSpacingMid());
-        str.append("}{");
+        str.append("(Task){");
+        str.append(saveFormat(task));
+        str.append('{');
         LocalDateTime start = task.getStartDate();
         str.append(saveLocalDateTime(start));
         str.append('|');
@@ -103,7 +146,9 @@ public class Save {
             }
         }
 
-        return new Task(loadLocalDateTime(values[0].substring(6)), values[1], loadLocalDateTime(values[2].substring(6)));
+        Task task = new Task(loadLocalDateTime(values[0].substring(6)), values[1], loadLocalDateTime(values[2].substring(6)));
+        task.changeToStringWidth(spacingMid,spacingOuter);
+        return task;
         //this part deals with the task
     }
     public String saveUser(User user) {
@@ -112,9 +157,7 @@ public class Save {
     public String saveTable(Tables tables) {
         return "";
     }
-    public String saveFormat(Format format) {
-        return "";
-    }
+
     public static String saveLocalDateTime(LocalDateTime date) {
         if(date == null) {
             return "(Date){||||}";
@@ -163,8 +206,14 @@ public class Save {
         //System.out.println(loadLocalDateTime(saveLocalDateTime(null).substring(6)));
 
     //test task load and save
-        Task task = new Task("this is a task", 2020,1,1,1,1);
-        System.out.println(saveTask(task));
-        System.out.println(loadTask(saveTask(task).substring(6)));
+        //Task task = new Task("this is a task", 2020,1,1,1,1);
+        //System.out.println(saveTask(task));
+        //System.out.println(loadTask(saveTask(task).substring(6)));
+
+    //test ToDoList save
+        ToDoList list = new ToDoList("list 1");
+        list.addTask("task1",2020,1,1,1,1);
+        list.addTask("task2",2012,2,2,2,2);
+        System.out.println(saveToDoList(list,"\\"));
     }
 }
