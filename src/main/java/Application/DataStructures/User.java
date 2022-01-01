@@ -41,4 +41,7 @@ public class User extends ToDoList {
             System.out.println("the old name doesn't exist or the new name is an existing table");
         }
     }
+    public HashMap<String, Tables> getTables() {
+        return tables;
+    }
 }
