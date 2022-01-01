@@ -30,6 +30,9 @@ public class Tables {
         }
 
     }
+    public ArrayList<ToDoList> getToDoList() {
+        return toDoList;
+    }
 
     public String getLists() {
         StringBuilder str = new StringBuilder();

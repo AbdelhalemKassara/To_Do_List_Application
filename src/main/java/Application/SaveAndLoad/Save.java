@@ -98,9 +98,31 @@ public class Save {
 
         return "";
     }
-    public String saveTable(Tables tables) {
+    //(Tables){list1|list2|list3}
+    public static String saveTable(Tables table) {
+        StringBuilder str = new StringBuilder();
+        ArrayList<ToDoList> lists = table.getToDoList();
 
-        return "";
+        str.append("(Tables){");
+
+        for(int i = 0; i < lists.size(); i++) {
+            str.append(lists.get(i).getPath());
+            str.append('|');
+        }
+        str.deleteCharAt(str.length()-1);
+        str.append('}');
+
+        return str.toString();
+    }
+    public static Tables loadTable(String tableString, User user) {//untested
+        ArrayList<String> values = splitObjects(tableString.substring(8));
+        Tables table = new Tables();
+
+        for(int i = 0; i < values.size(); i++) {
+            table.addList(user.getList(values.get(i)));
+        }
+
+        return table;
     }
     //replace the [] with {}, the [] are here just to make it easier to see here and using {} simplifies the code
     //format out (path){{spacingOuter|spacingMid}{[task1|task2]|listName}}
@@ -247,6 +269,22 @@ public class Save {
         //    System.out.println(val.get(i));
         //}
         //splitSubObjects("{{something}{something else}{something else 1}}");
+
+        Tables table = new Tables();
+        ToDoList l1 = new ToDoList("1");
+
+        l1.addSubList("2");
+        l1.addSubList("2.1");
+
+        l1.getList("2").addSubList("3");
+        l1.getList("2").addSubList("3.1");
+
+        l1.getList("2/3").addSubList("4");
+        table.addList(l1.getList("2.1"));
+        table.addList(l1.getList("2/3.1"));
+        table.addList(l1.getList("2/3/4"));
+
+        System.out.println(saveTable(table));
 
 
     }
