@@ -186,6 +186,23 @@ public class ToDoList extends Format {
 			return getListMethod(path);
 		}
 	}
+	public String getPath() {
+		ArrayList<String> val = new ArrayList<>();
+		ToDoList temp = this;
+
+		while(temp != null) {
+			val.add(temp.getListName());
+			temp = temp.getParentList();
+		}
+
+		StringBuilder str = new StringBuilder();
+		for(int i = val.size()-2; i >= 0; i--) {
+			str.append(val.get(i));
+			str.append('/');
+		}
+
+		return str.toString();
+	}
 
 	//"tostring" methods
 	public String subListString() {

@@ -202,4 +202,17 @@ public class ToDoListTest {
         t1.addSubList(t12.getListName(), t12);
         Assertions.assertEquals(t1, t12.getParentList());
     }
+
+    @Test
+    public void getPathTest() {
+        ToDoList t1 = new ToDoList("root");
+        t1.addSubList("1");
+        t1.addSubList("1.5");
+        t1.getList("1").addSubList("2");
+        t1.getList("1").addSubList("2.5");
+        t1.getList("1/2").addSubList("3");
+        t1.getList("1/2/3").addSubList("something");
+
+        Assertions.assertEquals("1/2/3/something/", t1.getList("1/2/3/something").getPath());
+    }
 }
