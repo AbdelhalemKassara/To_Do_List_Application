@@ -94,10 +94,37 @@ public class Save {
     }
 
     //save methods
-    public String saveUser(User user) {
+    //format
+    /*
+    user todolist
+    todolists
+    tables
+     */
+    public static String saveUser(User user) {
+
+        //getting the paths to all todolist in this user
+        String pathsStr = user.getAllSubLists();
+        ArrayList<String> paths = new ArrayList<>();
+
+        int st = 2;
+        for(int i = 0; i < pathsStr.length(); i++) {
+            if(pathsStr.charAt(i) == '\n') {
+                paths.add(pathsStr.substring(st,i));
+                st = i + 3;
+            }
+
+        }
+
+        //adding the user todolist
+
+        //adding the subtodolists
+
+        //adding the tables
+
 
         return "";
     }
+
     //(Tables){list1|list2|list3}
     public static String saveTable(Tables table) {
         StringBuilder str = new StringBuilder();
@@ -114,7 +141,7 @@ public class Save {
 
         return str.toString();
     }
-    public static Tables loadTable(String tableString, User user) {//untested
+    public static Tables loadTable(String tableString, User user) {
         ArrayList<String> values = splitObjects(tableString.substring(8));
         Tables table = new Tables();
 
@@ -271,7 +298,7 @@ public class Save {
         //splitSubObjects("{{something}{something else}{something else 1}}");
 
         Tables table = new Tables();
-        ToDoList l1 = new ToDoList("1");
+        User l1 = new User();
 
         l1.addSubList("2");
         l1.addSubList("2.1");
@@ -280,13 +307,14 @@ public class Save {
         l1.getList("2").addSubList("3.1");
 
         l1.getList("2/3").addSubList("4");
+
         table.addList(l1.getList("2.1"));
         table.addList(l1.getList("2/3.1"));
         table.addList(l1.getList("2/3/4"));
 
         System.out.println(saveTable(table));
-
-
+        System.out.println(loadTable(saveTable(table),l1));
+        saveUser(l1);
     }
     /*
     //takes in {year|month|dayOfMonth|hour|minute}
