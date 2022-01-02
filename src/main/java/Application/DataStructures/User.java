@@ -1,6 +1,7 @@
 package Application.DataStructures;
 
 import java.util.HashMap;
+import Application.DataStructures.Tables;
 
 public class User extends ToDoList {
     HashMap<String, Tables> tables = new HashMap<>();
