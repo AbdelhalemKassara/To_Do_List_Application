@@ -8,6 +8,8 @@ import Application.DataStructures.User;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /*
 format of: ToDoList
@@ -101,6 +103,22 @@ public class Save {
     tables
      */
     public static String saveUser(User user) {
+        StringBuilder str = new StringBuilder();
+
+        //adding the tables
+        str.append("(TablesList){");
+        for(Map.Entry<String,Tables> table : user.getTables().entrySet()) {
+            str.append(saveTable(table.getValue()));
+            str.append('|');
+        }
+        if(str.charAt(str.length()-1) != '{') {
+            str.deleteCharAt(str.length()-1);
+        }
+        str.append("}\n");
+
+        //adding the user todolist
+        str.append(saveToDoList(user,"User"));
+        str.append('\n');
 
         //getting the paths to all todolist in this user
         String pathsStr = user.getAllSubLists();
@@ -115,14 +133,23 @@ public class Save {
 
         }
 
-        //adding the user todolist
-
         //adding the subtodolists
+        for(int i = 0; i < paths.size(); i++) {
+            str.append(saveToDoList(user.getList(paths.get(i)), paths.get(i)));
+            str.append('\n');
+        }
+        if(str.charAt(str.length()-1) == '\n') {
+            str.deleteCharAt(str.length()-1);//removes the last \n
 
-        //adding the tables
+        }
+
+        return str.toString();
+    }
+
+    public static User loadUser(String userString) {
 
 
-        return "";
+        return null;
     }
 
     //(Tables){list1|list2|list3}
@@ -136,7 +163,11 @@ public class Save {
             str.append(lists.get(i).getPath());
             str.append('|');
         }
-        str.deleteCharAt(str.length()-1);
+        if(str.charAt(str.length()-1) != '{') {
+            str.deleteCharAt(str.length()-1);
+        }
+
+
         str.append('}');
 
         return str.toString();
@@ -164,7 +195,10 @@ public class Save {
             str.append(saveTask(task));
             str.append('|');
         }
-        str.deleteCharAt(str.length()-1);
+        if(str.charAt(str.length()-1) != '{') {
+            str.deleteCharAt(str.length()-1);
+
+        }
         str.append("}|");
         str.append(list.getListName());
         str.append("}}");
@@ -308,13 +342,18 @@ public class Save {
 
         l1.getList("2/3").addSubList("4");
 
-        table.addList(l1.getList("2.1"));
-        table.addList(l1.getList("2/3.1"));
-        table.addList(l1.getList("2/3/4"));
+        l1.addTable("table1");
 
-        System.out.println(saveTable(table));
-        System.out.println(loadTable(saveTable(table),l1));
-        saveUser(l1);
+        l1.addToTable("table1",l1.getList("2.1"));
+        l1.addToTable("table1", l1.getList("2/3.1"));
+        l1.addToTable("table1", l1.getList("2/3/4"));
+
+        l1.addTask("user task", 2020,1,1,1,1);
+        l1.getList("2").addTask("2 task", 2020,1,1,1,1);
+        l1.getList("2/3").addTask("3 task", 2020,1,1,1,1);
+
+
+        System.out.println(saveUser(l1));
     }
     /*
     //takes in {year|month|dayOfMonth|hour|minute}
