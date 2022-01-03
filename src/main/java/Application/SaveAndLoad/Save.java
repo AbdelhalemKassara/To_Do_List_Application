@@ -6,6 +6,8 @@ import Application.DataStructures.Task;
 import Application.DataStructures.ToDoList;
 import Application.DataStructures.User;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -102,7 +104,9 @@ public class Save {
     todolists
     tables
      */
-    public static String saveUser(User user) {
+     public static void saveUser(User user) throws FileNotFoundException {
+        PrintWriter outputFile = new PrintWriter(user.getListName() + ".user");
+
         StringBuilder str = new StringBuilder();
 
         //adding the tables
@@ -142,9 +146,10 @@ public class Save {
             str.deleteCharAt(str.length()-1);//removes the last \n
 
         }
+        outputFile.print(str.toString());
+        outputFile.close();
 
-        return str.toString();
-    }
+     }
 
     public static User loadUser(String userString) {
 
@@ -302,7 +307,7 @@ public class Save {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
     //test date load and save
         //LocalDateTime date = LocalDateTime.of(2002,1,2,1,1);
         //System.out.println(saveLocalDateTime(date));
@@ -353,7 +358,7 @@ public class Save {
         l1.getList("2/3").addTask("3 task", 2020,1,1,1,1);
 
 
-        System.out.println(saveUser(l1));
+        saveUser(l1);
     }
     /*
     //takes in {year|month|dayOfMonth|hour|minute}
