@@ -333,7 +333,7 @@ public class Operations {
             curList = user;
             dir = "/";
         } catch(FileNotFoundException e) {
-
+            System.out.println("can't find file");
         } catch(Exception e) {
             System.out.println(e + "\n\nerror loading user");
         }
