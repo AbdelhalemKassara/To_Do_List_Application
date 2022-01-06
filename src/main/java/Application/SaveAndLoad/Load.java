@@ -79,7 +79,7 @@ public class Load {
     }
     public static User loadUser(String userName) throws FileNotFoundException {
 
-        File userFile = new File(userName + ".user");
+        File userFile = new File("UserFiles/" + userName + ".user");
         if(!userFile.isFile()) {
             return null;
         }

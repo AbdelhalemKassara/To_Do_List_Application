@@ -16,7 +16,7 @@ public class Save {
     //saves tables, user list, then all sub-lists
     //outputs: a userName.user file
      public static void saveUser(User user) throws FileNotFoundException {
-        PrintWriter outputFile = new PrintWriter(user.getListName() + ".user");
+        PrintWriter outputFile = new PrintWriter("UserFiles/" + user.getListName() + ".user");
 
         StringBuilder str = new StringBuilder();
 

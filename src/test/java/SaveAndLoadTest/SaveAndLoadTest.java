@@ -11,6 +11,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static Application.SaveAndLoad.Load.loadUser;
+import static Application.SaveAndLoad.Save.saveUser;
+
 public class SaveAndLoadTest {
 
     @Test
@@ -41,7 +44,7 @@ public class SaveAndLoadTest {
         l1.getList("2/3").addTask("3 task", 2020,1,1,1,1);
 
 
-        User user = Application.SaveAndLoad.Load.loadUser("testLoading");
+        User user = loadUser("testLoading");
 
         Assertions.assertEquals(l1.getListName(), user.getListName());
         Assertions.assertEquals(l1.getTask(0).getTask(), user.getTask(0).getTask());
@@ -75,9 +78,9 @@ public class SaveAndLoadTest {
         l1.getList("2").addTask("2 task", 2020,1,1,1,1);
         l1.getList("2/3").addTask("3 task", 2020,1,1,1,1);
 
-        Application.SaveAndLoad.Save.saveUser(l1);
+        saveUser(l1);
 
-        File userFile = new File(l1.getListName() + ".user");
+        File userFile = new File("UserFiles/"+ l1.getListName() + ".user");
         Scanner in = new Scanner(userFile);
 
         //expected output
