@@ -1,7 +1,7 @@
 package Application.SaveAndLoad;
 
 
-import Application.CommandLine.Format;
+import Application.DataStructures.Format;
 import Application.DataStructures.*;
 
 import java.io.File;

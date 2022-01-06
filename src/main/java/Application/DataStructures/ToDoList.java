@@ -1,7 +1,5 @@
 package Application.DataStructures;
 
-import Application.CommandLine.Format;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;

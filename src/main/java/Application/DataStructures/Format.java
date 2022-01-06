@@ -1,4 +1,4 @@
-package Application.CommandLine;
+package Application.DataStructures;
 
 public abstract class Format {
     private int spacingOuter = 28;
