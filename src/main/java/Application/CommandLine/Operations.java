@@ -2,7 +2,9 @@ package Application.CommandLine;
 
 import Application.DataStructures.ToDoList;
 import Application.DataStructures.User;
+import Application.SaveAndLoad.Save;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,6 +44,8 @@ public class Operations {
         helpMessages.put("printCurDir", "printCurDir: prints the current directory. ()");
         helpMessages.put("removeListFromTable", "removeListFromTable: this will remove a list from the desired table. (tableName|listName)");
         helpMessages.put("exit", "exit: end the program ()");
+        helpMessages.put("save", "saves the current user ()");
+        helpMessages.put("load", "loads the user ()");
     }
 
     public void help() {
@@ -318,8 +322,20 @@ public class Operations {
     public void printCurDir() {
         System.out.println(dir);
     }
-    //delete this
-    public User getUser() {
-        return user;
+
+    public void save() throws FileNotFoundException {
+        Application.SaveAndLoad.Save.saveUser(user);
+    }
+
+    public void load() {
+        try {
+            user = Application.SaveAndLoad.Load.loadUser("root");
+            curList = user;
+            dir = "/";
+        } catch(FileNotFoundException e) {
+
+        } catch(Exception e) {
+            System.out.println(e + "\n\nerror loading user");
+        }
     }
 }

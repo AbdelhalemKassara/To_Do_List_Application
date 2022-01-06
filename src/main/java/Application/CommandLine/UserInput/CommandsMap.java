@@ -4,6 +4,7 @@ import Application.DataStructures.ToDoList;
 import Application.DataStructures.User;
 import Application.CommandLine.Operations;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 //this class should use hashing in the future
@@ -21,7 +22,7 @@ public class CommandsMap extends Operations{
             System.out.println(e);
         }
     }
-    public boolean operationsWithoutValues(String operation) {
+    public boolean operationsWithoutValues(String operation) throws FileNotFoundException {
         switch(operation) {
             case "listNames":
                 listNames();
@@ -43,6 +44,12 @@ public class CommandsMap extends Operations{
                 return true;
             case "help":
                 help();
+                return true;
+            case "save":
+                save();
+                return true;
+            case "load":
+                load();
                 return true;
             case "exit":
                 System.exit(0);

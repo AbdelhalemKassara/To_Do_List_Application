@@ -9,7 +9,7 @@ public abstract class Format {
         updateToStringFormat();
     }
 
-    //"%-26.26s | %-56.56s | %-26.26s\n"
+    //"%-28.28s | %-27.27s | %-28.28s\n"
     private void updateToStringFormat() {
         toStringFormat = "%-" + spacingOuter + "." + spacingOuter + "s | %-" + spacingMid + "." + spacingMid + "s | %-" + spacingOuter + "."+ spacingOuter +"s";
     }

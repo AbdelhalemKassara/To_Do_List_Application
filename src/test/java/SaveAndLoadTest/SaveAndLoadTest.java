@@ -4,6 +4,7 @@ import Application.DataStructures.Tables;
 import Application.DataStructures.User;
 import Application.SaveAndLoad.Save;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -92,6 +93,27 @@ public class SaveAndLoadTest {
         values.add("(2/3/){{28|27}{{}|4}}");
         values.add("(2/){{28|27}{{}|3.1}}");
         values.add("(){{28|27}{{}|2.1}}");
+
+        for(int i = 0; i < values.size(); i++) {
+            Assertions.assertEquals(values.get(i), in.nextLine());
+            Assertions.assertFalse((values.size()-1 == i) && in.hasNext());
+        }
+    }
+
+    @Test
+    @DisplayName("empty user")
+    public void saveUserTest1() throws FileNotFoundException {
+        User l1 = new User();
+        l1.setListName("testEmptyUser");
+        saveUser(l1);
+
+        File userFile = new File("UserFiles/"+ l1.getListName() + ".user");
+        Scanner in = new Scanner(userFile);
+
+        //expected output
+        ArrayList<String> values = new ArrayList<>();
+        values.add("(TablesList){}");
+        values.add("(User){{28|27}{{}|testEmptyUser}}");
 
         for(int i = 0; i < values.size(); i++) {
             Assertions.assertEquals(values.get(i), in.nextLine());

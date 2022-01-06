@@ -23,7 +23,7 @@ public class Load {
 
         //sets the format
         loadFormat(list, splitToDoListObject.get(0));
-        // System.out.println(toDoListValues.get(0));
+
 
         //loads the tasks
         ArrayList<String> tasks = new ArrayList<>();
@@ -69,6 +69,10 @@ public class Load {
     }
     //takes in {tableName|path1|path2|pathn}
     public static void loadTable(String tableString, User user) {
+        if(tableString.equals("")) {
+            return;
+        }
+
         ArrayList<String> values = splitObjects(tableString);
         Tables table = new Tables();
 
@@ -90,7 +94,6 @@ public class Load {
 
         //load user
         User user = new User(loadToDoList(in.nextLine().substring(6)));
-        System.out.println(user);
 
         //load sublists
         while(in.hasNext()) {
@@ -100,18 +103,15 @@ public class Load {
                 if(line.charAt(i) == '{' && line.charAt(i-1) == ')') {
                     ToDoList list = loadToDoList(line.substring(i));
                     user.getList(line.substring(1,i-1)).addSubList(list.getListName(), list);
-                    //System.out.println(user.getList(line.substring(1,i-1)));
                     break;
                 }
             }
         }
-
         //load the array of tables
         ArrayList<String> tables = splitObjects(tablesRaw.substring(12));
         for(int i = 0; i < tables.size(); i++) {
             loadTable(tables.get(i), user);
         }
-
         return user;
     }
     //takes in {{something}{something else}{something else 1}}
