@@ -10,9 +10,17 @@ public class User extends ToDoList {
         super("root");
     }
 
+    public User(ToDoList list) {
+        super(list);
+    }
     public void addTable(String name) {
         if(!tables.containsKey(name)) {
             tables.put(name, new Tables());
+        }
+    }
+    public void addTable(String name, Tables table) {
+        if(!tables.containsKey(name)) {
+            tables.put(name, table);
         }
     }
     public void addToTable(String name, ToDoList list) {

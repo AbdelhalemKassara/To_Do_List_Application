@@ -28,6 +28,12 @@ public class ToDoList extends Format {
 		this.listName = listName;
 		this.parentList = parentList;
 	}
+	public ToDoList(ToDoList list) {
+		this.taskList = list.taskList;
+		this.subList = list.subList;
+		this.listName = list.listName;
+		this.parentList = list.parentList;
+	}
 
 
 	//setters and getters
@@ -186,7 +192,8 @@ public class ToDoList extends Format {
 			return getListMethod(path);
 		}
 	}
-	public String getPath() {
+
+	private ArrayList<String> getCurListPath() {
 		ArrayList<String> val = new ArrayList<>();
 		ToDoList temp = this;
 
@@ -195,8 +202,25 @@ public class ToDoList extends Format {
 			temp = temp.getParentList();
 		}
 
+		return val;
+	}
+	public String getPath() {
+		ArrayList<String> val = getCurListPath();
+
 		StringBuilder str = new StringBuilder();
 		for(int i = val.size()-2; i >= 0; i--) {
+			str.append(val.get(i));
+			str.append('/');
+		}
+
+		return str.toString();
+	}
+
+	public String getPathExCur() {
+		ArrayList<String> val = getCurListPath();
+
+		StringBuilder str = new StringBuilder();
+		for(int i = val.size()-2; i > 0; i--) {
 			str.append(val.get(i));
 			str.append('/');
 		}
