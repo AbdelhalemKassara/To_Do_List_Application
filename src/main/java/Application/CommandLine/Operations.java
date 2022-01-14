@@ -55,16 +55,17 @@ public class Operations {
     }
 
     public void about(ArrayList<String> values) {
-        try {
-            String output = helpMessages.get(values.get(0));
-            if (output != null) {
-                System.out.println(output);
+            if(values.size() == 1) {
+                String output = helpMessages.get(values.get(0));
+                if (output != null) {
+                    System.out.println(output);
+                } else {
+                    System.out.println("please enter a valid command.\n");
+                }
             } else {
-                throw new NullPointerException();
+                System.out.println("The format of the inputs is: command");
             }
-        } catch (Exception e) {
-            System.out.println("please enter a valid command");
-        }
+
     }
 
     public void addTask(ArrayList<String> values) {
@@ -78,65 +79,61 @@ public class Operations {
                 curList.addTask(values.get(0), Integer.parseInt(values.get(1)), Integer.parseInt(values.get(2)), Integer.parseInt(values.get(3)),
                         Integer.parseInt(values.get(4)), Integer.parseInt(values.get(5)));
             } else {
-                throw new RuntimeException();
+                throw new Exception();
             }
         } catch (Exception e) {
-            System.out.println(e + "\n\nInvalid input values for addtask operation, format: task|year|month|dayOfMonth|hour|minute or stYear|stMonth|stDayOfMonth|stHour|stMin|task|year|month|dayOfMonth|hour|minute");
+            System.out.println("Invalid input values for addtask operation, format: task|year|month|dayOfMonth|hour|minute or stYear|stMonth|stDayOfMonth|stHour|stMin|task|year|month|dayOfMonth|hour|minute\n");
         }
     }
 
     public void addTable(ArrayList<String> values) {
-        try {
-            user.addTable(values.get(0));
-        } catch (Exception e) {
-            System.out.println("please enter a name, format: nameOfNewTable");
+        if(values.size() == 1) {
+            if(!user.addTable(values.get(0))) {//returns true if the name doesn't exist
+                System.out.println("please enter a different name, format: nameOfNewTable\n");
+            }
+        } else {
+            System.out.println("The format of the inputs is: nameOfNewTable\n");
         }
     }
 
     public void addList(ArrayList<String> values) {
-        try {
-            curList.addSubList(values.get(0));
-        } catch (Exception e) {
-            System.out.println("please enter a name, format: nameOfNewList");
-        }
+        curList.addSubList(values.get(0));
     }
 
     public void addListToTable(ArrayList<String> values) {
-        try {
-            ToDoList list = getToDoList(values.get(1));
-            if (list != null) {
-                user.addToTable(values.get(0), list);
-            } else {
-                throw new NullPointerException();
-            }
-
-        } catch (Exception e) {
-            System.out.println(e + "\n\nplease enter a valid table name or path to list, format: nameOfTable|path");
+        if(values.size() < 2) {
+            System.out.println("The format of the inputs is: nameOfTable|path\n");
         }
+        ToDoList list = getToDoList(values.get(1));
+        if (list != null) {
+            if(!user.addToTable(values.get(0), list)) {
+                System.out.println("the table entered is invalid, please try again. format: nameOfTable|path\n");
+            }
+        } else {
+            System.out.println("The path entered is invalid, please try again. format: nameOfTable|path\n");
+        }
+
     }
 
     public void moveList(ArrayList<String> values) {
-        try {
-            ToDoList moving = curList.getList(values.get(0));
-            ToDoList destination = getToDoList(values.get(1));
+        ToDoList moving = curList.getList(values.get(0));
+        ToDoList destination = getToDoList(values.get(1));
 
-            if (moving != null && destination != null && !moving.getListName().equals("root")) {
-                destination.addSubList(moving.getListName(), moving);
-                curList.removeSubList(values.get(0));
-            } else {
-                throw new NullPointerException();
-            }
-        } catch (Exception e) {
-            System.out.println(e + "\n\ninvalid inputs format: pathToMove|PathNewLoc");
+        if (moving != null && destination != null && !moving.getListName().equals("root")) {
+            destination.addSubList(moving.getListName(), moving);
+            curList.removeSubList(values.get(0));
+        } else {
+            System.out.println("invalid path or paths. format: pathToMove|PathNewLoc\n");
         }
     }
 
     public void moveTask(ArrayList<String> values) {
         try {
-            getToDoList(values.get(1)).addTask(curList.getTask(Integer.parseInt(values.get(0))));
+            ToDoList newLocation = getToDoList(values.get(1));
+            newLocation.addTask(curList.getTask(Integer.parseInt(values.get(0))));
             curList.removeTask(Integer.parseInt(values.get(0)));
         } catch (Exception e) {
-            System.out.println(e + "\n\ninvalid inputs for moveTask format: index|pathToNewList");
+            System.out.println("invalid inputs for moveTask format: index|pathToNewList\n");
         }
     }
 
@@ -144,7 +141,7 @@ public class Operations {
         try {
             user.deleteTable(values.get(0));
         } catch (Exception e) {
-            System.out.println("can't delete table, format: tableName");
+            System.out.println("can't delete table, format: tableName\n");
         }
     }
 
@@ -152,7 +149,7 @@ public class Operations {
         try {
             curList.removeTask(Integer.parseInt(values.get(0)));
         } catch (Exception e) {
-            System.out.println("can't delete task, format: taskNumber");
+            System.out.println("can't delete task, format: taskNumber\n");
         }
     }
 
@@ -160,7 +157,7 @@ public class Operations {
         try {
             curList.removeSubList(values.get(0));
         } catch (Exception e) {
-            System.out.println("can't delete list, format: listName");
+            System.out.println("can't delete list, format: listName\n");
         }
     }
 
@@ -209,7 +206,7 @@ public class Operations {
             }
 
         } catch (Exception e) {
-            System.out.println(e + "\n\n invalid list, format: path");
+            System.out.println("invalid path, format: path\n");
         }
     }
 
@@ -227,7 +224,7 @@ public class Operations {
                         Integer.parseInt(values.get(4)), Integer.parseInt(values.get(5)));
             }
         } catch (Exception e) {
-            System.out.println(e + "\n\nformat: index|year|month|dayOfMonth| or index|hour|min| or index|year|month|dayOfMonth|hour|min");
+            System.out.println("invalid input values format, format: index|year|month|dayOfMonth| or index|hour|min| or index|year|month|dayOfMonth|hour|min\n");
         }
     }
 
@@ -235,7 +232,7 @@ public class Operations {
         try {
             curList.changeTask(Integer.parseInt(values.get(0)), values.get(1));
         } catch (Exception e) {
-            System.out.println(e + "\n\n format: index|task|");
+            System.out.println("invalid input values format, format: index|task\n");
         }
     }
 
@@ -253,7 +250,7 @@ public class Operations {
                         Integer.parseInt(values.get(4)), Integer.parseInt(values.get(5)));
             }
         } catch (Exception e) {
-            System.out.println(e + "\n\nformat: index|year|month|dayOfMonth| or index|hour|min| or index|year|month|dayOfMonth|hour|min");
+            System.out.println("invalid input values format, format: index|year|month|dayOfMonth| or index|hour|min| or index|year|month|dayOfMonth|hour|min\n");
         }
     }
 
@@ -261,7 +258,7 @@ public class Operations {
         try {
             curList.renameSubList(values.get(0), values.get(1));
         } catch (Exception e) {
-            System.out.println(e + "\n\nformat: oldName|newName|");
+            System.out.println("Invalid input values format, format: oldName|newName|\n");
         }
     }
 
@@ -269,7 +266,7 @@ public class Operations {
         try {
             user.renameTable(values.get(0), values.get(1));
         } catch (Exception e) {
-            System.out.println(e + "\n\nformat: oldName|newName|");
+            System.out.println("Invalid input values format, format: oldName|newName|\n");
         }
     }
 
@@ -299,7 +296,7 @@ public class Operations {
         try {
             System.out.println(user.getTable(values.get(0)));
         } catch (Exception e) {
-            System.out.println(e + "\n\n invalid name for table, format: tableName");
+            System.out.println("invalid name for table, format: tableName\n");
         }
     }
 
@@ -307,7 +304,7 @@ public class Operations {
         try {
             user.removeFromTable(values.get(0), values.get(1));
         } catch (Exception e) {
-            System.out.println(e + "\n\n invalid name for table and or list. format tableName|ListName");
+            System.out.println("invalid name for table and or list. format tableName|ListName\n");
         }
     }
 
@@ -333,9 +330,9 @@ public class Operations {
             curList = user;
             dir = "/";
         } catch(FileNotFoundException e) {
-            System.out.println("can't find file");
+            System.out.println("can't find root file\n");
         } catch(Exception e) {
-            System.out.println(e + "\n\nerror loading user");
+            System.out.println("error loading user\n");
         }
     }
 }

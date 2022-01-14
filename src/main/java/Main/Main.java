@@ -4,7 +4,6 @@ import Application.CommandLine.UserInput.CommandsMap;
 import Application.CommandLine.UserInput.Parser;
 import Application.DataStructures.User;
 
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {

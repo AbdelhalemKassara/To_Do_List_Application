@@ -113,8 +113,9 @@ public class ToDoList extends Format {
 		list.setParentList(this);
 		subList.putIfAbsent(title, list);
 	}
+	//".." is used to go back a list and '/' is used for the path
 	public void addSubList(String title) {
-		if(!title.equals("..")) {
+		if(!title.equals("..") && !title.equals("/")) {
 			subList.putIfAbsent(title, new ToDoList(title, this));
 		}
 	}

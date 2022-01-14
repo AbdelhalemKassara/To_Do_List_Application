@@ -13,18 +13,28 @@ public class User extends ToDoList {
     public User(ToDoList list) {
         super(list);
     }
-    public void addTable(String name) {
+    public boolean addTable(String name) {
         if(!tables.containsKey(name)) {
             tables.put(name, new Tables());
+            return true;
         }
+        return false;
     }
-    public void addTable(String name, Tables table) {
+    public boolean addTable(String name, Tables table) {
         if(!tables.containsKey(name)) {
             tables.put(name, table);
+            return true;
         }
+        return false;
     }
-    public void addToTable(String name, ToDoList list) {
-            tables.get(name).addList(list);
+    public boolean addToTable(String name, ToDoList list) {
+            Tables temp = tables.get(name);
+            if(temp != null) {
+                temp.addList(list);
+                return true;
+            } else {
+                return false;
+            }
     }
 
     public String getTable(String name) {

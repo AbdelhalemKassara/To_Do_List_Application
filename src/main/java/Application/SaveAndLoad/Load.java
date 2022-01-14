@@ -114,7 +114,7 @@ public class Load {
         }
         return user;
     }
-    //takes in {{something}{something else}{something else 1}}
+    //takes in {{something}{something else}{something else 1}{something else n}}
     private static ArrayList<String> splitSubObjects(String value) {
         int st = 1;
         int bracketNum = 1;
@@ -135,7 +135,7 @@ public class Load {
 
         return splitVals;
     }
-    //takes in {something|something|something} or {[task1|task2]|listName}
+    //takes in {something1|something2|something3|somethingN}
     private static ArrayList<String> splitObjects(String value) {
         int st = 1;
         int bracketNum = 0;
