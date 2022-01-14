@@ -4,8 +4,6 @@ This is to-do list applciation where you can add a to-do list within a to-do lis
 ## Why Was This Made
 With most to-do list applications that you find online, you usually are limited in the number of sub-lists that you can have, and you can't view more than one list at a time. This is usually all you need for most applications where there are few tasks, but once the tasks start to increase your lists can start to get disogranized and you might start missing some important tasks. This application solves these issues by allowing you to create as many sublists as you like and lets you create tables where you can lists to them and view all the lists you added at the same time. 
 
-There are also many additional features that I will be adding such as, the ability to combine lists as one list in the tables and view those combinations or single lists side by side, and the ability to view only the tasks within a set period of time from the current date (both fixed and dynamic), but I'll save those for the version with a user interface.
-
 This program was based on a prototype that I made using google sheets and forums which I was using to store and view the dates of all assignments, tests, quizzes, Exams, homework, lectures, etc for all of my courses for the entire term.
 
 ## Description
