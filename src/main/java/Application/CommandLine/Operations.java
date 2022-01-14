@@ -27,9 +27,8 @@ public class Operations {
         helpMessages.put("moveList", "moveList: moves a list from the current directory to another list. (pathToMove|PathNewLoc)");
         helpMessages.put("moveTask", "moveTask: moves a task from the current list to a desired list. (index|pathToNewList)");
         helpMessages.put("deleteTable", "deleteTable: deletes a table. (tableName)");
-        helpMessages.put("deleteTask", "deleteTask: deletes a task from the current list. (taskNumber)");
+        helpMessages.put("deleteTask", "deleteTask: deletes a task from the current user. (taskNumber)");
         helpMessages.put("deleteList", "deleteList: deletes a list from the current list. (listName)");
-        helpMessages.put("changeList", "changeList: changes the current list to the desired list. (path)");
         helpMessages.put("changeStDateTask", "changeStDateTask: changes the start date of a task. (index|year|month|dayOfMonth| or index|hour|min| or index|year|month|dayOfMonth|hour|min)");
         helpMessages.put("changeTask", "changeTask: changes the task of a task. (index|task|)");
         helpMessages.put("changeEndDateTask", "changeEndDateTask: changes the end date of a task. (index|year|month|dayOfMonth| or index|hour|min| or index|year|month|dayOfMonth|hour|min)");
@@ -47,6 +46,8 @@ public class Operations {
         helpMessages.put("save", "save: saves the current user ()");
         helpMessages.put("load", "load: loads the user ()");
         helpMessages.put("about", "about: briefly tells you what a command does (command)");
+        helpMessages.put("cl", "cl: changes the list from the root or current list (path)");
+
     }
 
     public void help() {
