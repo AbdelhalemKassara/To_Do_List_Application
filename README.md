@@ -3,14 +3,13 @@ This is to-do list applciation where you can add a to-do list within a to-do lis
 
 ## Description
 
-This is to-do list applciation where you can add a to-do list within a to-do list. 
-You can also pick any set of lists and add them to a table so that you can display them side by side.
-It has a similar structure to computer file systems, but with the directories replaced with lists and the files replaced with tasks.
-
-A task is contained within a to-do list and contains a start date, end date, and the task.
-All to-do list leads to the user and contains sublists and tasks.
-The user contains everything that the to-do list does and a tables.
-tables is contained within the user and contains to-do lists.
+* This is to-do list applciation where you can add a to-do list within a to-do list. 
+* You can pick any set of lists and add them to a table so that you can display them side by side.
+* It has a similar structure to computer file systems, but with the directories replaced with lists and the files replaced with tasks.
+* A task is contained within a to-do list and contains a start date, end date, and the task.
+* All to-do list leads to the user and contains sublists and tasks.
+* The user contains everything that the to-do list has, and in addition to that contains a list of tables.
+* Tables are contained within the user and contains to-do lists.
 
 
 ## How To Use
