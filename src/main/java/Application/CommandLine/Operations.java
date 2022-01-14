@@ -44,14 +44,16 @@ public class Operations {
         helpMessages.put("printCurDir", "printCurDir: prints the current directory. ()");
         helpMessages.put("removeListFromTable", "removeListFromTable: this will remove a list from the desired table. (tableName|listName)");
         helpMessages.put("exit", "exit: end the program ()");
-        helpMessages.put("save", "saves the current user ()");
-        helpMessages.put("load", "loads the user ()");
+        helpMessages.put("save", "save: saves the current user ()");
+        helpMessages.put("load", "load: loads the user ()");
+        helpMessages.put("about", "about: briefly tells you what a command does (command)");
     }
 
     public void help() {
         for (Map.Entry<String, String> i : helpMessages.entrySet()) {
             System.out.println(i.getValue());
         }
+        System.out.println();
     }
 
     public void about(ArrayList<String> values) {
@@ -320,15 +322,18 @@ public class Operations {
         System.out.println(dir);
     }
 
-    public void save() throws FileNotFoundException {
+    public void save() {
         Application.SaveAndLoad.Save.saveUser(user);
     }
 
     public void load() {
         try {
-            user = Application.SaveAndLoad.Load.loadUser("root");
-            curList = user;
-            dir = "/";
+            User temp  = Application.SaveAndLoad.Load.loadUser("root");
+            if(temp != null) {
+                user = temp;
+                curList = user;
+                dir = "/";
+            }
         } catch(FileNotFoundException e) {
             System.out.println("can't find root file\n");
         } catch(Exception e) {

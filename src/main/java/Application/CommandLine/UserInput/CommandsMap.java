@@ -16,13 +16,13 @@ public class CommandsMap extends Operations{
     public void operationsSearch(ArrayList<String> values) {
         try {
             if(!operationsWithoutValues(values.get(0)) && !operationsWithValues(values)) {
-                System.out.println("this command doesn't exist");
+                System.out.println("this command doesn't exist\n");
             }
         } catch(Exception e) {
             System.out.println(e);
         }
     }
-    public boolean operationsWithoutValues(String operation) throws FileNotFoundException {
+    public boolean operationsWithoutValues(String operation) {
         switch(operation) {
             case "listNames":
                 listNames();

@@ -3,7 +3,9 @@ package Application.SaveAndLoad;
 import Application.DataStructures.Format;
 import Application.DataStructures.*;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,9 +17,16 @@ public class Save {
 
     //saves tables, user list, then all sub-lists
     //outputs: a userName.user file
-     public static void saveUser(User user) throws FileNotFoundException {
-        PrintWriter outputFile = new PrintWriter("UserFiles/" + user.getListName() + ".user");
-
+     public static void saveUser(User user)  {
+         File file = new File("UserFiles/" + user.getListName() + ".user");
+         PrintWriter outputFile;
+         try {
+             new File("UserFiles/").mkdir();
+             outputFile = new PrintWriter(file);
+         } catch(Exception e){
+             System.out.println("issue with saving file");
+                return;
+         }
         StringBuilder str = new StringBuilder();
 
         //adding the tables
@@ -60,7 +69,6 @@ public class Save {
         }
         outputFile.print(str.toString());
         outputFile.close();
-
      }
 
 
