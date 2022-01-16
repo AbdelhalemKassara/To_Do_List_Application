@@ -2,6 +2,8 @@ package Main;
 
 import Application.CommandLine.UserInput.CommandsMap;
 import Application.CommandLine.UserInput.Parser;
+import Application.DataStructures.Column;
+import Application.DataStructures.ToDoList;
 import Application.DataStructures.User;
 
 import java.util.Scanner;

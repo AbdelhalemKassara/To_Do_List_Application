@@ -3,22 +3,21 @@ package Application.DataStructures;
 import java.util.ArrayList;
 
 public class Tables {
-    protected ArrayList<ToDoList> toDoList;
+    protected ArrayList<ArrayList<ToDoList>> toDoList;
 
     public Tables() {
         toDoList = new ArrayList<>();
     }
     public void addList(ToDoList list) {
-
-        toDoList.add(list);
+        ArrayList<ToDoList> temp = new ArrayList<>();
+        temp.add(list);
+        toDoList.add(temp);
     }
 
-
-    //implement this in operations
     public boolean removeList(String list) {
         int index = -1;
         for(int i = 0; i < toDoList.size(); i++) {
-            if(toDoList.get(i).getListName().equals(list)) {
+            if(toDoList.get(i).get(0).getListName().equals(list)) {
                 index = i;
             }
         }
@@ -31,14 +30,18 @@ public class Tables {
 
     }
     public ArrayList<ToDoList> getToDoList() {
-        return toDoList;
+        ArrayList<ToDoList> temp = new ArrayList<>();
+            for(ArrayList<ToDoList> list : toDoList) {
+                temp.add(list.get(0));
+            }
+        return temp;
     }
 
     public String getLists() {
         StringBuilder str = new StringBuilder();
 
         for (int i = 0; i < toDoList.size(); i++) {
-            str.append(toDoList.get(i).getListName());
+            str.append(toDoList.get(i).get(0).getListName());
             str.append(", ");
         }
         return str.toString();
@@ -50,14 +53,14 @@ public class Tables {
         int space = 0;
         int max = -1;
         for(int i = 0; i < toDoList.size(); i++) {
-            test.add(toDoList.get(i).toStringArrListStr());
+            test.add(toDoList.get(i).get(0).toStringArrListStr());
 
-            String name = toDoList.get(i).getListName();
+            String name = toDoList.get(i).get(0).getListName();
             //+10 because of whitespace and | in the format and the || for spacing between the lists
-            space = toDoList.get(i).getSpacingMid() + 2 * toDoList.get(i).getSpacingOuter() + 10;
-            int len = space - toDoList.get(i).getListName().length();
+            space = toDoList.get(i).get(0).getSpacingMid() + 2 * toDoList.get(i).get(0).getSpacingOuter() + 10;
+            int len = space - toDoList.get(i).get(0).getListName().length();
             if(len < 0) {
-                name = toDoList.get(i).getListName().substring(0, space-4);
+                name = toDoList.get(i).get(0).getListName().substring(0, space-4);
                 len = 4;//since we are using 4 characters for the border between the lists " || "
             }
             str.append(name);
