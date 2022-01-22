@@ -7,6 +7,7 @@ import Application.SaveAndLoad.Save;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Operations {
@@ -14,7 +15,7 @@ public class Operations {
     private User user;
     private ToDoList curList;
     private HashMap<String, String> helpMessages = new HashMap<>();
-
+    private boolean descSortOrder = true;
 
     public Operations(User user) {
         this.user = user;
@@ -47,7 +48,22 @@ public class Operations {
         helpMessages.put("load", "load: loads the user ()");
         helpMessages.put("about", "about: briefly tells you what a command does (command)");
         helpMessages.put("cl", "cl: changes the list from the root or current list (path)");
+        helpMessages.put("setSortOrder", "setSortOrder: set the sort order as descending order(true) or ascending order(false). (true or false)(t or f)");
 
+    }
+    public void setDescSortOrder(ArrayList<String> values) {
+        if(values.size() == 1) {
+            values.set(0,values.get(0).toLowerCase());
+            if(values.get(0).equals("t") || values.get(0).equals("true")) {
+                descSortOrder = true;
+            } else if(values.get(0).equals("f") || values.get(0).equals("false")) {
+                descSortOrder = false;
+            } else {
+                System.out.println("please enter either true, false, t, or f.\n");
+            }
+        }else {
+            System.out.println("invalid number of parameters\n");
+        }
     }
 
     public void help() {
@@ -283,7 +299,7 @@ public class Operations {
     }
 
     public void printList() {
-        System.out.println(curList.toString() + '\n');
+        System.out.println(curList.toString(descSortOrder) + '\n');
     }
 
     public void listTableNames() {
@@ -297,7 +313,7 @@ public class Operations {
 
     public void printTable(ArrayList<String> values) {
         try {
-            System.out.println(user.getTable(values.get(0)));
+            System.out.println(user.getTable(values.get(0), descSortOrder));
         } catch (Exception e) {
             System.out.println("invalid name for table, format: tableName\n");
         }

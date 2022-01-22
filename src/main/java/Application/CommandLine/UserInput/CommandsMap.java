@@ -117,6 +117,9 @@ public class CommandsMap extends Operations{
             case "about":
                 about(values);
                 return true;
+            case "setSortOrder":
+                setDescSortOrder(values);
+                return true;
             default:
                 return false;
         }

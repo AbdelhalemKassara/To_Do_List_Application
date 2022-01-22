@@ -1,9 +1,6 @@
 package Application.DataStructures;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 
 public class ToDoList extends Format {
 
@@ -243,33 +240,37 @@ public class ToDoList extends Format {
 		return str;
 	}
 
-	public String taskListString() {
-		StringBuilder str = new StringBuilder();	
-	       	Task[] taskarray = taskList.toArray(new Task[taskList.size()]);
-	
-		for(int i = 0; i < taskarray.length; i++) {
-			str.append(taskarray[i].toString());
+	public String taskListString(boolean descSortOrder) {
+		StringBuilder str = new StringBuilder();
+		Iterator<Task> task = descSortOrder? taskList.descendingIterator() : taskList.iterator();
+
+		while(task.hasNext()) {
+			str.append(task.next().toString());
 		}
 		
 		return str.toString();
 	}
-	public ArrayList<String> taskListArrListStr() {
-		ArrayList<String> str = new ArrayList<>();
-		Task[] taskarray = taskList.toArray(new Task[taskList.size()]);
+	public ArrayList<String> taskListArrListStr(boolean descSortOrder) {
 
-		for(int i = 0; i < taskarray.length; i++) {
-				str.addAll(taskarray[i].toStringArrList());
+		ArrayList<String> str = new ArrayList<>();
+		Iterator<Task> task = descSortOrder? taskList.descendingIterator() : taskList.iterator();
+
+		while(task.hasNext()) {
+			str.add(task.next().toString());
 		}
 		return str;
 	}
 
-	public ArrayList<String> toStringArrListStr() {
+	public ArrayList<String> toStringArrListStr(boolean descSortOrder) {
 		ArrayList<String> temp = subListArrListStr();
-		temp.addAll(taskListArrListStr());
+		temp.addAll(taskListArrListStr(descSortOrder));
 		return temp;
 	}
 
 	public String toString() {
-		return subListString() + taskListString();
+		return subListString() + taskListString(true);
+	}
+	public String toString(boolean descSortOrder) {
+		return subListString() + taskListString(descSortOrder);
 	}	
 }

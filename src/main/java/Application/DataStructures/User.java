@@ -5,6 +5,7 @@ import Application.DataStructures.Tables;
 
 public class User extends ToDoList {
     HashMap<String, Tables> tables = new HashMap<>();
+    private boolean greatestToLeast = true;
 
     public User() {
         super("root");
@@ -37,9 +38,9 @@ public class User extends ToDoList {
             }
     }
 
-    public String getTable(String name) {
+    public String getTable(String name, boolean descSortOrder) {
         if(tables.containsKey(name)) {
-            return name + "\n\n" + tables.get(name).toString();
+            return name + "\n\n" + tables.get(name).toString(descSortOrder);
         }
         return "";
     }
@@ -62,5 +63,12 @@ public class User extends ToDoList {
     }
     public HashMap<String, Tables> getTables() {
         return tables;
+    }
+
+    public void setGreatestToLeast(boolean greatestToLeast) {
+        this.greatestToLeast = greatestToLeast;
+    }
+    public boolean getGreatestToLeast() {
+        return greatestToLeast;
     }
 }
