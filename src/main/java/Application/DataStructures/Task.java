@@ -45,8 +45,9 @@ public class Task extends Format implements Comparable<Task>{
 	}
 
 	public int compareTo(Task t2) {
+		//this returns a positive number if greater, negative if less than, and 0 if equal
 		int result = endDate.compareTo(t2.getEndDate());
-		
+
 		if(result > 0) {
 			return 1;
 		} else if (result < 0) {
@@ -130,7 +131,7 @@ public class Task extends Format implements Comparable<Task>{
 	public String endDateString(){
 		return dateString(endDate) + ", " + timeString(endDate);
 	}
-	//56 is the default width of the command prompt window
+
 	public String toString(){
 		StringBuilder outStr = new StringBuilder();
 		outStr.append(String.format(getFormat() + '\n', startDateString(), task, endDateString()));
