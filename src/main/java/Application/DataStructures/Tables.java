@@ -46,14 +46,17 @@ public class Tables {
         }
         return str.toString();
     }
-
     public String toString() {
+        return toString(true);
+    }
+    public String toString(boolean descSortOrder) {
         ArrayList<ArrayList<String>> test = new ArrayList<>();
         StringBuilder str = new StringBuilder();
         int space = 0;
         int max = -1;
+
         for(int i = 0; i < toDoList.size(); i++) {
-            test.add(toDoList.get(i).get(0).toStringArrListStr());
+            test.add(toDoList.get(i).get(0).toStringArrListStr(descSortOrder));
 
             String name = toDoList.get(i).get(0).getListName();
             //+10 because of whitespace and | in the format and the || for spacing between the lists
@@ -75,6 +78,7 @@ public class Tables {
             for(int i = 0; i < test.size(); i++) {
                 if(d < test.get(i).size()) {
                     str.append(test.get(i).get(d));
+                    str.deleteCharAt(str.length()-1);//removes the last character from the task ---(temp fix)----
                     str.append(" || ");
                 } else {
                     for(int s = 0; s < space; s++) {

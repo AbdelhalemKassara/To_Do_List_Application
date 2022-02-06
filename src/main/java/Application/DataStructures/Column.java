@@ -77,9 +77,9 @@ public class Column extends Format {
         }
         return listsOfTasks;
     }
-    public ArrayList<String> toStringArrListDesc() {
+    public LinkedList<String> toStringArrListDesc() {
         ArrayList<LinkedList<Task>> listsOfTasks = getListsOfTasks();
-        ArrayList<String> columnStr = new ArrayList<>();
+        LinkedList<String> columnStr = new LinkedList<>();
 
         if(maxMinDays != 0) {
             //removes the tasks outside the minimum range
@@ -120,12 +120,12 @@ public class Column extends Format {
 
         return columnStr;
     }
-    public ArrayList<String> toStringArrList(boolean descSortOrder) {
+    public LinkedList<String> toStringArrList(boolean descSortOrder) {
         return descSortOrder? toStringArrListDesc() : toStringArrListAsc();
     }
-    public ArrayList<String> toStringArrListAsc() {
+    public LinkedList<String> toStringArrListAsc() {
         ArrayList<LinkedList<Task>> listsOfTasks = getListsOfTasks();
-        ArrayList<String> columnStr = new ArrayList<>();
+        LinkedList<String> columnStr = new LinkedList<>();
 
         if(maxMinDays != 0) {
             Task min;
