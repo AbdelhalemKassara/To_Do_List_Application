@@ -1,0 +1,11 @@
+Application/CommandLine/UserInput/CommandsMap.class
+Application/SaveAndLoad/Load.class
+Main/Main.class
+Application/DataStructures/Format.class
+Application/CommandLine/UserInput/Parser.class
+Application/SaveAndLoad/Save.class
+Application/DataStructures/Task.class
+Application/DataStructures/Tables.class
+Application/DataStructures/ToDoList.class
+Application/CommandLine/Operations.class
+Application/DataStructures/User.class
